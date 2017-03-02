@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/deploy.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/javaws.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/jce.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/jfr.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/jfxswt.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/management-agent.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/resources.jar"/>
+	<classpathentry kind="lib" path="/usr/java/jre1.8.0_112/lib/rt.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/deploy.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/javaws.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/jce.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/jfr.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/jfxswt.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/management-agent.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/resources.jar"/>
+	<classpathentry kind="lib" path="/usr/java/default/lib/rt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
