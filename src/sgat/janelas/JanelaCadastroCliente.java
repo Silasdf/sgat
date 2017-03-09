@@ -1,5 +1,8 @@
 package sgat.janelas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +18,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import sgat.entidades.Cliente;
+
 public class JanelaCadastroCliente extends Application {
+	
+	public List<Cliente> clientesMock = new ArrayList<Cliente>();
 	
 	public static void main(String[] args){
 		launch(args);
@@ -54,6 +61,15 @@ public class JanelaCadastroCliente extends Application {
 			public void handle(ActionEvent event){
 				System.out.println("Incluir cadastro cliente");
 				
+				incluirCliente();
+			}
+
+			private void incluirCliente() {
+				Cliente novoCliente = new Cliente();
+				novoCliente.setNome(tfNome.getText());
+				
+				clientesMock.add(novoCliente);
+				System.out.println("Cliente cadastrado:" + novoCliente);
 			}
 		});
 		
@@ -62,6 +78,13 @@ public class JanelaCadastroCliente extends Application {
 			// Limpar mensagem no console
 			public void handle(ActionEvent event){
 				System.out.println("Limpar cadastro cliente");
+				
+				limparTela();
+				
+			}
+
+			private void limparTela() {
+				tfNome.setText("");
 				
 			}
 		});
@@ -117,9 +140,10 @@ public class JanelaCadastroCliente extends Application {
 		//grid.setHalignment(hbButtons, HPos.RIGHT);
 		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
 		primaryStage.setTitle("Cadastro - Clientes");
-		primaryStage.getIcons().add(new Image("imagens/S.png"));
+		primaryStage.getIcons().add(new Image("imagens/S_1.png"));
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
 		primaryStage.show();
 
 	}//Fim do método Start
+	
 }// Fim da classe JanelaCadastroCliente

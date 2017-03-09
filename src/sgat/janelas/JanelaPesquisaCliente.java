@@ -117,7 +117,7 @@ public class JanelaPesquisaCliente extends Application {
 		//grid.setHalignment(hbButtons, HPos.RIGHT);
 		Scene scene = new Scene(grid,700,340); // Aparecer os labels e Textfields largura e altura
 		primaryStage.setTitle("Pesquisa - Clientes");
-		primaryStage.getIcons().add(new Image("imagens/S.png"));
+		primaryStage.getIcons().add(new Image("imagens/S_1.png"));
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
 		primaryStage.show();
 
