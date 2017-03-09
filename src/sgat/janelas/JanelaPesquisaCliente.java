@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class JanelaCadastroCliente extends Application {
+public class JanelaPesquisaCliente extends Application {
 	
 	public static void main(String[] args){
 		launch(args);
@@ -25,10 +25,10 @@ public class JanelaCadastroCliente extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		// Cria um botão e inclui o clique
-		Button btn_incluir = new Button("Incluir");
-		Button btn_limpar = new Button("Limpar");
 		Button btn_pesquisar = new Button("Pesquisar");
-		Button btn_sair = new Button("Sair");
+		Button btn_limpar = new Button("Limpar");
+		Button btn_voltar = new Button("Voltar");
+		//Button btn_sair = new Button("Sair");
 		
 		// Cria Labels.
 		Label lblNome = new Label("Nome:");
@@ -48,37 +48,37 @@ public class JanelaCadastroCliente extends Application {
 		TextField tfCidade = new TextField();
 		TextField tfViagPelaEmp = new TextField();
 		
-		btn_incluir.setOnAction(new EventHandler<ActionEvent>(){
+		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Inclui mensagem no console
+			// Pesquisar, exibe mensagem no console após ocorrer uma ação
 			public void handle(ActionEvent event){
-				System.out.println("Incluir cadastro cliente");
+				System.out.println("Pesquisa por clientes cadastrados");
 				
 			}
 		});
 		
 		btn_limpar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Limpar mensagem no console
+			// Limpar, exibe mensagem no console após ocorrer uma ação
 			public void handle(ActionEvent event){
-				System.out.println("Limpar cadastro cliente");
+				System.out.println("Limpar dados digitados nos campos");
 				
 			}
 		});
 		
-		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
+		btn_voltar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Pesquisar mensagem no console
+			// Voltar, exibe mensagem no console após ocorrer uma ação
 			public void handle(ActionEvent event){
-				System.out.println("Pesquisar cadastro cliente");
+				System.out.println("Voltar para a página inicial");
 				
 			}
 		});
 		
-		btn_sair.setOnAction(e -> {
-			System.out.println("Sair da aplicação");
-			System.exit(0);
-		});
+//		btn_sair.setOnAction(e -> {
+//			System.out.println("Sair da aplicação");
+//			System.exit(0);
+//		});
 		
 		GridPane grid = new GridPane();
 		grid.setHgap(5); // Separação entre as linhas horizontalmente
@@ -94,7 +94,7 @@ public class JanelaCadastroCliente extends Application {
 		hbButtons.setSpacing(10.0);
 //		hbButtons.setAlignment(Pos.BOTTOM_RIGHT);
 		
-		hbButtons.getChildren().addAll(btn_incluir, btn_limpar, btn_pesquisar, btn_sair);
+		hbButtons.getChildren().addAll(btn_pesquisar, btn_limpar, btn_voltar);
 		grid.getColumnConstraints().addAll(coluna01, coluna02);
 		
 		// Inclusão labels e taxtfields no grid
@@ -115,8 +115,8 @@ public class JanelaCadastroCliente extends Application {
 		// Inclusão dos botões no grid
 		grid.add(hbButtons, 2, 7);
 		//grid.setHalignment(hbButtons, HPos.RIGHT);
-		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
-		primaryStage.setTitle("Cadastro - Clientes");
+		Scene scene = new Scene(grid,700,340); // Aparecer os labels e Textfields largura e altura
+		primaryStage.setTitle("Pesquisa - Clientes");
 		primaryStage.getIcons().add(new Image("imagens/S.png"));
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
 		primaryStage.show();
