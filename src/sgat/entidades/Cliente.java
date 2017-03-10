@@ -1,11 +1,11 @@
 package sgat.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Cliente {
 	private String nome;
 	private String cpf;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private String rg;
 	private String endereco;
 	private String cidade;
@@ -23,10 +23,10 @@ public class Cliente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getRg() {
