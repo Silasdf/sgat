@@ -135,7 +135,7 @@ public class JanelaCadastroCliente extends Application {
 		grid.getColumnConstraints().addAll(coluna01, coluna02);
 		
 		// Inclusão labels e taxtfields no grid
-		grid.add(lblNome, 0, 0);
+		grid.add(lblNome, 0, 0); // Coluna e Linha
 		grid.add(tfNome, 1, 0);
 		grid.add(lblCpf, 0, 1);
 		grid.add(tfCpf, 1, 1);
@@ -149,12 +149,12 @@ public class JanelaCadastroCliente extends Application {
 		grid.add(tfCidade, 1, 5);
 		grid.add(lblViagemEmpresa, 0, 6);
 		grid.add(tfViagemEmpresa, 1, 6);
-		// Inclusão dos botões no grid
-		grid.add(hbButtons, 2, 7);
-		//grid.setHalignment(hbButtons, HPos.RIGHT);
-		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
-		primaryStage.setTitle("Cadastro - Clientes");
-		primaryStage.getIcons().add(new Image("imagens/S_1.png"));
+
+		grid.add(hbButtons, 2, 7);// Inclusão dos botões no grid
+
+		Scene scene = new Scene(grid,700,340); // Aparecer os labels e Textfields largura e altura
+		primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
+		primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
 		primaryStage.show();
 

@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -37,16 +38,16 @@ public class JanelaPesquisaCliente extends Application {
 		Label lblRg = new Label("R.G:");
 		Label lblEndereco = new Label("Endereço:");
 		Label lblCidade = new Label("Cidade:");
-		Label lblViagPelaEmp = new Label("Viagens Pela Empresa:");
+		Label lblViagemEmpresa = new Label("Viagens Pela Empresa:");
 		
 		// Cria TextFields
 		TextField tfNome = new TextField();
 		TextField tfCpf = new TextField();
-		TextField tfDataNascimento = new TextField();
+		DatePicker tfDataNascimento = new DatePicker();
 		TextField tfRg = new TextField();
 		TextField tfEndereco = new TextField();
 		TextField tfCidade = new TextField();
-		TextField tfViagPelaEmp = new TextField();
+		TextField tfViagemEmpresa = new TextField();
 		
 		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
 			
@@ -57,11 +58,25 @@ public class JanelaPesquisaCliente extends Application {
 			}
 		});
 		
-		btn_limpar.setOnAction(new EventHandler<ActionEvent>(){
+btn_limpar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Limpar, exibe mensagem no console após ocorrer uma ação
+			// Limpar mensagem no console
 			public void handle(ActionEvent event){
-				System.out.println("Limpar dados digitados nos campos");
+				System.out.println("Limpar cadastro cliente");
+				
+				limparTela();
+				
+			}
+
+			private void limparTela() {
+
+				tfNome.setText("");
+				tfCpf.setText("");
+				tfDataNascimento.setValue(null);
+				tfRg.setText("");
+				tfEndereco.setText("");
+				tfCidade.setText("");
+				tfViagemEmpresa.setText("");
 				
 			}
 		});
@@ -98,7 +113,7 @@ public class JanelaPesquisaCliente extends Application {
 		grid.getColumnConstraints().addAll(coluna01, coluna02);
 		
 		// Inclusão labels e taxtfields no grid
-		grid.add(lblNome, 0, 0);
+		grid.add(lblNome, 0, 0); // Coluna e Linha
 		grid.add(tfNome, 1, 0);
 		grid.add(lblCpf, 0, 1);
 		grid.add(tfCpf, 1, 1);
@@ -110,14 +125,14 @@ public class JanelaPesquisaCliente extends Application {
 		grid.add(tfEndereco, 1, 4);
 		grid.add(lblCidade, 0, 5);
 		grid.add(tfCidade, 1, 5);
-		grid.add(lblViagPelaEmp, 0, 6);
-		grid.add(tfViagPelaEmp, 1, 6);
-		// Inclusão dos botões no grid
-		grid.add(hbButtons, 2, 7);
-		//grid.setHalignment(hbButtons, HPos.RIGHT);
+		grid.add(lblViagemEmpresa, 0, 6);
+		grid.add(tfViagemEmpresa, 1, 6);
+
+		grid.add(hbButtons, 2, 7);// Inclusão dos botões no grid
+
 		Scene scene = new Scene(grid,700,340); // Aparecer os labels e Textfields largura e altura
-		primaryStage.setTitle("Pesquisa - Clientes");
-		primaryStage.getIcons().add(new Image("imagens/S_1.png"));
+		primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
+		primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
 		primaryStage.show();
 
