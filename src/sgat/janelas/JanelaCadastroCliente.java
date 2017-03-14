@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -25,12 +26,18 @@ public class JanelaCadastroCliente extends Application {
 	
 	public List<Cliente> clientesMock = new ArrayList<Cliente>();
 	
+	FlowPane pane1;
+	Scene janelaPesquisaCliente;
+	Stage thestage;
+	
 	public static void main(String[] args){
 		launch(args);
 	} // Fim do método main
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		thestage = primaryStage;
 		
 		// Cria um botão e inclui o clique
 		Button btn_incluir = new Button("Incluir");
@@ -103,12 +110,20 @@ public class JanelaCadastroCliente extends Application {
 			}
 		});
 		
+		pane1 = new FlowPane();
+		pane1.setVgap(10);
+		
 		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
 			
 			// Pesquisar mensagem no console
 			public void handle(ActionEvent event){
 				System.out.println("Pesquisar cadastro cliente");
 				
+				janelaPesquisaCliente = new Scene(pane1, 1200,600);
+				primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
+				primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
+				primaryStage.setScene(janelaPesquisaCliente); // Aparecer os labels e Textfields
+				primaryStage.show();
 			}
 		});
 		
