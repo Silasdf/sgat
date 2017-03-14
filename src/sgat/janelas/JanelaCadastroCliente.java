@@ -152,7 +152,7 @@ public class JanelaCadastroCliente extends Application {
 
 		grid.add(hbButtons, 2, 7);// Inclusão dos botões no grid
 
-		Scene scene = new Scene(grid,700,340); // Aparecer os labels e Textfields largura e altura
+		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
 		primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
 		primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
 		primaryStage.setScene(scene); // Aparecer os labels e Textfields
