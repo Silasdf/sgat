@@ -1,49 +1,30 @@
 package sgat.janelas;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-//import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-
+import javafx.scene.layout.VBox;
 import sgat.entidades.Cliente;
 
-public class JanelaCadastroCliente extends Application {
+public class ConstruirJanelaPesquisaCliente {
 	
-	public List<Cliente> clientesMock = new ArrayList<Cliente>();
-	
-	FlowPane pane1;
-	Scene janelaPesquisaCliente;
-	Stage thestage;
-	
-	public static void main(String[] args){
-		launch(args);
-	} // Fim do método main
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		thestage = primaryStage;
-		
+	public static Scene montaJanelaPesquisa() {
+		// TODO Auto-generated method stub
+        
 		// Cria um botão e inclui o clique
-		Button btn_incluir = new Button("Incluir");
-		Button btn_limpar = new Button("Limpar");
 		Button btn_pesquisar = new Button("Pesquisar");
-		Button btn_sair = new Button("Sair");
+		Button btn_limpar = new Button("Limpar");
+		Button btn_voltar = new Button("Voltar");
+		//Button btn_sair = new Button("Sair");
 		
 		// Cria Labels.
 		Label lblNome = new Label("Nome:");
@@ -63,31 +44,18 @@ public class JanelaCadastroCliente extends Application {
 		TextField tfCidade = new TextField();
 		TextField tfViagemEmpresa = new TextField();
 		
-		btn_incluir.setOnAction(new EventHandler<ActionEvent>(){
+		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Inclui mensagem no console
+			// Pesquisar, exibe mensagem no console após ocorrer uma ação
 			public void handle(ActionEvent event){
-				System.out.println("Incluir cadastro cliente");
+				System.out.println("Pesquisa por clientes cadastrados");
 				
-				incluirCliente();
-			}
-
-			private void incluirCliente() {
-				Cliente novoCliente = new Cliente();
-				novoCliente.setNome(tfNome.getText());
-				novoCliente.setCpf(tfCpf.getText());
-				novoCliente.setDataNascimento(tfDataNascimento.getValue());
-				novoCliente.setRg(tfRg.getText());
-				novoCliente.setEndereco(tfEndereco.getText());
-				novoCliente.setCidade(tfCidade.getText());
-				novoCliente.setViagemEmpresa(tfViagemEmpresa.getText());
 				
-				clientesMock.add(novoCliente);
-				System.out.println("Cliente cadastrado:" + novoCliente);
+				
 			}
 		});
 		
-		btn_limpar.setOnAction(new EventHandler<ActionEvent>(){
+btn_limpar.setOnAction(new EventHandler<ActionEvent>(){
 			
 			// Limpar mensagem no console
 			public void handle(ActionEvent event){
@@ -110,27 +78,19 @@ public class JanelaCadastroCliente extends Application {
 			}
 		});
 		
-		pane1 = new FlowPane();
-		pane1.setVgap(10);
-		
-		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
+		btn_voltar.setOnAction(new EventHandler<ActionEvent>(){
 			
-			// Pesquisar mensagem no console
+			// Voltar, exibe mensagem no console após ocorrer uma ação
 			public void handle(ActionEvent event){
-				System.out.println("Pesquisar cadastro cliente");
+				System.out.println("Voltar para a página inicial");
 				
-				janelaPesquisaCliente = new Scene(pane1, 1200,600);
-				primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
-				primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
-				primaryStage.setScene(janelaPesquisaCliente); // Aparecer os labels e Textfields
-				primaryStage.show();
 			}
 		});
 		
-		btn_sair.setOnAction(e -> {
-			System.out.println("Sair da aplicação");
-			System.exit(0);
-		});
+//		btn_sair.setOnAction(e -> {
+//			System.out.println("Sair da aplicação");
+//			System.exit(0);
+//		});
 		
 		GridPane grid = new GridPane();
 		grid.setHgap(5); // Separação entre as linhas horizontalmente
@@ -146,7 +106,12 @@ public class JanelaCadastroCliente extends Application {
 		hbButtons.setSpacing(10.0);
 //		hbButtons.setAlignment(Pos.BOTTOM_RIGHT);
 		
-		hbButtons.getChildren().addAll(btn_incluir, btn_limpar, btn_pesquisar, btn_sair);
+		VBox tabelas = new VBox();
+
+		TableView<Cliente> tabela = new TableView<>();
+		
+		hbButtons.getChildren().addAll(btn_pesquisar, btn_limpar, btn_voltar);
+		tabelas.getChildren().add(tabela);
 		grid.getColumnConstraints().addAll(coluna01, coluna02);
 		
 		// Inclusão labels e taxtfields no grid
@@ -166,13 +131,10 @@ public class JanelaCadastroCliente extends Application {
 		grid.add(tfViagemEmpresa, 1, 6);
 
 		grid.add(hbButtons, 2, 7);// Inclusão dos botões no grid
+		
+		grid.add(tabela, 0, 8, 8, 2);
+		
+		return new Scene(grid,1200,600); // Aparecer os labels e Textfields largura e altura
+	}
 
-		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
-		primaryStage.setTitle("Cadastro - Clientes"); // Titulo da janela
-		primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
-		primaryStage.setScene(scene); // Aparecer os labels e Textfields
-		primaryStage.show();
-
-	}//Fim do método Start
-	
-}// Fim da classe JanelaCadastroCliente
+}

@@ -3,41 +3,27 @@ package sgat.janelas;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-//import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import sgat.entidades.Cliente;
 
-public class JanelaCadastroCliente extends Application {
+public class ConstruirJanelaCadastroCliente {
 	
-	public List<Cliente> clientesMock = new ArrayList<Cliente>();
+	public static List<Cliente> clientesMock = new ArrayList<Cliente>();
 	
-	FlowPane pane1;
-	Scene janelaPesquisaCliente;
-	Stage thestage;
+	static Stage thestage;
 	
-	public static void main(String[] args){
-		launch(args);
-	} // Fim do método main
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		thestage = primaryStage;
+	public static Scene montaJanelaCadastro(){
 		
 		// Cria um botão e inclui o clique
 		Button btn_incluir = new Button("Incluir");
@@ -110,23 +96,18 @@ public class JanelaCadastroCliente extends Application {
 			}
 		});
 		
-		pane1 = new FlowPane();
-		pane1.setVgap(10);
-		
 		btn_pesquisar.setOnAction(new EventHandler<ActionEvent>(){
 			
 			// Pesquisar mensagem no console
 			public void handle(ActionEvent event){
 				System.out.println("Pesquisar cadastro cliente");
 				
-				janelaPesquisaCliente = new Scene(pane1, 1200,600);
-				primaryStage.setTitle("Pesquisa - Clientes"); // Titulo da janela
-				primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
-				primaryStage.setScene(janelaPesquisaCliente); // Aparecer os labels e Textfields
-				primaryStage.show();
+//		        if (event.getSource()==btn_pesquisar)
+//		            thestage.setScene(scenePesquisaCliente);
+				
 			}
 		});
-		
+
 		btn_sair.setOnAction(e -> {
 			System.out.println("Sair da aplicação");
 			System.exit(0);
@@ -166,13 +147,9 @@ public class JanelaCadastroCliente extends Application {
 		grid.add(tfViagemEmpresa, 1, 6);
 
 		grid.add(hbButtons, 2, 7);// Inclusão dos botões no grid
+		
+		return new Scene(grid, 760,340); // Aparecer os labels e Textfields largura e altura
+		
+	}
 
-		Scene scene = new Scene(grid,760,340); // Aparecer os labels e Textfields largura e altura
-		primaryStage.setTitle("Cadastro - Clientes"); // Titulo da janela
-		primaryStage.getIcons().add(new Image("imagens/S_1.png")); // Icone na janela
-		primaryStage.setScene(scene); // Aparecer os labels e Textfields
-		primaryStage.show();
-
-	}//Fim do método Start
-	
-}// Fim da classe JanelaCadastroCliente
+}
