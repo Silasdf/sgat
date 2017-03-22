@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 public class ScreensFramework extends Application{
 	
 	public static String screen1ID = "main";
-    public static String screen1File = "CadastroCliente.fxml";
+    public static String screen1File = "Login.fxml";
     
     public static String screen2ID = "screen2";
-    public static String screen2File = "PesquisaCliente.fxml";
+    public static String screen2File = "CadastroCliente.fxml";
     
     public static String screen3ID = "screen3";
-    public static String screen3File = "Screen3.fxml";
+    public static String screen3File = "PesquisaCliente.fxml";
     
     @Override
     public void start(Stage primaryStage) {
@@ -23,7 +23,7 @@ public class ScreensFramework extends Application{
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(ScreensFramework.screen1ID, ScreensFramework.screen1File);
         mainContainer.loadScreen(ScreensFramework.screen2ID, ScreensFramework.screen2File);
-//        mainContainer.loadScreen(ScreensFramework.screen3ID, ScreensFramework.screen3File);
+        mainContainer.loadScreen(ScreensFramework.screen3ID, ScreensFramework.screen3File);
         
         mainContainer.setScreen(ScreensFramework.screen1ID);
         
