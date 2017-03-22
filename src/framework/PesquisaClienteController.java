@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-public class Screen2Controller implements Initializable, ControlledScreen {
+public class PesquisaClienteController implements Initializable, ControlledScreen {
 	
 	ScreensController myController;
     /**
@@ -23,7 +23,7 @@ public class Screen2Controller implements Initializable, ControlledScreen {
     }
 
     @FXML
-    private void goToScreen1(ActionEvent event){
+    private void goToCadastroCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen1ID);
     }
     

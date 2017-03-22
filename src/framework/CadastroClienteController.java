@@ -23,7 +23,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     }
 
     @FXML
-    private void goToScreen2(ActionEvent event){
+    private void goToPesquisaCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen2ID);
     }
     

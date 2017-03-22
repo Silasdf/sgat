@@ -12,7 +12,7 @@ public class ScreensFramework extends Application{
     public static String screen1File = "CadastroCliente.fxml";
     
     public static String screen2ID = "screen2";
-    public static String screen2File = "Screen2.fxml";
+    public static String screen2File = "PesquisaCliente.fxml";
     
     public static String screen3ID = "screen3";
     public static String screen3File = "Screen3.fxml";
