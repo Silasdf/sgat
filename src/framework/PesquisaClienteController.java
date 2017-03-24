@@ -24,7 +24,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 
     @FXML
     private void goToCadastroCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen1ID);
+       myController.setScreen(ScreensFramework.screen2ID);
     }
     
     @FXML

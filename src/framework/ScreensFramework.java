@@ -31,6 +31,7 @@ public class ScreensFramework extends Application{
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
 		primaryStage.getIcons().add(new Image("imagens/S_1.png"));
+		primaryStage.setTitle("SGAT");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
