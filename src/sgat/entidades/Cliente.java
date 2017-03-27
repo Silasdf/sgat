@@ -10,6 +10,8 @@ public class Cliente {
 	private String endereco;
 	private String cidade;
 	private String viagemEmpresa;
+//	private List<Cliente> clientes;
+	private int codigo;
 	
 	public String getNome() {
 		return nome;
@@ -53,10 +55,22 @@ public class Cliente {
 	public void setViagemEmpresa(String viagemEmpresa) {
 		this.viagemEmpresa = viagemEmpresa;
 	}
+	
+//	public List<Cliente> buscarTodos(){
+//		return clientes;
+//	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", rg=" + rg
 				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa + "]";
 	}
-	
+
 }
