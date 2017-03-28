@@ -4,7 +4,7 @@ import java.util.List;
 
 import sgat.entidades.Cliente;
 
-public interface ContasService {
+public interface ClientesService {
 	
 	// INSERT
 	public void salvar(Cliente cliente);
@@ -19,5 +19,10 @@ public interface ContasService {
 	
 	// DELETE
 	public void apagar(int codigo);
+
+	public static ClientesService getNewInstance() {
+		// TODO Auto-generated method stub
+		return new ClientesDBService();
+	}
 
 }

@@ -14,9 +14,9 @@ import java.util.List;
 
 import sgat.entidades.Cliente;
 
-public class ContasDBService implements ContasService{
+public class ClientesDBService implements ClientesService{
 	
-	final String INSERIR = "INSERT INTO cliente(nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa) VALUES(?, ?, ?, ?, ?, ?, ?))";
+	final String INSERIR = "INSERT INTO cliente(nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=?, ativo=? WHERE codigo = ?";
 	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
 	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
@@ -30,6 +30,7 @@ public class ContasDBService implements ContasService{
 			salvar.setString(1, cliente.getNome());
 			salvar.setString(2, cliente.getCpf());
 			salvar.setDate(3, java.sql.Date.valueOf(cliente.getDataNascimento()));
+//			salvar.setDate(3, new java.sql.Date(0L));
 			salvar.setString(4, cliente.getRg());
 			salvar.setString(5, cliente.getEndereco());
 			salvar.setString(6, cliente.getCidade());

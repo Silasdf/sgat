@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="360.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="framework.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="framework.LoginController">
    <children>
       <Label fx:id="isConnected" alignment="CENTER" layoutX="274.0" layoutY="38.0" prefHeight="46.0" prefWidth="192.0" text="Status" textFill="#cd1313">
          <font>
