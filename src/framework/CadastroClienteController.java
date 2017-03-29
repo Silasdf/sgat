@@ -9,11 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import sgat.entidades.Cliente;
 
 public class CadastroClienteController implements Initializable, ControlledScreen {
 	
 	ScreensController myController;
+	
+	@FXML
+	private GridPane gridCliente;
 	
 	@FXML
 	private TextField txtNome;
@@ -45,6 +49,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
         // TODO
     	clientesService = ClientesService.getNewInstance();
     	atualizaDadosTabela();
+//    	atualizaDadosGrid();
     	
     }
     
@@ -71,27 +76,39 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		atualizaDadosTabela();
     }
     
+    @FXML
+    private void limpar(){
+    	System.out.println("Cliquei em limpar!");
+    	txtNome.setText("");
+    	txtCpf.setText("");
+    	txtDataNascimento.setValue(null);
+    	txtRg.setText("");
+    	txtEndereco.setText("");
+    	txtCidade.setText("");
+    	txtViagemEmpresa.setText("");
+    }
+    
 	// pega os valores entrados pelo usuário e adiciona no objeto conta
 	private void pegaValores(Cliente cliente) {
 		cliente.setNome(txtNome.getText());
 		cliente.setCpf(txtCpf.getText());
 		LocalDate data = txtDataNascimento.getValue();
 		cliente.setDataNascimento(data);
-//		cliente.setDataNascimento(txtDataNascimento.getValue());
 		cliente.setRg(txtRg.getText());
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
 		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
-//		c.setConcessionaria(txtConsc.getText());
-//		c.setDescricao(txtDesc.getText());
-//		c.setDataVencimento(dataSelecionada());
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
 	private void atualizaDadosTabela() {
 //		tblContas.getItems().setAll(service.buscarTodas());
-//		limpar();
+		limpar();
 	}
+	
+//	private void atualizaDadosGrid(){
+//		gridCliente.getChildren().addAll(clientesService.buscarTodos());
+//	}
 
 }
 
