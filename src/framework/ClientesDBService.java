@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import sgat.entidades.Cliente;
@@ -60,7 +58,7 @@ public class ClientesDBService implements ClientesService{
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR BUSCANDO TODAS AS CONTAS.");
+			System.err.println("ERROR AO BUSCAR TODOS OS CLIENTES.");
 			System.exit(0);
 		} 
 		return clientes;
@@ -151,9 +149,8 @@ public class ClientesDBService implements ClientesService{
 		cliente.setCodigo(resultadoBusca.getInt(1));
 		cliente.setNome(resultadoBusca.getString(2));
 		cliente.setCpf(resultadoBusca.getString(3));
-		Date dataNascimento = resultadoBusca.getDate(4);
-		LocalDate localDateNascimento = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		cliente.setDataNascimento(localDateNascimento);
+		LocalDate dataNascimento = resultadoBusca.getDate(4).toLocalDate();
+		cliente.setDataNascimento(dataNascimento);
 		cliente.setRg(resultadoBusca.getString(5));
 		cliente.setEndereco(resultadoBusca.getString(6));
 		cliente.setCidade(resultadoBusca.getString(7));

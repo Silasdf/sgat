@@ -78,7 +78,6 @@ public class CadastroClienteController implements Initializable, ControlledScree
     
     @FXML
     private void limpar(){
-    	System.out.println("Cliquei em limpar!");
     	txtNome.setText("");
     	txtCpf.setText("");
     	txtDataNascimento.setValue(null);
@@ -102,7 +101,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     
 	// chamado quando acontece alguma operação de atualização dos dados
 	private void atualizaDadosTabela() {
-//		tblContas.getItems().setAll(service.buscarTodas());
+//		tblClientes.getItems().setAll(clientesService.buscarTodos());
 		limpar();
 	}
 	
