@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import sgat.entidades.Cliente;
 
 public class PesquisaClienteController implements Initializable, ControlledScreen {
@@ -18,19 +21,19 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	ScreensController myController;
 
 	@FXML
-	private TableView<Cliente> tblClientes;
+	private TableView<Cliente> tblClientes = new TableView<Cliente>();
 	
 	@FXML
-	private TableColumn<Cliente, String> c1Nome;
+	private TableColumn<Cliente, String> clNome = new TableColumn<>("Nome");
 	
 	@FXML
-	private TableColumn<Cliente, String> c1Cpf;
+	private TableColumn<Cliente, String> clCpf = new TableColumn<>("Cpf");
 	
 	@FXML
-	private TableColumn<Cliente, String> c1Rg;
+	private TableColumn<Cliente, String> clRg = new TableColumn<>("Rg");
 	
 	@FXML
-	private TableColumn<Cliente, String> c1ViagemEmpresa;
+	private TableColumn<Cliente, String> clViagemEmpresa = new TableColumn<>("ViagemPelaEmpresa");
 	
 	@FXML
 	private TextField txtNome;
@@ -63,8 +66,11 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+//    	tblClientes.getColumns().addAll(clNome, clCpf, clRg, clViagemEmpresa);
     	clientesService = ClientesService.getNewInstance();
-    	atualizaDadosTabela();
+    	configuraColunas();
+        ObservableList<Cliente> clientesObservable = FXCollections.observableArrayList(clientesService.buscarTodos());
+//    	atualizaDadosTabela();
     }
     
     public void setScreenParent(ScreensController screenParent){
@@ -73,7 +79,9 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 
     @FXML
     private void goToCadastroCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen2ID);
+    	myController.setScreen(ScreensFramework.screen2ID);
+		limpar();
+    	tblClientes.getItems().clear();
     }
     
 //    @FXML
@@ -82,8 +90,8 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 //    }
     
     @FXML
-    public List<Cliente> pesquisar(){
-    	return clientes;
+    public void pesquisar(){
+    	atualizaDadosTabela();
     }
     
     @FXML
@@ -109,6 +117,13 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 //		cliente.setCidade(txtCidade.getText());
 //		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
 //	}
+
+	private void configuraColunas() {
+		clNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
+		clCpf.setCellValueFactory(new PropertyValueFactory<Cliente, String>("cpf"));
+		clRg.setCellValueFactory(new PropertyValueFactory<Cliente, String>("rg"));
+		clViagemEmpresa.setCellValueFactory(new PropertyValueFactory<Cliente, String>("viagemEmpresa"));
+	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
 	private void atualizaDadosTabela() {
