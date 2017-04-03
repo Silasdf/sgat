@@ -54,10 +54,10 @@
       </GridPane>
       <TableView fx:id="tblClientes" layoutX="10.0" layoutY="329.0" prefHeight="200.0" prefWidth="396.0">
         <columns>
-          <TableColumn fx:id="clNome" prefWidth="75.0" text="Nome" />
-          <TableColumn fx:id="clCpf" prefWidth="75.0" text="CPF" />
-            <TableColumn fx:id="clRg" prefWidth="75.0" text="R.G" />
-            <TableColumn fx:id="clViagemEmpresa" prefWidth="172.0" text="Viagens Pela Empresa" />
+          <TableColumn fx:id="clNome" prefWidth="117.0" text="Nome" />
+          <TableColumn fx:id="clCpf" prefWidth="115.0" text="CPF" />
+            <TableColumn fx:id="clRg" prefWidth="88.0" text="R.G" />
+            <TableColumn fx:id="clViagemEmpresa" prefWidth="77.0" text="Viagens" />
         </columns>
       </TableView>
    </children>

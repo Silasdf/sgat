@@ -12,6 +12,8 @@ public interface ClientesService {
 	// RETRIEVE
 	public List<Cliente> buscarTodos();
 	
+	public List<Cliente> buscarClientes(Cliente cliente);
+	
 	public Cliente buscaPorCodigo(int condigo);
 	
 	// UPDATE

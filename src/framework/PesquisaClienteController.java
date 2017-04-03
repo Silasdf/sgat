@@ -1,6 +1,7 @@
 package framework;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -91,10 +92,19 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     
     @FXML
     public void pesquisar(){
-    	atualizaDadosTabela();
+		Cliente cliente = new Cliente();
+		pegaValores(cliente);
+    	buscarClientes(cliente);
+//    	atualizaDadosTabela();
     }
     
-    @FXML
+    private void buscarClientes(Cliente cliente) {
+	// TODO Auto-generated method stub
+		tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
+	
+}
+
+	@FXML
     private void limpar(){
     	System.out.println("Cliquei em limpar!");
     	txtNome.setText("");
@@ -106,17 +116,17 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	txtViagemEmpresa.setText("");
     }
     
-//	// pega os valores entrados pelo usuário e adiciona no objeto conta
-//	private void pegaValores(Cliente cliente) {
-//		cliente.setNome(txtNome.getText());
-//		cliente.setCpf(txtCpf.getText());
-//		LocalDate data = txtDataNascimento.getValue();
-//		cliente.setDataNascimento(data);
-//		cliente.setRg(txtRg.getText());
-//		cliente.setEndereco(txtEndereco.getText());
-//		cliente.setCidade(txtCidade.getText());
-//		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
-//	}
+	// pega os valores entrados pelo usuário e adiciona no objeto conta
+	private void pegaValores(Cliente cliente) {
+		cliente.setNome(txtNome.getText());
+		cliente.setCpf(txtCpf.getText());
+		LocalDate data = txtDataNascimento.getValue();
+		cliente.setDataNascimento(data);
+		cliente.setRg(txtRg.getText());
+		cliente.setEndereco(txtEndereco.getText());
+		cliente.setCidade(txtCidade.getText());
+		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+	}
 
 	private void configuraColunas() {
 		clNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
@@ -126,9 +136,9 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
-	private void atualizaDadosTabela() {
-		tblClientes.getItems().setAll(clientesService.buscarTodos());
-//		limpar();
-	}
+//	private void atualizaDadosTabela() {
+//		tblClientes.getItems().setAll(clientesService.buscarTodos());
+////		limpar();
+//	}
 
 }

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class ClientesDBService implements ClientesService{
 	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
 	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
 	final String APAGAR = "DELETE FROM cliente WHERE codigo = ?";
+	
+	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE 1 = 1 ";
 	
 	@Override
 	public void salvar(Cliente cliente) {
@@ -41,6 +44,73 @@ public class ClientesDBService implements ClientesService{
 			System.err.println("ERROR AO SALVAR CLIENTE");
 			System.exit(0);
 		} 
+	}
+
+	@Override
+	public List<Cliente> buscarClientes(Cliente cliente) {
+		List<Cliente> clientes = new ArrayList<>();
+		try {
+			Connection con = conexao();
+			String sql = BUSCAR_CLIENTES;
+			if (!SgatUtills.isNullOrEmpty((cliente.getNome()))){
+				sql += " and nome LIKE :nome";
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getCpf()))){
+				sql += " and cpf = :cpf";
+			}
+			if (cliente.getDataNascimento()!= null){
+				sql += " and dataNascimento = :dataNascimento";
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getRg()))){
+				sql += " and rg = :rg";
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getEndereco()))){
+				sql += " and endereco LIKE :endereco";
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getCidade()))){
+				sql += " and cidade LIKE :cidade";
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getViagemEmpresa()))){
+				sql += " and viagensPelaEmpresa = :viagensPelaEmpresa";
+			}
+			System.out.println("SQL = " + sql);
+			NamedParameterStatement buscarClientes = new NamedParameterStatement(con, sql);
+			if (!SgatUtills.isNullOrEmpty((cliente.getNome()))){
+				buscarClientes.setString("nome", "%" + cliente.getNome() + "%");
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getCpf()))){
+				buscarClientes.setString("cpf", cliente.getCpf());
+			}
+			if (cliente.getDataNascimento()!= null){
+				Timestamp timestamp = Timestamp.valueOf(cliente.getDataNascimento().atStartOfDay());
+				buscarClientes.setTimestamp("dataNascimento", timestamp);
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getRg()))){
+				buscarClientes.setString("rg", cliente.getRg());
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getEndereco()))){
+				buscarClientes.setString("endereco", "%" + cliente.getEndereco() + "%");
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getCidade()))){
+				buscarClientes.setString("cidade", "%" + cliente.getCidade() + "%");
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getViagemEmpresa()))){
+				buscarClientes.setString("viagensPelaEmpresa", cliente.getViagemEmpresa());
+			}
+			System.out.println("cliente = " + cliente);
+			ResultSet resultadoBusca = buscarClientes.executeQuery();
+			while (resultadoBusca.next()) {
+				Cliente clienteResultado = extraiCliente(resultadoBusca);
+				clientes.add(clienteResultado);
+			}
+			buscarClientes.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO BUSCAR CLIENTES ESPECIFICOS.");
+			System.exit(0);
+		} 
+		return clientes;
 	}
 	
 	@Override
