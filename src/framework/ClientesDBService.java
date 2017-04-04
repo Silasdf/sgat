@@ -23,6 +23,8 @@ public class ClientesDBService implements ClientesService{
 	
 	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE 1 = 1 ";
 	
+	private Cliente cliente;
+	
 	@Override
 	public void salvar(Cliente cliente) {
 		try {
@@ -226,6 +228,18 @@ public class ClientesDBService implements ClientesService{
 		cliente.setCidade(resultadoBusca.getString(7));
 		cliente.setViagemEmpresa(resultadoBusca.getString(8));
 		return cliente;
+	}
+
+	@Override
+	public Cliente getCliente() {
+
+		return cliente;
+	}
+
+	@Override
+	public void setCliente(Cliente cliente) {
+
+		this.cliente = cliente;
 	}
 
 }

@@ -6,6 +6,9 @@ import sgat.entidades.Cliente;
 
 public interface ClientesService {
 	
+	public Cliente getCliente();
+	public void setCliente (Cliente cliente);
+	
 	// INSERT
 	public void salvar(Cliente cliente);
 	
@@ -23,7 +26,7 @@ public interface ClientesService {
 	public void apagar(int codigo);
 
 	public static ClientesService getNewInstance() {
-		// TODO Auto-generated method stub
+
 		return new ClientesDBService();
 	}
 

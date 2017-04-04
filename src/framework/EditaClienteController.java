@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import sgat.entidades.Cliente;
 
-public class CadastroClienteController implements Initializable, ControlledScreen {
+public class EditaClienteController implements Initializable, ControlledScreen{
 	
 	ScreensController myController;
 	
@@ -53,7 +53,6 @@ public class CadastroClienteController implements Initializable, ControlledScree
         // TODO
     	clientesService = ClientesService.getNewInstance();
     	atualizaDadosTabela();
-//    	atualizaDadosGrid();
     	
     }
     
@@ -115,5 +114,3 @@ public class CadastroClienteController implements Initializable, ControlledScree
 //	}
 
 }
-
-

@@ -85,10 +85,10 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	tblClientes.getItems().clear();
     }
     
-//    @FXML
-//    private void goToScreen3(ActionEvent event){
-//       myController.setScreen(ScreensFramework.screen3ID);
-//    }
+    @FXML
+    private void goToEditaCliente(ActionEvent event){
+       myController.setScreen(ScreensFramework.screen4ID);
+    }
     
     @FXML
     public void pesquisar(){
@@ -96,6 +96,20 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		pegaValores(cliente);
     	buscarClientes(cliente);
 //    	atualizaDadosTabela();
+    }
+    
+    @FXML
+    private void visualizar(ActionEvent event){
+    	Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
+    	System.out.println(cliente);
+//    	goToEditaCliente(event);
+    	txtNome.setText(cliente.getNome());
+    	txtCpf.setText(cliente.getCpf());
+    	txtDataNascimento.setValue(cliente.getDataNascimento());
+    	txtRg.setText(cliente.getRg());
+    	txtEndereco.setText(cliente.getEndereco());
+    	txtCidade.setText(cliente.getCidade());
+    	txtViagemEmpresa.setText(cliente.getViagemEmpresa());
     }
     
     private void buscarClientes(Cliente cliente) {
