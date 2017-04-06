@@ -51,7 +51,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    	clientesService = ClientesService.getNewInstance();
+    	clientesService = ClientesDBService.getInstance();
     	atualizaDadosTabela();
 //    	atualizaDadosGrid();
     	

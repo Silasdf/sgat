@@ -24,6 +24,15 @@ public class ClientesDBService implements ClientesService{
 	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE 1 = 1 ";
 	
 	private Cliente cliente;
+	private static ClientesService instance;
+	
+//	@Override
+	public static ClientesService getInstance(){
+		if (instance == null) {
+		instance = new ClientesDBService();
+		}
+		return instance;
+	}
 	
 	@Override
 	public void salvar(Cliente cliente) {
@@ -233,7 +242,7 @@ public class ClientesDBService implements ClientesService{
 	@Override
 	public Cliente getCliente() {
 
-		return cliente;
+		return this.cliente;
 	}
 
 	@Override

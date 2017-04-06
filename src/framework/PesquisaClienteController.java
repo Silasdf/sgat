@@ -68,7 +68,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 //    	tblClientes.getColumns().addAll(clNome, clCpf, clRg, clViagemEmpresa);
-    	clientesService = ClientesService.getNewInstance();
+    	clientesService = ClientesDBService.getInstance();
     	configuraColunas();
         ObservableList<Cliente> clientesObservable = FXCollections.observableArrayList(clientesService.buscarTodos());
 //    	atualizaDadosTabela();
@@ -99,17 +99,19 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     }
     
     @FXML
-    private void visualizar(ActionEvent event){
+    private void visualizar(){
     	Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
     	System.out.println(cliente);
-//    	goToEditaCliente(event);
-    	txtNome.setText(cliente.getNome());
-    	txtCpf.setText(cliente.getCpf());
-    	txtDataNascimento.setValue(cliente.getDataNascimento());
-    	txtRg.setText(cliente.getRg());
-    	txtEndereco.setText(cliente.getEndereco());
-    	txtCidade.setText(cliente.getCidade());
-    	txtViagemEmpresa.setText(cliente.getViagemEmpresa());
+    	clientesService.setCliente(cliente);
+        myController.setScreen(ScreensFramework.screen4ID);
+//    	goToEditaCliente();
+//    	txtNome.setText(cliente.getNome());
+//    	txtCpf.setText(cliente.getCpf());
+//    	txtDataNascimento.setValue(cliente.getDataNascimento());
+//    	txtRg.setText(cliente.getRg());
+//    	txtEndereco.setText(cliente.getEndereco());
+//    	txtCidade.setText(cliente.getCidade());
+//    	txtViagemEmpresa.setText(cliente.getViagemEmpresa());
     }
     
     private void buscarClientes(Cliente cliente) {

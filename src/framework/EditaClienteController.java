@@ -21,25 +21,25 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 	private GridPane gridCliente;
 	
 	@FXML
-	private TextField txtNome;
+	private TextField txtNomeEdita;
 	
 	@FXML
-	private TextField txtCpf;
+	private TextField txtCpfEdita;
 	
 	@FXML
-	private DatePicker txtDataNascimento;
+	private DatePicker txtDataNascimentoEdita;
 	
 	@FXML
-	private TextField txtRg;
+	private TextField txtRgEdita;
 	
 	@FXML
-	private TextField txtEndereco;
+	private TextField txtEnderecoEdita;
 	
 	@FXML
-	private TextField txtCidade;
+	private TextField txtCidadeEdita;
 	
 	@FXML
-	private TextField txtViagemEmpresa;
+	private TextField txtViagemEmpresaEdita;
 	
 	@FXML
 	private Button sair;
@@ -51,9 +51,9 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    	clientesService = ClientesService.getNewInstance();
-    	atualizaDadosTabela();
-    	
+    	clientesService = ClientesDBService.getInstance();
+//    	carrega();
+
     }
     
     public void setScreenParent(ScreensController screenParent){
@@ -63,6 +63,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen3ID);
+       limpar();
     }
     
     @FXML
@@ -72,42 +73,55 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     }
     
     @FXML
+    private void carrega(){
+    	Cliente cliente = clientesService.getCliente();
+    	txtNomeEdita.setText(cliente.getNome());
+    	txtCpfEdita.setText(cliente.getCpf());
+    	txtDataNascimentoEdita.setValue(cliente.getDataNascimento());
+    	txtRgEdita.setText(cliente.getRg());
+    	txtEnderecoEdita.setText(cliente.getEndereco());
+    	txtCidadeEdita.setText(cliente.getCidade());
+    	txtViagemEmpresaEdita.setText(cliente.getViagemEmpresa());
+    	System.out.println(cliente);
+    }
+    
+    @FXML
     private void salvar(ActionEvent event){
     	System.out.println("Cliquei em salvar!");
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.salvar(cliente);
-		atualizaDadosTabela();
+//		atualizaDadosTabela();
     }
     
     @FXML
     private void limpar(){
-    	txtNome.setText("");
-    	txtCpf.setText("");
-    	txtDataNascimento.setValue(null);
-    	txtRg.setText("");
-    	txtEndereco.setText("");
-    	txtCidade.setText("");
-    	txtViagemEmpresa.setText("");
+    	txtNomeEdita.setText("");
+    	txtCpfEdita.setText("");
+    	txtDataNascimentoEdita.setValue(null);
+    	txtRgEdita.setText("");
+    	txtEnderecoEdita.setText("");
+    	txtCidadeEdita.setText("");
+    	txtViagemEmpresaEdita.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto conta
 	private void pegaValores(Cliente cliente) {
-		cliente.setNome(txtNome.getText());
-		cliente.setCpf(txtCpf.getText());
-		LocalDate data = txtDataNascimento.getValue();
+		cliente.setNome(txtNomeEdita.getText());
+		cliente.setCpf(txtCpfEdita.getText());
+		LocalDate data = txtDataNascimentoEdita.getValue();
 		cliente.setDataNascimento(data);
-		cliente.setRg(txtRg.getText());
-		cliente.setEndereco(txtEndereco.getText());
-		cliente.setCidade(txtCidade.getText());
-		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+		cliente.setRg(txtRgEdita.getText());
+		cliente.setEndereco(txtEnderecoEdita.getText());
+		cliente.setCidade(txtCidadeEdita.getText());
+		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
-	private void atualizaDadosTabela() {
-//		tblClientes.getItems().setAll(clientesService.buscarTodos());
-		limpar();
-	}
+//	private void atualizaDadosTabela() {
+////		tblClientes.getItems().setAll(clientesService.buscarTodos());
+//		limpar();
+//	}
 	
 //	private void atualizaDadosGrid(){
 //		gridCliente.getChildren().addAll(clientesService.buscarTodos());
