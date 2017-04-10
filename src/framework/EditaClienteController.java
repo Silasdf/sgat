@@ -42,6 +42,9 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 	private TextField txtViagemEmpresaEdita;
 	
 	@FXML
+	private TextField txtArmazenaCodigo;
+	
+	@FXML
 	private Button sair;
 	
 	private ClientesService clientesService;
@@ -53,8 +56,19 @@ public class EditaClienteController implements Initializable, ControlledScreen{
         // TODO
     	clientesService = ClientesDBService.getInstance();
 //    	carrega();
-
     }
+    
+//    public final void setOnShown(EventHandler<WindowEvent> value) {
+//    	System.out.println("Evento disparado: ");
+//    }
+    
+//    final ContextMenu contextMenu = new ContextMenu();
+//    
+//    contextMenu.setOnShown(new EventHandler<WindowEvent>(){
+//    	public void handle(WindowEvent e){
+//    	System.out.println("Evento disparado: ");
+//    	}
+//    });
     
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
@@ -62,7 +76,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen3ID);
+       myController.setScreen(ScreensFramework.screen4ID);
        limpar();
     }
     
@@ -86,12 +100,12 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     }
     
     @FXML
-    private void salvar(ActionEvent event){
-    	System.out.println("Cliquei em salvar!");
+    private void editar(ActionEvent event){
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
-		clientesService.salvar(cliente);
-//		atualizaDadosTabela();
+		clientesService.atualizar(cliente);
+    	System.out.println("cliente Editado: " + cliente + cliente.getCodigo());
+
     }
     
     @FXML
@@ -105,7 +119,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtViagemEmpresaEdita.setText("");
     }
     
-	// pega os valores entrados pelo usuário e adiciona no objeto conta
+	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {
 		cliente.setNome(txtNomeEdita.getText());
 		cliente.setCpf(txtCpfEdita.getText());
@@ -115,16 +129,10 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		cliente.setEndereco(txtEnderecoEdita.getText());
 		cliente.setCidade(txtCidadeEdita.getText());
 		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
+		String clientec = "";
+		System.out.println(txtArmazenaCodigo);
+		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
+		cliente.setCodigo(codigo);
 	}
-    
-	// chamado quando acontece alguma operação de atualização dos dados
-//	private void atualizaDadosTabela() {
-////		tblClientes.getItems().setAll(clientesService.buscarTodos());
-//		limpar();
-//	}
 	
-//	private void atualizaDadosGrid(){
-//		gridCliente.getChildren().addAll(clientesService.buscarTodos());
-//	}
-
 }

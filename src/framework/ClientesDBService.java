@@ -16,7 +16,7 @@ import sgat.entidades.Cliente;
 public class ClientesDBService implements ClientesService{
 	
 	final String INSERIR = "INSERT INTO cliente(nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=?, ativo=? WHERE codigo = ?";
+	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=? WHERE codigo = ?";
 	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
 	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
 	final String APAGAR = "DELETE FROM cliente WHERE codigo = ?";

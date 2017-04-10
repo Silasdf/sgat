@@ -79,15 +79,15 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     }
 
     @FXML
-    private void goToCadastroCliente(ActionEvent event){
-    	myController.setScreen(ScreensFramework.screen2ID);
+    private void voltar(ActionEvent event){
+    	myController.setScreen(ScreensFramework.screen3ID);
 		limpar();
     	tblClientes.getItems().clear();
     }
     
     @FXML
     private void goToEditaCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen4ID);
+       myController.setScreen(ScreensFramework.screen5ID);
     }
     
     @FXML
@@ -103,7 +103,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
     	System.out.println(cliente);
     	clientesService.setCliente(cliente);
-        myController.setScreen(ScreensFramework.screen4ID);
+        myController.setScreen(ScreensFramework.screen5ID);
 //    	goToEditaCliente();
 //    	txtNome.setText(cliente.getNome());
 //    	txtCpf.setText(cliente.getCpf());

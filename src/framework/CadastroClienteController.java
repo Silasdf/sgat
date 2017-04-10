@@ -63,13 +63,12 @@ public class CadastroClienteController implements Initializable, ControlledScree
 
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen3ID);
+       myController.setScreen(ScreensFramework.screen4ID);
     }
     
     @FXML
-    private void sair(ActionEvent event){
-    	System.out.println("Sistema foi fechado!");
-    	System.exit(0);
+    private void voltar(ActionEvent event){
+    	myController.setScreen(ScreensFramework.screen2ID);
     }
     
     @FXML
@@ -92,7 +91,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     	txtViagemEmpresa.setText("");
     }
     
-	// pega os valores entrados pelo usuário e adiciona no objeto conta
+	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {
 		cliente.setNome(txtNome.getText());
 		cliente.setCpf(txtCpf.getText());
