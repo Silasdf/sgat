@@ -73,7 +73,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     
     @FXML
     private void salvar(ActionEvent event){
-    	System.out.println("Cliquei em salvar!");
+    	System.out.println("Cliente cadastro com sucesso!");
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.salvar(cliente);

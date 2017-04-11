@@ -135,8 +135,10 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
 //		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
-		int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
-		cliente.setViagemEmpresa(viagemEmpresa);
+		if (!SgatUtills.isNullOrEmpty((txtViagemEmpresa.getText()))){
+			int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
+			cliente.setViagemEmpresa(viagemEmpresa);
+		}
 //		cliente.setCodigo(codigo);
 	}
 
