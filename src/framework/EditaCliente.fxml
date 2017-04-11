@@ -17,7 +17,7 @@
             <Button mnemonicParsing="false" onAction="#carrega" text="Carregar" />
             <Button mnemonicParsing="false" onAction="#editar" text="Editar" />
             <Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
-            <Button mnemonicParsing="false" onAction="#goToPesquisaCliente" text="Voltar" />
+            <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
             <Button mnemonicParsing="false" onAction="#sair" text="Sair" />
          </children>
       </HBox>

@@ -57,6 +57,8 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	@FXML
 	private TextField txtViagemEmpresa;
 	
+//	private TextField txtArmazenaCodigo;
+	
 	private List<Cliente> clientes;
 	
 	private ClientesService clientesService;
@@ -104,14 +106,6 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	System.out.println(cliente);
     	clientesService.setCliente(cliente);
         myController.setScreen(ScreensFramework.screen5ID);
-//    	goToEditaCliente();
-//    	txtNome.setText(cliente.getNome());
-//    	txtCpf.setText(cliente.getCpf());
-//    	txtDataNascimento.setValue(cliente.getDataNascimento());
-//    	txtRg.setText(cliente.getRg());
-//    	txtEndereco.setText(cliente.getEndereco());
-//    	txtCidade.setText(cliente.getCidade());
-//    	txtViagemEmpresa.setText(cliente.getViagemEmpresa());
     }
     
     private void buscarClientes(Cliente cliente) {
@@ -142,6 +136,8 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
 		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+//		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
+//		cliente.setCodigo(codigo);
 	}
 
 	private void configuraColunas() {

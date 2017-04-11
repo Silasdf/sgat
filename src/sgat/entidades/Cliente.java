@@ -11,7 +11,7 @@ public class Cliente {
 	private String cidade;
 	private String viagemEmpresa;
 //	private List<Cliente> clientes;
-	private int codigo;
+	private Integer codigo;
 	
 	public String getNome() {
 		return nome;
@@ -60,17 +60,17 @@ public class Cliente {
 //		return clientes;
 //	}
 	
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	
 	@Override
 	public String toString() {
 		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", rg=" + rg
-				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa + "]";
+				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa + " codigo=" + codigo + "]";
 	}
 
 }

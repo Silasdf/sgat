@@ -40,14 +40,15 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 	
 	@FXML
 	private TextField txtViagemEmpresaEdita;
-	
-	@FXML
-	private TextField txtArmazenaCodigo;
+
+//	private TextField txtArmazenaCodigo;
 	
 	@FXML
 	private Button sair;
 	
 	private ClientesService clientesService;
+	
+	private Cliente clienteSelecionado;
     /**
      * Initializes the controller class.
      */
@@ -55,27 +56,14 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     	clientesService = ClientesDBService.getInstance();
-//    	carrega();
     }
-    
-//    public final void setOnShown(EventHandler<WindowEvent> value) {
-//    	System.out.println("Evento disparado: ");
-//    }
-    
-//    final ContextMenu contextMenu = new ContextMenu();
-//    
-//    contextMenu.setOnShown(new EventHandler<WindowEvent>(){
-//    	public void handle(WindowEvent e){
-//    	System.out.println("Evento disparado: ");
-//    	}
-//    });
     
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
 
     @FXML
-    private void goToPesquisaCliente(ActionEvent event){
+    private void voltar(ActionEvent event){
        myController.setScreen(ScreensFramework.screen4ID);
        limpar();
     }
@@ -88,15 +76,15 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     
     @FXML
     private void carrega(){
-    	Cliente cliente = clientesService.getCliente();
-    	txtNomeEdita.setText(cliente.getNome());
-    	txtCpfEdita.setText(cliente.getCpf());
-    	txtDataNascimentoEdita.setValue(cliente.getDataNascimento());
-    	txtRgEdita.setText(cliente.getRg());
-    	txtEnderecoEdita.setText(cliente.getEndereco());
-    	txtCidadeEdita.setText(cliente.getCidade());
-    	txtViagemEmpresaEdita.setText(cliente.getViagemEmpresa());
-    	System.out.println(cliente);
+    	clienteSelecionado = clientesService.getCliente();
+    	txtNomeEdita.setText(clienteSelecionado.getNome());
+    	txtCpfEdita.setText(clienteSelecionado.getCpf());
+    	txtDataNascimentoEdita.setValue(clienteSelecionado.getDataNascimento());
+    	txtRgEdita.setText(clienteSelecionado.getRg());
+    	txtEnderecoEdita.setText(clienteSelecionado.getEndereco());
+    	txtCidadeEdita.setText(clienteSelecionado.getCidade());
+    	txtViagemEmpresaEdita.setText(clienteSelecionado.getViagemEmpresa());
+    	System.out.println(clienteSelecionado);
     }
     
     @FXML
@@ -104,7 +92,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.atualizar(cliente);
-    	System.out.println("cliente Editado: " + cliente + cliente.getCodigo());
+    	System.out.println("cliente Editado: " + cliente );
 
     }
     
@@ -129,10 +117,9 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		cliente.setEndereco(txtEnderecoEdita.getText());
 		cliente.setCidade(txtCidadeEdita.getText());
 		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
-		String clientec = "";
-		System.out.println(txtArmazenaCodigo);
-		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
-		cliente.setCodigo(codigo);
+//		System.out.println(txtArmazenaCodigo.getText());
+//		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
+		cliente.setCodigo(clienteSelecionado.getCodigo());
 	}
 	
 }
