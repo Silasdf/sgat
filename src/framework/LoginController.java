@@ -1,6 +1,7 @@
 package framework;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -36,26 +37,34 @@ public class LoginController implements Initializable, ControlledScreen {
 
 	   isConnected.setText("Not Connected");
 	  }
+  	txtNomeUsuario.setText("vfturismo");
+  	txtSenhaUsuario.setText("vfturismo");
 	 }
 	 
-//	 public void Login (ActionEvent event){
-//		 try{
-//			 if (loginModel.isLogin(txtNomeUsuario.getText(), txtSenhaUsuario.getText())){
-//				 isConnected.setText("Usuário e senha corretos");
-//			  } else {
-//
-//			   isConnected.setText("Usuário e senha incorretos");
-//			  }
-//			 
-//		 } catch (SQLException e){
-//			 isConnected.setText("Usuário e senha incorretos");
-//			 e.printStackTrace();
-//		 }
-//	 }
+	 public void login (ActionEvent event){
+		 try{
+			 if (loginModel.isLogin(txtNomeUsuario.getText(), txtSenhaUsuario.getText())){
+				 isConnected.setText("Usuário e senha corretos");
+				 goToCadastroCliente();
+			  } else {
+
+			   isConnected.setText("Usuário e senha incorretos");
+			  }
+			 
+		 } catch (SQLException e){
+			 isConnected.setText("Usuário e senha incorretos");
+			 e.printStackTrace();
+		 }
+	 }
 	 
-	    @FXML
-	    private void goToCadastroCliente(ActionEvent event){
+	    private void goToCadastroCliente(){
 	       myController.setScreen(ScreensFramework.screen2ID);
+	    }
+	    
+	    @FXML
+	    private void limpar(){
+	    	txtNomeUsuario.setText("");
+	    	txtSenhaUsuario.setText("");
 	    }
 	  
 	}

@@ -30,7 +30,7 @@ public class LoginModel {
 		  
 		  PreparedStatement preparedStatement = null;
 		  ResultSet resultSet = null;
-		  String query = "select * from usuariosaplicacao where username = ? and password = ?";
+		  String query = "select * from usuariosaplicacao where usuario = ? and senha = ?";
 		  
 		  try {
 			  preparedStatement = conection.prepareStatement(query);

@@ -2,6 +2,7 @@ package framework;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -56,6 +57,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     	clientesService = ClientesDBService.getInstance();
+    	System.out.println("Initialize do edita às " + new Date());
     }
     
     public void setScreenParent(ScreensController screenParent){
@@ -83,7 +85,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtRgEdita.setText(clienteSelecionado.getRg());
     	txtEnderecoEdita.setText(clienteSelecionado.getEndereco());
     	txtCidadeEdita.setText(clienteSelecionado.getCidade());
-    	txtViagemEmpresaEdita.setText(clienteSelecionado.getViagemEmpresa());
+    	txtViagemEmpresaEdita.setText(clienteSelecionado.getViagemEmpresa().toString());
     	System.out.println(clienteSelecionado);
     }
     
@@ -116,9 +118,9 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		cliente.setRg(txtRgEdita.getText());
 		cliente.setEndereco(txtEnderecoEdita.getText());
 		cliente.setCidade(txtCidadeEdita.getText());
-		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
-//		System.out.println(txtArmazenaCodigo.getText());
-//		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
+//		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
+		int viagemEmpresa = Integer.parseInt(txtViagemEmpresaEdita.getText());
+		cliente.setViagemEmpresa(viagemEmpresa);
 		cliente.setCodigo(clienteSelecionado.getCodigo());
 	}
 	

@@ -9,8 +9,7 @@ public class Cliente {
 	private String rg;
 	private String endereco;
 	private String cidade;
-	private String viagemEmpresa;
-//	private List<Cliente> clientes;
+	private Integer viagemEmpresa;
 	private Integer codigo;
 	
 	public String getNome() {
@@ -49,10 +48,10 @@ public class Cliente {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	public String getViagemEmpresa() {
+	public Integer getViagemEmpresa() {
 		return viagemEmpresa;
 	}
-	public void setViagemEmpresa(String viagemEmpresa) {
+	public void setViagemEmpresa(Integer viagemEmpresa) {
 		this.viagemEmpresa = viagemEmpresa;
 	}
 	

@@ -2,7 +2,6 @@ package framework;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -59,7 +58,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	
 //	private TextField txtArmazenaCodigo;
 	
-	private List<Cliente> clientes;
+//	private List<Cliente> clientes;
 	
 	private ClientesService clientesService;
 	
@@ -135,8 +134,9 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		cliente.setRg(txtRg.getText());
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
-		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
-//		int codigo = Integer.parseInt(txtArmazenaCodigo.getText());
+//		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+		int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
+		cliente.setViagemEmpresa(viagemEmpresa);
 //		cliente.setCodigo(codigo);
 	}
 

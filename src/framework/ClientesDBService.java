@@ -46,7 +46,7 @@ public class ClientesDBService implements ClientesService{
 			salvar.setString(4, cliente.getRg());
 			salvar.setString(5, cliente.getEndereco());
 			salvar.setString(6, cliente.getCidade());
-			salvar.setString(7, cliente.getViagemEmpresa());
+			salvar.setInt(7, cliente.getViagemEmpresa());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -81,7 +81,7 @@ public class ClientesDBService implements ClientesService{
 			if (!SgatUtills.isNullOrEmpty((cliente.getCidade()))){
 				sql += " and cidade LIKE :cidade";
 			}
-			if (!SgatUtills.isNullOrEmpty((cliente.getViagemEmpresa()))){
+			if (cliente.getViagemEmpresa()!= null){
 				sql += " and viagensPelaEmpresa = :viagensPelaEmpresa";
 			}
 			System.out.println("SQL = " + sql);
@@ -105,8 +105,8 @@ public class ClientesDBService implements ClientesService{
 			if (!SgatUtills.isNullOrEmpty((cliente.getCidade()))){
 				buscarClientes.setString("cidade", "%" + cliente.getCidade() + "%");
 			}
-			if (!SgatUtills.isNullOrEmpty((cliente.getViagemEmpresa()))){
-				buscarClientes.setString("viagensPelaEmpresa", cliente.getViagemEmpresa());
+			if (cliente.getViagemEmpresa()!= null){
+				buscarClientes.setInt("viagensPelaEmpresa", cliente.getViagemEmpresa());
 			}
 			System.out.println("cliente = " + cliente);
 			ResultSet resultadoBusca = buscarClientes.executeQuery();
@@ -192,7 +192,7 @@ public class ClientesDBService implements ClientesService{
 			atualizar.setString(4, cliente.getRg());
 			atualizar.setString(5, cliente.getEndereco());
 			atualizar.setString(6, cliente.getCidade());
-			atualizar.setString(7, cliente.getViagemEmpresa());
+			atualizar.setInt(7, cliente.getViagemEmpresa());
 			atualizar.setInt(8, cliente.getCodigo());
 			atualizar.executeUpdate();
 			atualizar.close();
@@ -235,7 +235,7 @@ public class ClientesDBService implements ClientesService{
 		cliente.setRg(resultadoBusca.getString(5));
 		cliente.setEndereco(resultadoBusca.getString(6));
 		cliente.setCidade(resultadoBusca.getString(7));
-		cliente.setViagemEmpresa(resultadoBusca.getString(8));
+		cliente.setViagemEmpresa(resultadoBusca.getInt(8));
 		return cliente;
 	}
 

@@ -100,7 +100,9 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		cliente.setRg(txtRg.getText());
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
-		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+//		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+		int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
+		cliente.setViagemEmpresa(viagemEmpresa);
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
