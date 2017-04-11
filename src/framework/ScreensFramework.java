@@ -15,13 +15,13 @@ public class ScreensFramework extends Application{
     public static String screen2File = "Inicio.fxml";
     
     public static String screen3ID = "screen3";
-    public static String screen3File = "CadastroCliente.fxml";
+    public static String screen3File = "../application/clientes/CadastroCliente.fxml";
     
     public static String screen4ID = "screen4";
-    public static String screen4File = "PesquisaCliente.fxml";
+    public static String screen4File = "../application/clientes/PesquisaCliente.fxml";
     
     public static String screen5ID = "screen5";
-    public static String screen5File = "EditaCliente.fxml";
+    public static String screen5File = "../application/clientes/EditaCliente.fxml";
     
     @Override
     public void start(Stage primaryStage) {

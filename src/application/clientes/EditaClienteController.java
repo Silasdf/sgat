@@ -1,10 +1,13 @@
-package framework;
+package application.clientes;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import framework.ControlledScreen;
+import framework.ScreensController;
+import framework.ScreensFramework;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -78,6 +81,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     
     @FXML
     private void carrega(){
+    	mudarEdicao(false);
     	clienteSelecionado = clientesService.getCliente();
     	txtNomeEdita.setText(clienteSelecionado.getNome());
     	txtCpfEdita.setText(clienteSelecionado.getCpf());
@@ -90,12 +94,28 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     }
     
     @FXML
-    private void editar(ActionEvent event){
+    private void salvar(ActionEvent event){
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.atualizar(cliente);
+    	mudarEdicao(false);
     	System.out.println("cliente Editado: " + cliente );
 
+    }
+    
+    @FXML
+    private void editar(){
+    	mudarEdicao(true);
+    }
+    
+    private void mudarEdicao(Boolean novoEstado){
+    	txtNomeEdita.setEditable(novoEstado);
+    	txtCpfEdita.setEditable(novoEstado);
+    	txtDataNascimentoEdita.setEditable(novoEstado);
+    	txtRgEdita.setEditable(novoEstado);
+    	txtEnderecoEdita.setEditable(novoEstado);
+    	txtCidadeEdita.setEditable(novoEstado);
+    	txtViagemEmpresaEdita.setEditable(novoEstado);
     }
     
     @FXML
