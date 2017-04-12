@@ -1,9 +1,11 @@
-package framework;
+package application.principal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import framework.MariaDBConection;
 
 public class LoginModel {
 	

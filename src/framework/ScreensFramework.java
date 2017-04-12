@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 public class ScreensFramework extends Application{
 	
 	public static String screen1ID = "main";
-    public static String screen1File = "Login.fxml";
+    public static String screen1File = "../application/principal/Login.fxml";
     
     public static String screen2ID = "screen2";
-    public static String screen2File = "Inicio.fxml";
+    public static String screen2File = "../application/principal/Inicio.fxml";
     
     public static String screen3ID = "screen3";
     public static String screen3File = "../application/clientes/CadastroCliente.fxml";

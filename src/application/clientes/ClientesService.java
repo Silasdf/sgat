@@ -30,7 +30,7 @@ public interface ClientesService {
 	public void atualizar(Cliente cliente);
 	
 	// DELETE
-	public void apagar(int codigo);
+	public void apagar(Cliente cliente);
 
 //	public static ClientesService getNewInstance() {
 //

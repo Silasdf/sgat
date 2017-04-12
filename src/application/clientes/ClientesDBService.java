@@ -21,7 +21,7 @@ public class ClientesDBService implements ClientesService{
 	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=? WHERE codigo = ?";
 	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
 	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
-	final String APAGAR = "DELETE FROM cliente WHERE codigo = ?";
+	final String APAGAR = "UPDATE cliente SET ativo = N WHERE codigo = ?";
 	
 	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE 1 = 1 ";
 	
@@ -168,17 +168,18 @@ public class ClientesDBService implements ClientesService{
 	}
 	
 	@Override
-	public void apagar(int codigo) {
+	public void apagar(Cliente cliente) {
 		try {
 			Connection con = conexao();
 			PreparedStatement apagar = con.prepareStatement(APAGAR);
-			apagar.setInt(1, codigo);
+			apagar.setInt(1, cliente.getCodigo());
+			apagar.setString(2, cliente.getAtivo());
 			apagar.executeUpdate();
 			apagar.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO APAGAR CLIENTE COM CODIGO " + codigo);
+			System.err.println("ERROR AO APAGAR CLIENTE COM CODIGO ");
 			System.exit(0);
 		} 
 	}

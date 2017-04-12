@@ -11,6 +11,7 @@ public class Cliente {
 	private String cidade;
 	private Integer viagemEmpresa;
 	private Integer codigo;
+	private String ativo;
 	
 	public String getNome() {
 		return nome;
@@ -55,10 +56,6 @@ public class Cliente {
 		this.viagemEmpresa = viagemEmpresa;
 	}
 	
-//	public List<Cliente> buscarTodos(){
-//		return clientes;
-//	}
-	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -66,10 +63,17 @@ public class Cliente {
 		this.codigo = codigo;
 	}
 	
+	public String getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", rg=" + rg
-				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa + " codigo=" + codigo + "]";
+				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa + " codigo=" + codigo + " ativo=" + ativo + "]";
 	}
 
 }

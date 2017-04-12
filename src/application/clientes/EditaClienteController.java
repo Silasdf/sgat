@@ -142,6 +142,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		int viagemEmpresa = Integer.parseInt(txtViagemEmpresaEdita.getText());
 		cliente.setViagemEmpresa(viagemEmpresa);
 		cliente.setCodigo(clienteSelecionado.getCodigo());
+		cliente.setAtivo(clienteSelecionado.getAtivo());
 	}
 	
 }

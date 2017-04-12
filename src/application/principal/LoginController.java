@@ -1,9 +1,12 @@
-package framework;
+package application.principal;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import framework.ControlledScreen;
+import framework.ScreensController;
+import framework.ScreensFramework;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
