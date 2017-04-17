@@ -74,12 +74,6 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     }
     
     @FXML
-    private void sair(ActionEvent event){
-    	System.out.println("Sistema foi fechado!");
-    	System.exit(0);
-    }
-    
-    @FXML
     private void carrega(){
     	mudarEdicao(false);
     	clienteSelecionado = clientesService.getCliente();

@@ -12,13 +12,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.clientes.PesquisaClienteController">
+<AnchorPane id="AnchorPane" prefHeight="543.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.clientes.PesquisaClienteController">
   <children>
-      <HBox alignment="BOTTOM_RIGHT" layoutX="381.0" layoutY="294.0" prefHeight="62.0" prefWidth="417.0" spacing="20.0">
+      <HBox alignment="BOTTOM_RIGHT" layoutX="445.0" layoutY="294.0" prefHeight="62.0" prefWidth="436.0" spacing="20.0">
          <children>
-			<Button mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
+			<Button fx:id="btnPesquisar" mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
 			<Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
             <Button mnemonicParsing="false" onAction="#visualizar" text="Visualizar" />
+            <Button mnemonicParsing="false" onAction="#apagar" text="Apagar" />
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
          </children>
       </HBox>

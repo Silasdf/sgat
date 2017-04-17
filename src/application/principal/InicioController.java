@@ -34,6 +34,16 @@ public class InicioController implements Initializable, ControlledScreen {
     }
     
     @FXML
+    private void cadastroHotel(ActionEvent event){
+       myController.setScreen(ScreensFramework.screen6ID);
+    }
+    
+    @FXML
+    private void pesquisaHotel(ActionEvent event){
+       myController.setScreen(ScreensFramework.screen7ID);
+    }
+    
+    @FXML
     private void sair(ActionEvent event){
     	System.out.println("Sistema foi fechado!");
     	System.exit(0);

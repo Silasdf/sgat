@@ -8,11 +8,10 @@ import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
 import framework.SgatUtills;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -60,9 +59,8 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	@FXML
 	private TextField txtViagemEmpresa;
 	
-//	private TextField txtArmazenaCodigo;
-	
-//	private List<Cliente> clientes;
+	@FXML
+	private Button btnPesquisar;
 	
 	private ClientesService clientesService;
 	
@@ -71,17 +69,27 @@ public class PesquisaClienteController implements Initializable, ControlledScree
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-//    	tblClientes.getColumns().addAll(clNome, clCpf, clRg, clViagemEmpresa);
     	clientesService = ClientesDBService.getInstance();
     	configuraColunas();
-        ObservableList<Cliente> clientesObservable = FXCollections.observableArrayList(clientesService.buscarTodos());
-//    	atualizaDadosTabela();
     }
     
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
+    
+//    private void mensagemInformativa(Cliente cliente){
+//    	
+//    	btnPesquisar.setOnAction(e -> {
+//        	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+//        	dialogoInfo.setTitle("Pesquisa Cliente");
+//        	dialogoInfo.setHeaderText("Esse é o cabeçalho...");
+//        	dialogoInfo.setContentText("Cliente Pesquisado com sucesso!");
+//        	dialogoInfo.showAndWait();
+//        	Stage stage1 = (Stage) dialogoInfo.getDialogPane().getScene().getWindow();
+//        	stage1.getIcons().add(new Image(this.getClass().getResource("imagens/S_1.png").toString()));
+//        });
+//
+//    }
 
     @FXML
     private void voltar(ActionEvent event){
@@ -91,16 +99,16 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     }
     
     @FXML
-    private void goToEditaCliente(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen5ID);
-    }
-    
-    @FXML
     public void pesquisar(){
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
     	buscarClientes(cliente);
-//    	atualizaDadosTabela();
+//		mensagemInformativa(cliente);
+    }
+    
+    
+    private void buscarClientes(Cliente cliente) {
+		tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
     }
     
     @FXML
@@ -111,12 +119,6 @@ public class PesquisaClienteController implements Initializable, ControlledScree
         myController.setScreen(ScreensFramework.screen5ID);
     }
     
-    private void buscarClientes(Cliente cliente) {
-	// TODO Auto-generated method stub
-		tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
-	
-}
-
 	@FXML
     private void limpar(){
     	System.out.println("Cliquei em limpar!");
@@ -127,6 +129,14 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	txtEndereco.setText("");
     	txtCidade.setText("");
     	txtViagemEmpresa.setText("");
+    }
+	
+    @FXML
+    public void apagar(){
+		Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
+		System.out.println(cliente);
+		clientesService.apagar(cliente);
+    	tblClientes.getItems().clear();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto conta
@@ -152,11 +162,5 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		clRg.setCellValueFactory(new PropertyValueFactory<Cliente, String>("rg"));
 		clViagemEmpresa.setCellValueFactory(new PropertyValueFactory<Cliente, String>("viagemEmpresa"));
 	}
-    
-	// chamado quando acontece alguma operação de atualização dos dados
-//	private void atualizaDadosTabela() {
-//		tblClientes.getItems().setAll(clientesService.buscarTodos());
-////		limpar();
-//	}
 
 }

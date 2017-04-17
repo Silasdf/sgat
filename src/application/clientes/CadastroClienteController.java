@@ -45,7 +45,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
 	private TextField txtViagemEmpresa;
 	
 	@FXML
-	private Button sair;
+	private Button btnSalvar;
 	
 	private ClientesService clientesService;
     /**
@@ -56,13 +56,31 @@ public class CadastroClienteController implements Initializable, ControlledScree
         // TODO
     	clientesService = ClientesDBService.getInstance();
     	atualizaDadosTabela();
-//    	atualizaDadosGrid();
-    	
     }
     
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
+    
+//    private void mensagemInformativa(Stage stage){
+//    	
+//    	btnSalvar.setOnAction(e -> {
+//        	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+//        	dialogoInfo.setTitle("Cadastro Cliente");
+//        	dialogoInfo.setHeaderText("Esse é o cabeçalho...");
+//        	dialogoInfo.setContentText("Cliente cadastrado com sucesso!");
+//        	dialogoInfo.showAndWait();
+////    		dialogoInfo.getIcons().add(new Image("imagens/S_1.png"));
+//        });
+//    	
+//    }
+    
+//    Alert alert = new Alert(AlertType.INFORMATION);
+//    alert.setTitle("Information Dialog");
+//    alert.setHeaderText("Look, an Information Dialog");
+//    alert.setContentText("I have a great message for you!");
+//
+//    alert.showAndWait();
 
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
@@ -80,6 +98,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.salvar(cliente);
+//		mensagemInformativa(null);
 		atualizaDadosTabela();
     }
     

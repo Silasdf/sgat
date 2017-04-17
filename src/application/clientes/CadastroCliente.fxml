@@ -14,7 +14,7 @@
    <children>
       <HBox alignment="BOTTOM_RIGHT" layoutX="317.0" layoutY="288.0" prefHeight="62.0" prefWidth="417.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#salvar" text="Incluir" />
+            <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Incluir" />
             <Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
             <Button mnemonicParsing="false" onAction="#goToPesquisaCliente" text="Pesquisar" />
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />

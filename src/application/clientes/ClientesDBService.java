@@ -20,10 +20,10 @@ public class ClientesDBService implements ClientesService{
 	final String INSERIR = "INSERT INTO cliente(nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=? WHERE codigo = ?";
 	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
-	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
-	final String APAGAR = "UPDATE cliente SET ativo = N WHERE codigo = ?";
+//	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
+	final String APAGAR = "UPDATE cliente SET ativo = 'N' WHERE codigo = ?";
 	
-	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE 1 = 1 ";
+	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE ativo = 'S' ";
 	
 	private Cliente cliente;
 	private static ClientesService instance;
@@ -44,7 +44,6 @@ public class ClientesDBService implements ClientesService{
 			salvar.setString(1, cliente.getNome());
 			salvar.setString(2, cliente.getCpf());
 			salvar.setDate(3, java.sql.Date.valueOf(cliente.getDataNascimento()));
-//			salvar.setDate(3, new java.sql.Date(0L));
 			salvar.setString(4, cliente.getRg());
 			salvar.setString(5, cliente.getEndereco());
 			salvar.setString(6, cliente.getCidade());
@@ -54,7 +53,7 @@ public class ClientesDBService implements ClientesService{
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO SALVAR CLIENTE");
+			System.err.println("ERROR AO CADASTRAR CLIENTE");
 			System.exit(0);
 		} 
 	}
@@ -126,26 +125,26 @@ public class ClientesDBService implements ClientesService{
 		return clientes;
 	}
 	
-	@Override
-	public List<Cliente> buscarTodos() {
-		List<Cliente> clientes = new ArrayList<>();
-		try {
-			Connection con = conexao();
-			PreparedStatement buscarTodos = con.prepareStatement(BUSCAR_TODOS);
-			ResultSet resultadoBusca = buscarTodos.executeQuery();
-			while (resultadoBusca.next()) {
-				Cliente cliente = extraiCliente(resultadoBusca);
-				clientes.add(cliente);
-			}
-			buscarTodos.close();
-			con.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("ERROR AO BUSCAR TODOS OS CLIENTES.");
-			System.exit(0);
-		} 
-		return clientes;
-	}
+//	@Override
+//	public List<Cliente> buscarTodos() {
+//		List<Cliente> clientes = new ArrayList<>();
+//		try {
+//			Connection con = conexao();
+//			PreparedStatement buscarTodos = con.prepareStatement(BUSCAR_TODOS);
+//			ResultSet resultadoBusca = buscarTodos.executeQuery();
+//			while (resultadoBusca.next()) {
+//				Cliente cliente = extraiCliente(resultadoBusca);
+//				clientes.add(cliente);
+//			}
+//			buscarTodos.close();
+//			con.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.err.println("ERROR AO BUSCAR TODOS OS CLIENTES.");
+//			System.exit(0);
+//		} 
+//		return clientes;
+//	}
 	
 	@Override
 	public Cliente buscaPorCodigo(int codigo) {
@@ -173,7 +172,6 @@ public class ClientesDBService implements ClientesService{
 			Connection con = conexao();
 			PreparedStatement apagar = con.prepareStatement(APAGAR);
 			apagar.setInt(1, cliente.getCodigo());
-			apagar.setString(2, cliente.getAtivo());
 			apagar.executeUpdate();
 			apagar.close();
 			con.close();
@@ -239,6 +237,7 @@ public class ClientesDBService implements ClientesService{
 		cliente.setEndereco(resultadoBusca.getString(6));
 		cliente.setCidade(resultadoBusca.getString(7));
 		cliente.setViagemEmpresa(resultadoBusca.getInt(8));
+		cliente.setAtivo(resultadoBusca.getString(9));
 		return cliente;
 	}
 
