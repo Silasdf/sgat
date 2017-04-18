@@ -3,6 +3,7 @@ package application.hoteis;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -48,7 +49,6 @@ public class CadastroHotelController implements Initializable, ControlledScreen{
 	
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     	hoteisService = HoteisDBService.getInstance();
     	atualizaDadosTabela();
     }
@@ -73,7 +73,7 @@ public class CadastroHotelController implements Initializable, ControlledScreen{
 		Hotel hotel = new Hotel();
 		pegaValores(hotel);
 		hoteisService.salvar(hotel);
-//		mensagemInformativa(null);
+		Mensagens.mensagemInformativa("Hotel cadastrado com sucesso!");
 		atualizaDadosTabela();
     }
     

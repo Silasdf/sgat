@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -41,8 +42,14 @@ public class CadastroClienteController implements Initializable, ControlledScree
 	@FXML
 	private TextField txtCidade;
 	
+//	@FXML
+//	private Spinner<Integer> txtViagemEmpresa;
+	
 	@FXML
 	private TextField txtViagemEmpresa;
+	
+	@FXML
+	private TextField txtTelefone;
 	
 	@FXML
 	private Button btnSalvar;
@@ -53,7 +60,6 @@ public class CadastroClienteController implements Initializable, ControlledScree
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     	clientesService = ClientesDBService.getInstance();
     	atualizaDadosTabela();
     }
@@ -61,26 +67,6 @@ public class CadastroClienteController implements Initializable, ControlledScree
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
-    
-//    private void mensagemInformativa(Stage stage){
-//    	
-//    	btnSalvar.setOnAction(e -> {
-//        	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
-//        	dialogoInfo.setTitle("Cadastro Cliente");
-//        	dialogoInfo.setHeaderText("Esse é o cabeçalho...");
-//        	dialogoInfo.setContentText("Cliente cadastrado com sucesso!");
-//        	dialogoInfo.showAndWait();
-////    		dialogoInfo.getIcons().add(new Image("imagens/S_1.png"));
-//        });
-//    	
-//    }
-    
-//    Alert alert = new Alert(AlertType.INFORMATION);
-//    alert.setTitle("Information Dialog");
-//    alert.setHeaderText("Look, an Information Dialog");
-//    alert.setContentText("I have a great message for you!");
-//
-//    alert.showAndWait();
 
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
@@ -98,7 +84,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.salvar(cliente);
-//		mensagemInformativa(null);
+		Mensagens.mensagemInformativa("Cliente cadastrado com sucesso!");
 		atualizaDadosTabela();
     }
     
@@ -111,6 +97,8 @@ public class CadastroClienteController implements Initializable, ControlledScree
     	txtEndereco.setText("");
     	txtCidade.setText("");
     	txtViagemEmpresa.setText("");
+//    	txtViagemEmpresa.setValueFactory(null);
+    	txtTelefone.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
@@ -122,20 +110,17 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		cliente.setRg(txtRg.getText());
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
-//		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
+//		cliente.setViagemEmpresa(txtViagemEmpresa.getValue());
 		int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
 		cliente.setViagemEmpresa(viagemEmpresa);
+		cliente.setTelefone(txtTelefone.getText());
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
 	private void atualizaDadosTabela() {
-//		tblClientes.getItems().setAll(clientesService.buscarTodos());
 		limpar();
 	}
-	
-//	private void atualizaDadosGrid(){
-//		gridCliente.getChildren().addAll(clientesService.buscarTodos());
-//	}
+
 
 }
 

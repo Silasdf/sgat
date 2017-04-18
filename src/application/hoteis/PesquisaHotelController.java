@@ -3,6 +3,7 @@ package application.hoteis;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -82,7 +83,7 @@ public class PesquisaHotelController implements Initializable, ControlledScreen{
 		Hotel hotel = new Hotel();
 		pegaValores(hotel);
     	buscarHoteis(hotel);
-//		mensagemInformativa(cliente);
+		Mensagens.mensagemInformativa("Hotel pesquisado com sucesso!");
     }
     
     @FXML
@@ -107,6 +108,15 @@ public class PesquisaHotelController implements Initializable, ControlledScreen{
     	txtEnderecoHotel.setText("");
     	txtCidadeHotel.setText("");
     	txtTelefoneHotel.setText("");
+    }
+    
+    @FXML
+    public void apagar(){
+		Hotel hotel = tblHoteis.getSelectionModel().getSelectedItem();
+		System.out.println(hotel);
+		Mensagens.mensagemConfirmacao("Deseja apagar este hotel?");
+		hoteisService.apagar(hotel);
+    	tblHoteis.getItems().clear();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto hotel

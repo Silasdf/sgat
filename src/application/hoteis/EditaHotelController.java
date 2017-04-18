@@ -3,6 +3,7 @@ package application.hoteis;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -84,6 +85,7 @@ public class EditaHotelController implements Initializable, ControlledScreen{
 		Hotel hotel = new Hotel();
 		pegaValores(hotel);
 		hoteisService.atualizar(hotel);
+		Mensagens.mensagemInformativa("Hotel alterado com sucesso!");
     	mudarEdicao(false);
     	System.out.println("hotel Editado: " + hotel );
     }

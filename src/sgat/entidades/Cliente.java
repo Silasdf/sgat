@@ -10,6 +10,7 @@ public class Cliente {
 	private String endereco;
 	private String cidade;
 	private Integer viagemEmpresa;
+	private String telefone;
 	private Integer codigo;
 	private String ativo;
 	
@@ -56,6 +57,13 @@ public class Cliente {
 		this.viagemEmpresa = viagemEmpresa;
 	}
 	
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -74,7 +82,7 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", rg=" + rg
 				+ ", endereco=" + endereco + ", cidade=" + cidade + ", viagemEmpresa=" + viagemEmpresa
-				+ " codigo=" + codigo + " ativo=" + ativo + "]";
+				+ ", telefone="+ telefone + ", codigo=" + codigo + " ativo=" + ativo + "]";
 	}
 
 }

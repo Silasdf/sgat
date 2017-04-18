@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -60,6 +61,9 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	private TextField txtViagemEmpresa;
 	
 	@FXML
+	private TextField txtTelefone;
+	
+	@FXML
 	private Button btnPesquisar;
 	
 	private ClientesService clientesService;
@@ -76,20 +80,6 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
-    
-//    private void mensagemInformativa(Cliente cliente){
-//    	
-//    	btnPesquisar.setOnAction(e -> {
-//        	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
-//        	dialogoInfo.setTitle("Pesquisa Cliente");
-//        	dialogoInfo.setHeaderText("Esse é o cabeçalho...");
-//        	dialogoInfo.setContentText("Cliente Pesquisado com sucesso!");
-//        	dialogoInfo.showAndWait();
-//        	Stage stage1 = (Stage) dialogoInfo.getDialogPane().getScene().getWindow();
-//        	stage1.getIcons().add(new Image(this.getClass().getResource("imagens/S_1.png").toString()));
-//        });
-//
-//    }
 
     @FXML
     private void voltar(ActionEvent event){
@@ -103,7 +93,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
     	buscarClientes(cliente);
-//		mensagemInformativa(cliente);
+		Mensagens.mensagemInformativa("Cliente pesquisado com sucesso!");
     }
     
     
@@ -129,12 +119,14 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	txtEndereco.setText("");
     	txtCidade.setText("");
     	txtViagemEmpresa.setText("");
+    	txtTelefone.setText("");
     }
 	
     @FXML
     public void apagar(){
 		Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
 		System.out.println(cliente);
+		Mensagens.mensagemConfirmacao("Deseja apagar este cliente?");
 		clientesService.apagar(cliente);
     	tblClientes.getItems().clear();
     }
@@ -153,7 +145,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 			int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
 			cliente.setViagemEmpresa(viagemEmpresa);
 		}
-//		cliente.setCodigo(codigo);
+		cliente.setTelefone(txtTelefone.getText());
 	}
 
 	private void configuraColunas() {

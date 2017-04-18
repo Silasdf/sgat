@@ -17,9 +17,9 @@ import sgat.entidades.Cliente;
 
 public class ClientesDBService implements ClientesService{
 	
-	final String INSERIR = "INSERT INTO cliente(nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, dataNascimento=?, rg=?, endereco=?, cidade=?, viagensPelaEmpresa=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente WHERE CODIGO = ?";
+	final String INSERIR = "INSERT INTO cliente(nome, cpf, datanascimento, rg, endereco, cidade, viagenspelaempresa, telefone) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, datanascimento=?, rg=?, endereco=?, cidade=?, viagenspelaempresa=?, telefone=? WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, telefone, ativo FROM cliente WHERE CODIGO = ?";
 //	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
 	final String APAGAR = "UPDATE cliente SET ativo = 'N' WHERE codigo = ?";
 	
@@ -37,6 +37,18 @@ public class ClientesDBService implements ClientesService{
 	}
 	
 	@Override
+	public Cliente getCliente() {
+
+		return this.cliente;
+	}
+
+	@Override
+	public void setCliente(Cliente cliente) {
+
+		this.cliente = cliente;
+	}
+	
+	@Override
 	public void salvar(Cliente cliente) {
 		try {
 			Connection con = conexao();
@@ -48,6 +60,7 @@ public class ClientesDBService implements ClientesService{
 			salvar.setString(5, cliente.getEndereco());
 			salvar.setString(6, cliente.getCidade());
 			salvar.setInt(7, cliente.getViagemEmpresa());
+			salvar.setString(8, cliente.getTelefone());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -85,6 +98,9 @@ public class ClientesDBService implements ClientesService{
 			if (cliente.getViagemEmpresa()!= null){
 				sql += " and viagensPelaEmpresa = :viagensPelaEmpresa";
 			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getTelefone()))){
+				sql += " and telefone = :telefone";
+			}
 			System.out.println("SQL = " + sql);
 			NamedParameterStatement buscarClientes = new NamedParameterStatement(con, sql);
 			if (!SgatUtills.isNullOrEmpty((cliente.getNome()))){
@@ -108,6 +124,9 @@ public class ClientesDBService implements ClientesService{
 			}
 			if (cliente.getViagemEmpresa()!= null){
 				buscarClientes.setInt("viagensPelaEmpresa", cliente.getViagemEmpresa());
+			}
+			if (!SgatUtills.isNullOrEmpty((cliente.getTelefone()))){
+				buscarClientes.setString("telefone", cliente.getTelefone());
 			}
 			System.out.println("cliente = " + cliente);
 			ResultSet resultadoBusca = buscarClientes.executeQuery();
@@ -194,7 +213,8 @@ public class ClientesDBService implements ClientesService{
 			atualizar.setString(5, cliente.getEndereco());
 			atualizar.setString(6, cliente.getCidade());
 			atualizar.setInt(7, cliente.getViagemEmpresa());
-			atualizar.setInt(8, cliente.getCodigo());
+			atualizar.setString(8, cliente.getTelefone());
+			atualizar.setInt(9, cliente.getCodigo());
 			atualizar.executeUpdate();
 			atualizar.close();
 			con.close();
@@ -237,20 +257,9 @@ public class ClientesDBService implements ClientesService{
 		cliente.setEndereco(resultadoBusca.getString(6));
 		cliente.setCidade(resultadoBusca.getString(7));
 		cliente.setViagemEmpresa(resultadoBusca.getInt(8));
-		cliente.setAtivo(resultadoBusca.getString(9));
+		cliente.setTelefone(resultadoBusca.getString(9));
+		cliente.setAtivo(resultadoBusca.getString(10));
 		return cliente;
 	}
-
-	@Override
-	public Cliente getCliente() {
-
-		return this.cliente;
-	}
-
-	@Override
-	public void setCliente(Cliente cliente) {
-
-		this.cliente = cliente;
-	}
-
+	
 }

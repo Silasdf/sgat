@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -45,7 +46,8 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 	@FXML
 	private TextField txtViagemEmpresaEdita;
 
-//	private TextField txtArmazenaCodigo;
+	@FXML
+	private TextField txtTelefoneEdita;
 	
 	@FXML
 	private Button sair;
@@ -58,7 +60,6 @@ public class EditaClienteController implements Initializable, ControlledScreen{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     	clientesService = ClientesDBService.getInstance();
     	System.out.println("Initialize do edita às " + new Date());
     }
@@ -84,6 +85,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtEnderecoEdita.setText(clienteSelecionado.getEndereco());
     	txtCidadeEdita.setText(clienteSelecionado.getCidade());
     	txtViagemEmpresaEdita.setText(clienteSelecionado.getViagemEmpresa().toString());
+    	txtTelefoneEdita.setText(clienteSelecionado.getTelefone());
     	System.out.println(clienteSelecionado);
     }
     
@@ -92,6 +94,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		Cliente cliente = new Cliente();
 		pegaValores(cliente);
 		clientesService.atualizar(cliente);
+		Mensagens.mensagemInformativa("Cliente alterado com sucesso!");
     	mudarEdicao(false);
     	System.out.println("cliente Editado: " + cliente );
 
@@ -110,6 +113,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtEnderecoEdita.setEditable(novoEstado);
     	txtCidadeEdita.setEditable(novoEstado);
     	txtViagemEmpresaEdita.setEditable(novoEstado);
+    	txtTelefoneEdita.setEditable(novoEstado);
     }
     
     @FXML
@@ -121,6 +125,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtEnderecoEdita.setText("");
     	txtCidadeEdita.setText("");
     	txtViagemEmpresaEdita.setText("");
+    	txtTelefoneEdita.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
@@ -135,6 +140,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 //		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
 		int viagemEmpresa = Integer.parseInt(txtViagemEmpresaEdita.getText());
 		cliente.setViagemEmpresa(viagemEmpresa);
+		cliente.setTelefone(txtTelefoneEdita.getText());
 		cliente.setCodigo(clienteSelecionado.getCodigo());
 		cliente.setAtivo(clienteSelecionado.getAtivo());
 	}
