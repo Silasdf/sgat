@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import sgat.entidades.Cliente;
@@ -44,7 +45,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 	private TextField txtCidadeEdita;
 	
 	@FXML
-	private TextField txtViagemEmpresaEdita;
+	private Spinner<Integer> txtViagemEmpresaEdita;
 
 	@FXML
 	private TextField txtTelefoneEdita;
@@ -84,7 +85,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtRgEdita.setText(clienteSelecionado.getRg());
     	txtEnderecoEdita.setText(clienteSelecionado.getEndereco());
     	txtCidadeEdita.setText(clienteSelecionado.getCidade());
-    	txtViagemEmpresaEdita.setText(clienteSelecionado.getViagemEmpresa().toString());
+    	txtViagemEmpresaEdita.getValueFactory().setValue(clienteSelecionado.getViagemEmpresa());
     	txtTelefoneEdita.setText(clienteSelecionado.getTelefone());
     	System.out.println(clienteSelecionado);
     }
@@ -103,6 +104,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     @FXML
     private void editar(){
     	mudarEdicao(true);
+
     }
     
     private void mudarEdicao(Boolean novoEstado){
@@ -124,7 +126,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtRgEdita.setText("");
     	txtEnderecoEdita.setText("");
     	txtCidadeEdita.setText("");
-    	txtViagemEmpresaEdita.setText("");
+    	txtViagemEmpresaEdita.getValueFactory().setValue(0);
     	txtTelefoneEdita.setText("");
     }
     
@@ -138,8 +140,9 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		cliente.setEndereco(txtEnderecoEdita.getText());
 		cliente.setCidade(txtCidadeEdita.getText());
 //		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getText());
-		int viagemEmpresa = Integer.parseInt(txtViagemEmpresaEdita.getText());
-		cliente.setViagemEmpresa(viagemEmpresa);
+//		int viagemEmpresa = Integer.parseInt(txtViagemEmpresaEdita.getText());
+//		cliente.setViagemEmpresa(viagemEmpresa);
+		cliente.setViagemEmpresa(txtViagemEmpresaEdita.getValue());
 		cliente.setTelefone(txtTelefoneEdita.getText());
 		cliente.setCodigo(clienteSelecionado.getCodigo());
 		cliente.setAtivo(clienteSelecionado.getAtivo());

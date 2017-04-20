@@ -8,12 +8,12 @@ import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
-import framework.SgatUtills;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,7 +58,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 	private TextField txtCidade;
 	
 	@FXML
-	private TextField txtViagemEmpresa;
+	private Spinner<Integer> txtViagemEmpresa;
 	
 	@FXML
 	private TextField txtTelefone;
@@ -118,7 +118,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	txtRg.setText("");
     	txtEndereco.setText("");
     	txtCidade.setText("");
-    	txtViagemEmpresa.setText("");
+    	txtViagemEmpresa.getValueFactory().setValue(0);
     	txtTelefone.setText("");
     }
 	
@@ -126,12 +126,13 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     public void apagar(){
 		Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
 		System.out.println(cliente);
-		Mensagens.mensagemConfirmacao("Deseja apagar este cliente?");
-		clientesService.apagar(cliente);
-    	tblClientes.getItems().clear();
+		if (Mensagens.mensagemConfirmacao("Deseja apagar este cliente?")) {
+			clientesService.apagar(cliente);
+	    	tblClientes.getItems().clear();
+		}
     }
     
-	// pega os valores entrados pelo usuário e adiciona no objeto conta
+	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {
 		cliente.setNome(txtNome.getText());
 		cliente.setCpf(txtCpf.getText());
@@ -141,9 +142,12 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 		cliente.setEndereco(txtEndereco.getText());
 		cliente.setCidade(txtCidade.getText());
 //		cliente.setViagemEmpresa(txtViagemEmpresa.getText());
-		if (!SgatUtills.isNullOrEmpty((txtViagemEmpresa.getText()))){
-			int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
-			cliente.setViagemEmpresa(viagemEmpresa);
+//		if (!SgatUtills.isNullOrEmpty((txtViagemEmpresa.getText()))){
+//			int viagemEmpresa = Integer.parseInt(txtViagemEmpresa.getText());
+//			cliente.setViagemEmpresa(viagemEmpresa);
+//		}
+		if (txtViagemEmpresa.getValue()!= null && txtViagemEmpresa.getValue()!= 0){
+			cliente.setViagemEmpresa(txtViagemEmpresa.getValue());
 		}
 		cliente.setTelefone(txtTelefone.getText());
 	}

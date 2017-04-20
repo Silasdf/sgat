@@ -10,7 +10,7 @@ public interface HoteisService {
 	public void setHotel (Hotel hotel);
 	
 	// INSERT
-		public void salvar(Hotel hotel);
+	public void salvar(Hotel hotel);
 		
 	// RETRIEVE
 	public List<Hotel> buscarHoteis(Hotel hotel);

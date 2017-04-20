@@ -1,5 +1,7 @@
 package application.mensagens;
 
+import java.util.Optional;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
@@ -16,8 +18,9 @@ public class Mensagens {
     	dialogoInfo.showAndWait();
     }
     
-    public static void mensagemConfirmacao(String mensagemConfirmacao){
+    public static boolean mensagemConfirmacao(String mensagemConfirmacao){
     	
+    	boolean resultado = false;
         Alert dialogoExe = new Alert(Alert.AlertType.CONFIRMATION);
         ButtonType btnSim = new ButtonType("Sim");
         ButtonType btnNao = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -26,11 +29,11 @@ public class Mensagens {
         dialogoExe.setHeaderText("");
         dialogoExe.setContentText(mensagemConfirmacao);
         dialogoExe.getButtonTypes().setAll(btnSim, btnNao);
-        dialogoExe.showAndWait().ifPresent(b -> {
-            if (b == btnSim) {
-                fazExe = "Faz exercício";
-            } 
-        });
+        
+        Optional<ButtonType> result = dialogoExe.showAndWait();
+        resultado = (result.get() == btnSim);
+        
+        return resultado;
 
     }
 }

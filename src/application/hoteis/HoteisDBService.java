@@ -18,7 +18,6 @@ public class HoteisDBService implements HoteisService{
 	final String INSERIR = "INSERT INTO hotel(nomehotel, cnpj, valorduploporpessoa, valortriploporpessoa, valorquadruploporpessoa, enderecohotel, cidadehotel, telefonehotel) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE hotel SET nomehotel=?, cnpj=?, valorduploporpessoa=?, valortriploporpessoa=?, valorquadruploporpessoa=?, enderecohotel=?, cidadehotel=?, telefonehotel=? WHERE codigo = ?";
 	final String BUSCAR = "SELECT codigo, nomehotel, cnpj, valorduploporpessoa, valortriploporpessoa, valorquadruploporpessoa, enderecohotel, cidadehotel, telefonehotel, ativo FROM hotel WHERE codigo = ?";
-//	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
 	final String APAGAR = "UPDATE hotel SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_HOTEIS = "SELECT * FROM hotel WHERE ativo = 'S' ";
@@ -160,7 +159,7 @@ public class HoteisDBService implements HoteisService{
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO APAGAR CLIENTE COM CODIGO ");
+			System.err.println("ERROR AO APAGAR HOTEL COM CODIGO ");
 			System.exit(0);
 		} 
 	}
@@ -209,7 +208,7 @@ public class HoteisDBService implements HoteisService{
 		}
 	}
 	
-	// extrai o objeto Cliente do result set
+	// extrai o objeto Hotel do result set
 	private Hotel extraiHotel(ResultSet resultadoBusca) throws SQLException, ParseException {
 		Hotel hotel = new Hotel();
 		hotel.setCodigo(resultadoBusca.getInt(1));
