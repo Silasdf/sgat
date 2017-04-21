@@ -98,7 +98,6 @@ public class EditaClienteController implements Initializable, ControlledScreen{
 		Mensagens.mensagemInformativa("Cliente alterado com sucesso!");
     	mudarEdicao(false);
     	System.out.println("cliente Editado: " + cliente );
-
     }
     
     @FXML

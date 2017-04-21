@@ -10,6 +10,7 @@ import framework.ScreensFramework;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import sgat.entidades.Onibus;
@@ -37,7 +38,10 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
 	private TextField txtAnoOnibus;
 	
 	@FXML
-	private TextField txtViagensRealizadas;
+	private Spinner<Integer> txtViagensRealizadas;
+	
+	@FXML
+	private TextField txtTelefone;
 	
 	private OnibusService onibusService;
 	
@@ -79,7 +83,8 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
     	txtPlacaOnibus.setText("");
     	txtOnibusComMultas.setText("");
     	txtAnoOnibus.setText("");
-    	txtViagensRealizadas.setText("");
+    	txtViagensRealizadas.getValueFactory().setValue(0);
+    	txtTelefone.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto onibus
@@ -90,8 +95,8 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
 		onibus.setOnibusComMultas(txtOnibusComMultas.getText());
 		int anoOnibus = Integer.parseInt(txtAnoOnibus.getText());
 		onibus.setAnoOnibus(anoOnibus);
-		int viagensRealizadas = Integer.parseInt(txtViagensRealizadas.getText());
-		onibus.setViagensRealizadas(viagensRealizadas);
+		onibus.setViagensRealizadas(txtViagensRealizadas.getValue());
+		onibus.setTelefone(txtTelefone.getText());
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados

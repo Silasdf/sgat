@@ -24,8 +24,8 @@
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Onibus">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar" />
+                  <MenuItem mnemonicParsing="false" onAction="#cadastroOnibus" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#pesquisaOnibus" text="Pesquisar" />
                </items>
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Viagens">

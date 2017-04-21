@@ -11,13 +11,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="392.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.onibus.CadastroOnibusController">
+<AnchorPane id="AnchorPane" prefHeight="395.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.onibus.EditaOnibusController">
    <children>
-      <HBox alignment="BOTTOM_RIGHT" layoutX="317.0" layoutY="294.0" prefHeight="62.0" prefWidth="417.0" spacing="20.0">
+      <HBox alignment="BOTTOM_RIGHT" layoutX="309.0" layoutY="319.0" prefHeight="62.0" prefWidth="417.0" spacing="20.0">
          <children>
-            <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Incluir" />
+            <Button mnemonicParsing="false" onAction="#carrega" text="Carregar" />
+            <Button mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+            <Button mnemonicParsing="false" onAction="#editar" text="Editar" />
             <Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
-            <Button mnemonicParsing="false" onAction="#pesquisaOnibus" text="Pesquisar" />
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
          </children>
       </HBox>
@@ -29,31 +30,32 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="txtNome" GridPane.columnIndex="1" />
-            <TextField fx:id="txtValorPorPoltrona" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtOnibusComMultas" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtAnoOnibus" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtNomeEdita" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="txtValorPorPoltronaEdita" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtPlacaOnibusEdita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtOnibusComMultasEdita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtAnoOnibusEdita" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtTelefoneEdita" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Nome Motorista:" />
-            <Label text="Valor por Poltrona:" GridPane.rowIndex="1" />
+            <Label text="Valor Por Poltrona:" GridPane.rowIndex="1" />
             <Label text="Placa Onibus:" GridPane.rowIndex="2" />
             <Label text="Onibus Com Multas:" GridPane.rowIndex="3" />
             <Label text="Ano Onibus:" GridPane.rowIndex="4" />
-            <Label text="Viagens Realizadas:" GridPane.rowIndex="5" />
-            <Spinner fx:id="txtViagensRealizadas" editable="false" prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label text="Viagens Realizadas:" GridPane.rowIndex="6" />
+            <Label text="Telefone Motorista:" GridPane.rowIndex="7" />
+            <Spinner fx:id="txtViagensRealizadasEdita" prefHeight="26.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <valueFactory>
             <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" max="99" min="0" />
             </valueFactory>
             </Spinner>
-            <TextField fx:id="txtPlacaOnibus" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Telefone Motorista:" GridPane.rowIndex="6" />
-            <TextField fx:id="txtTelefone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

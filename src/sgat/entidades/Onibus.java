@@ -8,6 +8,7 @@ public class Onibus {
 	private String onibusComMultas;
 	private Integer anoOnibus;
 	private Integer viagensRealizadas;
+	private String telefone;
 	private Integer codigo;
 	private String ativo;
 	
@@ -47,6 +48,12 @@ public class Onibus {
 	public void setViagensRealizadas(Integer viagensRealizadas) {
 		this.viagensRealizadas = viagensRealizadas;
 	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -63,8 +70,8 @@ public class Onibus {
 	@Override
 	public String toString() {
 		return "Onibus [nome=" + nome + ", valorPorPoltrona=" + valorPorPoltrona + ", onibusComMultas=" + onibusComMultas 
-				+ ", anoOnibus=" + anoOnibus + ", viagensRealizadas=" + viagensRealizadas + ", codigo=" + codigo 
-				+ " ativo=" + ativo + "]";
+				+ ", anoOnibus=" + anoOnibus + ", viagensRealizadas=" + viagensRealizadas + ", telefone=" + telefone
+				+ ", codigo=" + codigo + " ativo=" + ativo + "]";
 	}
 
 }

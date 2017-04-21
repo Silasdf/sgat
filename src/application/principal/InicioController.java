@@ -44,6 +44,16 @@ public class InicioController implements Initializable, ControlledScreen {
     }
     
     @FXML
+    private void cadastroOnibus(ActionEvent event){
+       myController.setScreen(ScreensFramework.screen9ID);
+    }
+    
+    @FXML
+    private void pesquisaOnibus(ActionEvent event){
+       myController.setScreen(ScreensFramework.screen10ID);
+    }
+    
+    @FXML
     private void sair(ActionEvent event){
     	System.out.println("Sistema foi fechado!");
     	System.exit(0);

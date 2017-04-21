@@ -14,9 +14,9 @@ import sgat.entidades.Onibus;
 
 public class OnibusDBService implements OnibusService {
 	
-	final String INSERIR = "INSERT INTO onibus(nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas) VALUES(?, ?, ?, ?, ?, ?)";
-	final String ATUALIZAR = "UPDATE hotel SET nomemotorista=?, valorporpoltrona=?, placaonibus=?, onibuscommultas=?, anoonibus=?, viagensrealizadas=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, ativo FROM onibus WHERE codigo = ?";
+	final String INSERIR = "INSERT INTO onibus(nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	final String ATUALIZAR = "UPDATE onibus SET nomemotorista=?, valorporpoltrona=?, placaonibus=?, onibuscommultas=?, anoonibus=?, viagensrealizadas=?, telefone=? WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone, ativo FROM onibus WHERE codigo = ?";
 	final String APAGAR = "UPDATE onibus SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_ONIBUS = "SELECT * FROM onibus WHERE ativo = 'S' ";
@@ -43,6 +43,7 @@ public class OnibusDBService implements OnibusService {
 			salvar.setString(4, onibus.getOnibusComMultas());
 			salvar.setInt(5, onibus.getAnoOnibus());
 			salvar.setInt(6, onibus.getViagensRealizadas());
+			salvar.setString(7, onibus.getTelefone());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -77,6 +78,9 @@ public class OnibusDBService implements OnibusService {
 			if (onibus.getViagensRealizadas()!= null){
 				sql += " and viagensrealizadas = :viagensrealizadas";
 			}
+			if (!SgatUtills.isNullOrEmpty((onibus.getTelefone()))){
+				sql += " and telefone = :telefone";
+			}
 			System.out.println("SQL = " + sql);
 			NamedParameterStatement buscarOnibus = new NamedParameterStatement(con, sql);
 			if (!SgatUtills.isNullOrEmpty((onibus.getNome()))){
@@ -97,6 +101,9 @@ public class OnibusDBService implements OnibusService {
 			if (onibus.getViagensRealizadas()!= null){
 				buscarOnibus.setInt("viagensrealizadas", onibus.getViagensRealizadas());
 			}
+			if (!SgatUtills.isNullOrEmpty((onibus.getTelefone()))){
+				buscarOnibus.setString("telefone", onibus.getTelefone());
+			}
 			System.out.println("onibus = " + onibus);
 			ResultSet resultadoBusca = buscarOnibus.executeQuery();
 			while (resultadoBusca.next()) {
@@ -107,7 +114,7 @@ public class OnibusDBService implements OnibusService {
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO BUSCAR HOTEIS ESPECIFICOS.");
+			System.err.println("ERROR AO BUSCAR ONIBUS ESPECIFICOS.");
 			System.exit(0);
 		} 
 		return variosOnibus;
@@ -160,7 +167,8 @@ public class OnibusDBService implements OnibusService {
 			atualizar.setString(4, onibus.getOnibusComMultas());
 			atualizar.setInt(5, onibus.getAnoOnibus());
 			atualizar.setInt(6, onibus.getViagensRealizadas());
-			atualizar.setInt(7, onibus.getCodigo());
+			atualizar.setString(7, onibus.getTelefone());
+			atualizar.setInt(8, onibus.getCodigo());
 			atualizar.executeUpdate();
 			atualizar.close();
 			con.close();
@@ -201,7 +209,8 @@ public class OnibusDBService implements OnibusService {
 		onibus.setOnibusComMultas(resultadoBusca.getString(5));
 		onibus.setAnoOnibus(resultadoBusca.getInt(6));
 		onibus.setViagensRealizadas(resultadoBusca.getInt(7));
-		onibus.setAtivo(resultadoBusca.getString(8));
+		onibus.setTelefone(resultadoBusca.getString(8));
+		onibus.setAtivo(resultadoBusca.getString(9));
 		return onibus;
 	}
 	
