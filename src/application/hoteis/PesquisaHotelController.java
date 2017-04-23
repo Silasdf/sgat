@@ -114,9 +114,10 @@ public class PesquisaHotelController implements Initializable, ControlledScreen{
     public void apagar(){
 		Hotel hotel = tblHoteis.getSelectionModel().getSelectedItem();
 		System.out.println(hotel);
-		Mensagens.mensagemConfirmacao("Deseja apagar este hotel?");
-		hoteisService.apagar(hotel);
-    	tblHoteis.getItems().clear();
+		if (Mensagens.mensagemConfirmacao("Deseja apagar este hotel?")) {
+			hoteisService.apagar(hotel);
+	    	tblHoteis.getItems().clear();
+		}
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto hotel

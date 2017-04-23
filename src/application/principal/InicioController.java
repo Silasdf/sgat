@@ -1,5 +1,6 @@
 package application.principal;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,10 +10,20 @@ import framework.ScreensFramework;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class InicioController implements Initializable, ControlledScreen {
 	
 	ScreensController myController;
+	
+	@FXML
+	private MenuItem incluirDocumento;
+	
+	@FXML
+	private ListView listaDocumento;
 	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,6 +62,25 @@ public class InicioController implements Initializable, ControlledScreen {
     @FXML
     private void pesquisaOnibus(ActionEvent event){
        myController.setScreen(ScreensFramework.screen10ID);
+    }
+    
+    @FXML
+    public void botaoIncluir(ActionEvent event){
+    	FileChooser fc = new FileChooser();
+//    	File file = new File(filename);
+    	
+    	fc.setInitialDirectory(new File("//home//silas//Documentos//TCC - 8º Semestre"));
+    	fc.getExtensionFilters().addAll(
+    			new ExtensionFilter("WORD Files","*.docx"));
+    	File selectedFile = fc.showOpenDialog(null);
+//    	File selectedFile = fc.showSaveDialog(window);
+    	
+    	if (selectedFile != null){
+    		listaDocumento.getItems().add(selectedFile.getAbsolutePath());
+//    	    Files.copy(file.toPath(), selectedFile.toPath());
+    	} else {
+    		System.out.println("Arquivo não é valido");
+    	}
     }
     
     @FXML
