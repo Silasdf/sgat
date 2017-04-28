@@ -1,5 +1,6 @@
 package framework;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -282,5 +283,10 @@ statement;
     public int[] executeBatch() throws SQLException {
         return statement.executeBatch();
     }
+
+
+	public void setBlob(String string, FileInputStream inputStream) {
+		
+	}
 
 }
