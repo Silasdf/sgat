@@ -32,8 +32,8 @@
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Viagens">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" text="Pesquisar" />
+                  <MenuItem mnemonicParsing="false" onAction="#cadastroViagem" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#pesquisaViagem" text="Pesquisar" />
                </items>
             </MenuButton>
             <MenuButton mnemonicParsing="false" text="Documento">
@@ -41,7 +41,6 @@
                   <MenuItem fx:id="incluirDocumento" mnemonicParsing="false" onAction="#botaoIncluir" text="Incluir" />
                   <MenuItem mnemonicParsing="false" onAction="#apagar" text="Excluir" />
                   <MenuItem mnemonicParsing="false" text="Imprimir" />
-                  <MenuItem mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
                </items>
             </MenuButton>
          </children>

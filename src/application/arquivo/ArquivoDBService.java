@@ -1,5 +1,6 @@
 package application.arquivo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import framework.NamedParameterStatement;
-import framework.SgatUtills;
 import sgat.entidades.Arquivo;
 
 public class ArquivoDBService implements ArquivoService{
@@ -64,27 +64,30 @@ public class ArquivoDBService implements ArquivoService{
 		try {
 			Connection con = conexao();
 			String sql = BUSCAR_ARQUIVO;
-			if (arquivo.getConteudo() != null){
-				sql += " and conteudoarquivo = :conteudoarquivo";
+			if ("doc".equals(arquivo.getTipo())){
+				sql += " and tipoarquivo = 'doc'";
 			}
-			if (!SgatUtills.isNullOrEmpty((arquivo.getNome()))){
-				sql += " and nomearquivo LIKE :nomearquivo";
-			}
-			if (!SgatUtills.isNullOrEmpty((arquivo.getTipo()))){
-				sql += " and tipoarquivo LIKE :tipoarquivo";
-			}
+//			if (arquivo.getConteudo() != null){
+//				sql += " and conteudoarquivo = :conteudoarquivo";
+//			}
+//			if (!SgatUtills.isNullOrEmpty((arquivo.getNome()))){
+//				sql += " and nomearquivo LIKE :nomearquivo";
+//			}
+//			if (!SgatUtills.isNullOrEmpty((arquivo.getTipo()))){
+//				sql += " and tipoarquivo LIKE :tipoarquivo";
+//			}
 			System.out.println("SQL = " + sql);
 			NamedParameterStatement buscarArquivo = new NamedParameterStatement(con, sql);
-			if (arquivo.getConteudo() != null){
-				FileInputStream inputStream = new FileInputStream(arquivo.getConteudo());
-				buscarArquivo.setBlob("conteudoarquivo", inputStream);
-			}
-			if (!SgatUtills.isNullOrEmpty((arquivo.getNome()))){
-				buscarArquivo.setString("nomearquivo", "%" + arquivo.getNome() + "%");
-			}
-			if (!SgatUtills.isNullOrEmpty((arquivo.getTipo()))){
-				buscarArquivo.setString("tipoarquivo", "%" + arquivo.getTipo() + "%");
-			}
+//			if (arquivo.getConteudo() != null){
+//				FileInputStream inputStream = new FileInputStream(arquivo.getConteudo());
+//				buscarArquivo.setBlob("conteudoarquivo", inputStream);
+//			}
+//			if (!SgatUtills.isNullOrEmpty((arquivo.getNome()))){
+//				buscarArquivo.setString("nomearquivo", "%" + arquivo.getNome() + "%");
+//			}
+//			if (!SgatUtills.isNullOrEmpty((arquivo.getTipo()))){
+//				buscarArquivo.setString("tipoarquivo", "%" + arquivo.getTipo() + "%");
+//			}
 			System.out.println("arquivo = " + arquivo);
 			ResultSet resultadoBusca = buscarArquivo.executeQuery();
 			while (resultadoBusca.next()) {
@@ -95,7 +98,7 @@ public class ArquivoDBService implements ArquivoService{
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO BUSCAR ONIBUS ESPECIFICOS.");
+			System.err.println("ERROR AO BUSCAR ARQUIVOS ESPECIFICOS.");
 			System.exit(0);
 		} 
 		return arquivos;
@@ -132,7 +135,7 @@ public class ArquivoDBService implements ArquivoService{
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("ERROR AO APAGAR ARQUIVO COM CODIGO"+ arquivo.getCodigo());
+			System.err.println("ERROR AO APAGAR ARQUIVO COM CODIGO" + arquivo.getCodigo());
 			System.exit(0);
 		} 
 	}
@@ -180,6 +183,8 @@ public class ArquivoDBService implements ArquivoService{
 	// extrai o objeto Arquivo do result set
 	private Arquivo extraiArquivo(ResultSet resultadoBusca) throws SQLException, ParseException {
 		Arquivo arquivo = new Arquivo();
+		File file = new File("abc.doc");
+		arquivo.setConteudo(file);
 		arquivo.setCodigo(resultadoBusca.getInt(1));
 		Blob blob = resultadoBusca.getBlob(2);
 		InputStream in = blob.getBinaryStream();

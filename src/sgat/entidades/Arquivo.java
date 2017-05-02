@@ -43,7 +43,7 @@ public class Arquivo {
 	
 	@Override
 	public String toString() {
-		return "Cliente [nome=" + nome + ", conteudo=" + conteudo + ", tipo=" + tipo + 
+		return "Arquivo [nome=" + nome + ", conteudo=" + conteudo + ", tipo=" + tipo + 
 				", codigo=" + codigo + " ativo=" + ativo + "]";
 	}
 	

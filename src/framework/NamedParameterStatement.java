@@ -284,9 +284,4 @@ statement;
         return statement.executeBatch();
     }
 
-
-	public void setBlob(String string, FileInputStream inputStream) {
-		
-	}
-
 }
