@@ -19,7 +19,7 @@
 			<Button mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
 			<Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
             <Button mnemonicParsing="false" onAction="#visualizar" text="Visualizar" />
-            <Button layoutX="143.0" layoutY="46.0" mnemonicParsing="false" onAction="#limpar" text="Impressao" />
+            <Button layoutX="143.0" layoutY="46.0" mnemonicParsing="false" onAction="#limpar" text="Imprimir" />
             <Button layoutX="143.0" layoutY="46.0" mnemonicParsing="false" onAction="#pesquisar" text="Acerto" />
             <Button mnemonicParsing="false" onAction="#apagar" text="Apagar" />
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />

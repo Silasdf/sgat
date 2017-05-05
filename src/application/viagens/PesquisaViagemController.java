@@ -70,7 +70,6 @@ public class PesquisaViagemController implements Initializable, ControlledScreen
 		Mensagens.mensagemInformativa("Viagem pesquisada com sucesso!");
     }
     
-    
     private void buscarViagens(Viagem viagem) {
 		tblViagens.getItems().setAll(viagensService.buscarViagens(viagem));
     }

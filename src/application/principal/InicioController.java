@@ -2,6 +2,7 @@ package application.principal;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.arquivo.ArquivoDBService;
@@ -95,35 +96,45 @@ public class InicioController implements Initializable, ControlledScreen {
     }
 
 	private void buscarDocumentoVigente() {
-		Arquivo arquivo = new Arquivo();
-		tblArquivo.getItems().setAll(arquivoService.buscarArquivo(arquivo));
+//		Arquivo arquivo = new Arquivo();
+//		arquivo.setTipo("doc");
+//		tblArquivo.getItems().setAll(arquivoService.buscarArquivo(arquivo));
+		tblArquivo.getItems().setAll(recuperarDocumentosAtivos());
 	}
 
 	private boolean incluirDocumento() {
+		List<Arquivo> resultado = recuperarDocumentosAtivos();
+		
 		FileChooser fc = new FileChooser();
-//    	File file = new File(filename);
     	
     	fc.setInitialDirectory(new File("//home//silas//Documentos//TCC - 8º Semestre"));
     	fc.getExtensionFilters().addAll(
     			new ExtensionFilter("Files","*.docx","*.doc", "*.pdf"));
     	File selectedFile = fc.showOpenDialog(null);
-//    	File selectedFile = fc.showSaveDialog(window);
     	
     	if (selectedFile != null){
-//    		listaDocumento.getItems().addAll(selectedFile.getAbsolutePath());
     		File file = new File(selectedFile.getAbsolutePath());
     		Arquivo arquivo = new Arquivo();
     		arquivo.setConteudo(file);
     		arquivo.setNome(file.getName());
     		arquivo.setTipo("doc");
     		arquivoService.salvar(arquivo);
+    		for (Arquivo a : resultado){
+    			arquivoService.apagar(a);
+    		}
     		Mensagens.mensagemInformativa("Arquivo cadastrado com sucesso!");
     		return true;
-//    	    Files.copy(file.toPath(), selectedFile.toPath());
     	} else {
     		System.out.println("Arquivo não é valido");
     	}
     	return false;
+	}
+
+	private List<Arquivo> recuperarDocumentosAtivos() {
+		Arquivo arq = new Arquivo();
+		arq.setTipo("doc");
+		List<Arquivo> resultado = arquivoService.buscarArquivo(arq);
+		return resultado;
 	}
     
 	private void configuraColunas() {

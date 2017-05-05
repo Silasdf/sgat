@@ -1,6 +1,8 @@
 package sgat.entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Viagem {
 	
@@ -11,6 +13,7 @@ public class Viagem {
 	private String hospedagem;
 	private Integer codigo;
 	private String ativo;
+	private List<Passageiro> passageiros = new ArrayList<Passageiro>();
 	
 	public String getNome() {
 		return nome;
@@ -54,12 +57,18 @@ public class Viagem {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
+	public List<Passageiro> getPassageiros() {
+		return passageiros;
+	}
+	public void setPassageiros(List<Passageiro> passageiros) {
+		this.passageiros = passageiros;
+	}
 	
 	@Override
 	public String toString() {
-		return "Viagem [nome=" + nome + ", dataIda=" + dataIda + ", dataVolta=" + dataVolta 
-				+ ", embarque=" + embarque + ", hospedagem=" + hospedagem + ", codigo=" + codigo 
-				+ " ativo=" + ativo + "]";
+		return "Viagem [nome=" + nome + ", dataIda=" + dataIda + ", dataVolta=" + dataVolta + ", embarque=" + embarque
+				+ ", hospedagem=" + hospedagem + ", codigo=" + codigo + ", ativo=" + ativo + ", passageiros="
+				+ passageiros + "]";
 	}
 
 }
