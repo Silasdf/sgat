@@ -9,12 +9,8 @@ public interface ClientesService {
 	public Cliente getCliente();
 	public void setCliente (Cliente cliente);
 	
-//	public abstract void getInstance();
-	
-//	private static final ClientesService instance;
-//	protected ClientesService(){
-//
-//	}
+	public Cliente getClienteSelecionado();
+	public void setClienteSelecionado (Cliente clienteSelecionado);
 	
 	// INSERT
 	public void salvar(Cliente cliente);

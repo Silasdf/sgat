@@ -141,5 +141,5 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 			clTelefone.setCellValueFactory(new PropertyValueFactory<Onibus, String>("telefone"));
 			clViagensRealizadas.setCellValueFactory(new PropertyValueFactory<Onibus, String>("viagensRealizadas"));
 		}
-
+		
 }

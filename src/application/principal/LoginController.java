@@ -33,7 +33,6 @@ public class LoginController implements Initializable, ControlledScreen {
 	   
 	 @Override
 	 public void initialize(URL url, ResourceBundle rb) {
-	  // TODO Auto-generated method stub
 	  if (loginModel.isDbConnected()) {
 	   isConnected.setText("Connected");
 	  } else {

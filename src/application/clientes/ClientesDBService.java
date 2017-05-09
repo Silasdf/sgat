@@ -26,6 +26,7 @@ public class ClientesDBService implements ClientesService{
 	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE ativo = 'S' ";
 	
 	private Cliente cliente;
+	private Cliente clienteSelecionado;
 	private static ClientesService instance;
 	
 //	@Override
@@ -46,6 +47,18 @@ public class ClientesDBService implements ClientesService{
 	public void setCliente(Cliente cliente) {
 
 		this.cliente = cliente;
+	}
+	
+	@Override
+	public Cliente getClienteSelecionado() {
+
+		return this.clienteSelecionado;
+	}
+
+	@Override
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+
+		this.clienteSelecionado = clienteSelecionado;
 	}
 	
 	@Override

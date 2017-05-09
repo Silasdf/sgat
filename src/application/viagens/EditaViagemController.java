@@ -83,6 +83,8 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	
 	private ClientesService clientesService;
 	
+	private Cliente clienteSelecionado;
+	
 	private Viagem viagemSelecionada;
 	
 	 @Override
@@ -90,6 +92,10 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	viagensService = ViagensDBService.getInstance();
 	    	clientesService = ClientesDBService.getInstance();
 	    	configuraColunas();
+	    	txtNomePassageiro.textProperty().addListener(
+	    			(observable, oldValue, newValue) -> {
+	    				preencherCampoCliente(newValue);
+	    			});
 	    }
 	    
 	    public void setScreenParent(ScreensController screenParent){
@@ -163,7 +169,9 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 		
 		private Passageiro pegaValoresPassageiro(){
 			Passageiro passageiro = new Passageiro();
-			passageiro.setCliente(tblClientes.getSelectionModel().getSelectedItem());
+//			passageiro.setCliente(tblClientes.getSelectionModel().getSelectedItem());
+//			clientesService.setClienteSelecionado(passageiro.getCliente());
+			passageiro.setCliente(clienteSelecionado);
 			passageiro.setObservacaoOnibus(txtObservacaoOnibus.getText());
 			passageiro.setObservacaoHotel(txtObservacaoHotel.getText());
 			Double valor = Double.parseDouble(txtValor.getText());
@@ -173,21 +181,19 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 		}
 		
 		@FXML
+		private void selecionaCliente(ActionEvent event){
+//			Cliente cliente = new Cliente();
+//			cliente.setNome(txtNomePassageiro.getText());
+//			tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
+	        myController.setScreen(ScreensFramework.screen15ID);
+		}
+		
+		@FXML
 		private void incluirPassageiro(ActionEvent event){
 			Passageiro passageiro = pegaValoresPassageiro();
 			viagemSelecionada.getPassageiros().add(passageiro);
 			exibirPassageirosCadastrados();
-		}
-		
-		@FXML
-		private void pesquisarCliente(ActionEvent event){
-			Cliente cliente = new Cliente();
-			cliente.setNome(txtNomePassageiro.getText());
-			tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
-		}
-		
-		private void exibirPassageirosCadastrados(){
-			tblPassageiros.getItems().setAll(viagemSelecionada.getPassageiros());
+			limparPassageiro();
 		}
 		
 	    @FXML
@@ -197,27 +203,28 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 
 	    private void limparPassageiro(){
 	    	txtNomePassageiro.setText("");
-	    	tblClientes.getItems().clear();
+	    	clientesService.setClienteSelecionado(null);
 	    	txtObservacaoOnibus.setText("");
 	    	txtObservacaoHotel.setText("");
 	    	txtValor.setText("");
 	    	txtGrupo.getValueFactory().setValue(0);
 	    }
 	    
-	    @FXML
-	    private void editarPassageiro(ActionEvent event){
-	    	limparPassageiro();
-	    	carregaPassageiro();
-	    }
+//	    @FXML
+//	    private void carregaCliente(){
+//	    	clienteSelecionado = clientesService.getCliente();
+////	    	txtNomePassageiro.setText(clienteSelecionado.getNome());
+//	    	System.out.println(clienteSelecionado);
+//	    }
 	    
-	    private void carregaPassageiro(){
-	    	Passageiro passageiro = tblPassageiros.getSelectionModel().getSelectedItem();
-			txtNomePassageiro.setText(passageiro.getCliente().getNome());
-	    	tblClientes.getItems().setAll(passageiro.getCliente());
-	    	txtObservacaoOnibus.setText(passageiro.getObservacaoOnibus());
-	    	txtObservacaoHotel.setText(passageiro.getObservacaoHotel());
-			txtValor.setText(passageiro.getValor().toString());
-	    	txtGrupo.getValueFactory().setValue(passageiro.getGrupo());
+	    private void preencherCampoCliente(String p){
+	    	System.out.println("Cliente selecionado passou aqui!!!");
+	    	clienteSelecionado = clientesService.getClienteSelecionado();
+	    	if (clienteSelecionado != null){
+		    	txtNomePassageiro.setText(clienteSelecionado.getNome());
+	    	} else {
+		    	txtNomePassageiro.setText("");
+	    	}
 	    }
 	    
 		@FXML
@@ -225,6 +232,10 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			Passageiro passageiro = tblPassageiros.getSelectionModel().getSelectedItem();
 			viagemSelecionada.getPassageiros().remove(passageiro);
 			incluirPassageiro(event);
+		}
+	    
+		private void exibirPassageirosCadastrados(){
+			tblPassageiros.getItems().setAll(viagemSelecionada.getPassageiros());
 		}
 		
 		@FXML
@@ -237,6 +248,23 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			}
 		}
 		
+	    @FXML
+	    private void editarPassageiro(ActionEvent event){
+	    	limparPassageiro();
+	    	carregaPassageiro();
+	    }
+	    
+	    private void carregaPassageiro(){
+	    	Passageiro passageiro = tblPassageiros.getSelectionModel().getSelectedItem();
+//			txtNomePassageiro.setText(passageiro.getCliente().getNome());
+	    	clientesService.setClienteSelecionado(passageiro.getCliente());
+			tblClientes.getItems().setAll(passageiro.getCliente());
+	    	txtObservacaoOnibus.setText(passageiro.getObservacaoOnibus());
+	    	txtObservacaoHotel.setText(passageiro.getObservacaoHotel());
+			txtValor.setText(passageiro.getValor().toString());
+	    	txtGrupo.getValueFactory().setValue(passageiro.getGrupo());
+	    }
+		
 		private void configuraColunas() {
 			clNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
 			clNomePassageiro.setCellValueFactory(new Callback <TableColumn.CellDataFeatures<Passageiro, String>, ObservableValue<String>>(){
@@ -247,5 +275,6 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			});
 			clGrupo.setCellValueFactory(new PropertyValueFactory<Passageiro, String>("grupo"));
 		}
+		
 		
 }

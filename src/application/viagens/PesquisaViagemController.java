@@ -114,6 +114,5 @@ public class PesquisaViagemController implements Initializable, ControlledScreen
 		clDataIda.setCellValueFactory(new PropertyValueFactory<Viagem, String>("dataIda"));
 		clDataVolta.setCellValueFactory(new PropertyValueFactory<Viagem, String>("dataVolta"));
 	}
-
-
+	
 }

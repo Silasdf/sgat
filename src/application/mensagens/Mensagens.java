@@ -8,8 +8,6 @@ import javafx.scene.control.ButtonBar;
 
 public class Mensagens {
 	
-	static String  fazExe;
-	
     public static void mensagemInformativa(String mensagemInformativa){
     	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
     	dialogoInfo.setTitle("SGAT");

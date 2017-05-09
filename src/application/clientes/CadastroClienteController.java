@@ -124,8 +124,6 @@ public class CadastroClienteController implements Initializable, ControlledScree
 	private void atualizaDadosTabela() {
 		limpar();
 	}
-
-
 }
 
 

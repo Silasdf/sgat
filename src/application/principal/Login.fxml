@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="885" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.principal.LoginController">
+<AnchorPane prefHeight="650.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.principal.LoginController">
    <children>
-      <Label fx:id="isConnected" alignment="CENTER" layoutX="153.0" layoutY="38.0" prefHeight="46.0" prefWidth="413.0" text="Status" textFill="#cd1313">
+      <Label fx:id="isConnected" alignment="CENTER" layoutX="401.0" layoutY="53.0" prefHeight="46.0" prefWidth="171.0" text="Status" textFill="#cd1313">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNomeUsuario" layoutX="285.0" layoutY="113.0" promptText="Nome do Usuário" />
-      <PasswordField fx:id="txtSenhaUsuario" layoutX="285.0" layoutY="154.0" promptText="Senha do usuário" />
-      <Button layoutX="285.0" layoutY="195.0" mnemonicParsing="false" onAction="#login" text="Entrar" />
-      <Button layoutX="392.0" layoutY="195.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+      <TextField fx:id="txtNomeUsuario" layoutX="401.0" layoutY="112.0" promptText="Nome do Usuário" />
+      <PasswordField fx:id="txtSenhaUsuario" layoutX="401.0" layoutY="153.0" promptText="Senha do usuário" />
+      <Button layoutX="401.0" layoutY="195.0" mnemonicParsing="false" onAction="#login" text="Entrar" />
+      <Button layoutX="508.0" layoutY="195.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
    </children>
 </AnchorPane>
