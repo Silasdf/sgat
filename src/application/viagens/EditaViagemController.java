@@ -107,6 +107,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	       myController.setScreen(ScreensFramework.screen13ID);
 	       limpar();
 	       limparPassageiro();
+	       tblPassageiros.getItems().clear();
 	    }
 	    
 	    @FXML
@@ -128,13 +129,12 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			viagensService.atualizar(viagem);
 			Mensagens.mensagemInformativa("Viagem alterada com sucesso!");
 	    	mudarEdicao(false);
-	    	System.out.println("cliente Editado: " + viagem);
+	    	System.out.println("viagem editada: " + viagem);
 	    }
 	    
 	    @FXML
 	    private void editar(){
 	    	mudarEdicao(true);
-
 	    }
 	    
 	    private void mudarEdicao(Boolean novoEstado){
@@ -165,6 +165,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			viagem.setHospedagem(txtHospedagemEdita.getText());
 			viagem.setCodigo(viagemSelecionada.getCodigo());
 			viagem.setAtivo(viagemSelecionada.getAtivo());
+			viagem.getPassageiros().addAll(tblPassageiros.getItems());
 		}
 		
 		private Passageiro pegaValoresPassageiro(){
@@ -209,13 +210,6 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtValor.setText("");
 	    	txtGrupo.getValueFactory().setValue(0);
 	    }
-	    
-//	    @FXML
-//	    private void carregaCliente(){
-//	    	clienteSelecionado = clientesService.getCliente();
-////	    	txtNomePassageiro.setText(clienteSelecionado.getNome());
-//	    	System.out.println(clienteSelecionado);
-//	    }
 	    
 	    private void preencherCampoCliente(String p){
 	    	System.out.println("Cliente selecionado passou aqui!!!");

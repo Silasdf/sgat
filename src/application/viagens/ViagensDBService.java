@@ -13,6 +13,7 @@ import java.util.List;
 
 import framework.NamedParameterStatement;
 import framework.SgatUtills;
+import sgat.entidades.Passageiro;
 import sgat.entidades.Viagem;
 
 public class ViagensDBService implements ViagensService{
@@ -23,6 +24,8 @@ public class ViagensDBService implements ViagensService{
 	final String APAGAR = "UPDATE viagem SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_VIAGENS = "SELECT * FROM viagem WHERE ativo = 'S' ";
+	
+	final String INSERIR_PASSAGEIRO = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo) VALUES(?, ?, ?, ?, ?, ?)";
 	
 	private Viagem viagem;
 	private static ViagensService instance;
@@ -62,6 +65,26 @@ public class ViagensDBService implements ViagensService{
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("ERROR AO CADASTRAR VIAGEM");
+			System.exit(0);
+		} 
+	}
+
+	private void salvarPassageiro(Passageiro passageiro, Viagem viagem) {
+		try {
+			Connection con = conexao();
+			PreparedStatement salvar = con.prepareStatement(INSERIR_PASSAGEIRO);
+			salvar.setInt(1, viagem.getCodigo());
+			salvar.setInt(2, passageiro.getCliente().getCodigo());
+			salvar.setString(3, passageiro.getObservacaoOnibus());
+			salvar.setString(4, passageiro.getObservacaoHotel());
+			salvar.setDouble(5, passageiro.getValor());
+			salvar.setInt(6, passageiro.getGrupo());
+			salvar.executeUpdate();
+			salvar.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO CADASTRAR PASSAGEIRO");
 			System.exit(0);
 		} 
 	}
@@ -170,6 +193,9 @@ public class ViagensDBService implements ViagensService{
 			atualizar.setString(5, viagem.getHospedagem());
 			atualizar.setInt(6, viagem.getCodigo());
 			atualizar.executeUpdate();
+			for (Passageiro passageiro : viagem.getPassageiros()){
+				salvarPassageiro(passageiro, viagem);
+			}
 			atualizar.close();
 			con.close();
 		} catch (Exception e) {
