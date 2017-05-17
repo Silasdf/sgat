@@ -11,8 +11,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.clientes.ClientesDBService;
+import application.clientes.ClientesService;
 import framework.NamedParameterStatement;
 import framework.SgatUtills;
+import sgat.entidades.Cliente;
 import sgat.entidades.Passageiro;
 import sgat.entidades.Viagem;
 
@@ -20,15 +23,23 @@ public class ViagensDBService implements ViagensService{
 	
 	final String INSERIR = "INSERT INTO viagem(nomeviagem, dataida, datavolta, embarque, hospedagem) VALUES(?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE viagem SET nomeviagem=?, dataida=?, datavolta=?, embarque=?, hospedagem=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT nomeviagem, dataida, datavolta, embarque, hospedagem, ativo FROM cliente WHERE CODIGO = ?";
+	final String BUSCAR = "SELECT codigo, nomeviagem, dataida, datavolta, embarque, hospedagem, ativo FROM viagem WHERE codigo = ?";
 	final String APAGAR = "UPDATE viagem SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_VIAGENS = "SELECT * FROM viagem WHERE ativo = 'S' ";
 	
 	final String INSERIR_PASSAGEIRO = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo) VALUES(?, ?, ?, ?, ?, ?)";
 	
+	final String BUSCAR_PASSAGEIROS = "SELECT * FROM participanteviagem WHERE codigoviagem = ? ";
+	
 	private Viagem viagem;
 	private static ViagensService instance;
+	
+	private ClientesService clientesService;
+	
+	private ViagensDBService(){
+		clientesService = ClientesDBService.getInstance();
+	}
 	
 	public static ViagensService getInstance(){
 		if (instance == null) {
@@ -133,6 +144,8 @@ public class ViagensDBService implements ViagensService{
 			ResultSet resultadoBusca = buscarViagens.executeQuery();
 			while (resultadoBusca.next()) {
 				Viagem viagemResultado = extraiViagem(resultadoBusca);
+				List<Passageiro> passageirosViagem = buscarPassageiros(viagemResultado.getCodigo());
+				viagemResultado.getPassageiros().addAll(passageirosViagem);
 				viagens.add(viagemResultado);
 			}
 			buscarViagens.close();
@@ -145,6 +158,28 @@ public class ViagensDBService implements ViagensService{
 		return viagens;
 	}
 	
+	private List<Passageiro> buscarPassageiros(int codigoViagem){
+		List<Passageiro> passageiros = new ArrayList<>();
+		try {
+			Connection con = conexao();
+			PreparedStatement buscarPassageiros = con.prepareStatement(BUSCAR_PASSAGEIROS);
+			System.out.println("Codigo da viagem = " + codigoViagem);
+			buscarPassageiros.setInt(1, codigoViagem);
+			ResultSet resultadoBusca = buscarPassageiros.executeQuery();
+			while (resultadoBusca.next()) {
+				Passageiro passageiroResultado = extraiPassageiro(resultadoBusca);
+				passageiros.add(passageiroResultado);
+			}
+			buscarPassageiros.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO BUSCAR PASSAGEIROS ESPECIFICOS.");
+			System.exit(0);
+		} 
+		return passageiros;
+	}
+	
 	@Override
 	public Viagem buscaPorCodigo(int codigo) {
 		Viagem viagem = null;
@@ -155,6 +190,8 @@ public class ViagensDBService implements ViagensService{
 			ResultSet resultadoBusca = buscar.executeQuery();
 			resultadoBusca.next();
 			viagem = extraiViagem(resultadoBusca);
+			List<Passageiro> passageirosViagem = buscarPassageiros(viagem.getCodigo());
+			viagem.getPassageiros().addAll(passageirosViagem);
 			buscar.close();
 			con.close();
 		} catch (Exception e) {
@@ -193,9 +230,10 @@ public class ViagensDBService implements ViagensService{
 			atualizar.setString(5, viagem.getHospedagem());
 			atualizar.setInt(6, viagem.getCodigo());
 			atualizar.executeUpdate();
-			for (Passageiro passageiro : viagem.getPassageiros()){
-				salvarPassageiro(passageiro, viagem);
-			}
+//			for (Passageiro passageiro : viagem.getPassageiros()){
+//				salvarPassageiro(passageiro, viagem);
+//			}
+			persistirPassageiros(viagem);
 			atualizar.close();
 			con.close();
 		} catch (Exception e) {
@@ -203,6 +241,26 @@ public class ViagensDBService implements ViagensService{
 			System.err.println("ERROR AO ATUALIZAR VIAGEM COM CODIGO " + viagem.getCodigo());
 			System.exit(0);
 		} 
+	}
+	
+	private void persistirPassageiros(Viagem viagem){
+		Viagem viagemRetorna = buscaPorCodigo(viagem.getCodigo());
+		
+		for (Passageiro passageiro : viagem.getPassageiros()){
+			if (viagemRetorna.getPassageiros().contains(passageiro)){
+				System.out.println("Está na tela e no banco então não faz nada");
+			} else {
+				System.out.println("Incluir pois não está no banco");
+			}
+		}
+		
+		for (Passageiro passageiro : viagemRetorna.getPassageiros()){
+			if (viagem.getPassageiros().contains(passageiro)){
+				System.out.println("Está na tela e no banco então não faz nada - Segunda validação");
+			} else {
+				System.out.println("Exclui pois está no banco e não na tela");
+			}
+		}
 	}
 
 	// abre uma nova conexão com o banco de dados. Se algum erro for lançado
@@ -238,6 +296,21 @@ public class ViagensDBService implements ViagensService{
 		viagem.setHospedagem(resultadoBusca.getString(6));
 		viagem.setAtivo(resultadoBusca.getString(7));
 		return viagem;
+	}
+	
+	// extrai o objeto Passageiro do result set
+	public Passageiro extraiPassageiro(ResultSet resultadoBusca) throws SQLException, ParseException {
+		Passageiro passageiro = new Passageiro();
+		passageiro.setCodigo(resultadoBusca.getInt(1));
+//		passageiro.setCliente(Cliente).setCodigo(resultadoBusca.getInt(2));
+		int codigoCliente = resultadoBusca.getInt(3);
+		Cliente cliente = clientesService.buscaPorCodigo(codigoCliente);
+		passageiro.setCliente(cliente);
+		passageiro.setObservacaoOnibus(resultadoBusca.getString(4));
+		passageiro.setObservacaoHotel(resultadoBusca.getString(5));
+		passageiro.setValor(resultadoBusca.getDouble(6));
+		passageiro.setGrupo(resultadoBusca.getInt(7));
+		return passageiro;
 	}
 
 }

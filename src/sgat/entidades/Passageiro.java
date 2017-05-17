@@ -52,4 +52,15 @@ public class Passageiro {
 				+ valor + ", grupo=" + grupo + ", codigo=" + codigo + ", cliente=" + cliente + "]";
 	}
 	
+	@Override
+	public boolean equals(Object object){
+		
+		if (object != null && object instanceof Passageiro){
+			if (this.codigo == ((Passageiro) object).codigo){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

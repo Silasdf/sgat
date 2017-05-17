@@ -119,6 +119,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtDataVoltaEdita.setValue(viagemSelecionada.getDataVolta());
 	    	txtEmbarqueEdita.setText(viagemSelecionada.getEmbarque());
 	    	txtHospedagemEdita.setText(viagemSelecionada.getHospedagem());
+	    	tblPassageiros.getItems().setAll(viagemSelecionada.getPassageiros());
 	    	System.out.println(viagemSelecionada);
 	    }
 	    
@@ -239,6 +240,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			if (Mensagens.mensagemConfirmacao("Deseja apagar este passageiro?")) {
 				viagemSelecionada.getPassageiros().remove(passageiro);
 				tblPassageiros.getItems().clear();
+				exibirPassageirosCadastrados();
 			}
 		}
 		

@@ -19,7 +19,7 @@ public class ClientesDBService implements ClientesService{
 	
 	final String INSERIR = "INSERT INTO cliente(nome, cpf, datanascimento, rg, endereco, cidade, viagenspelaempresa, telefone) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE cliente SET nome=?, cpf=?, datanascimento=?, rg=?, endereco=?, cidade=?, viagenspelaempresa=?, telefone=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, telefone, ativo FROM cliente WHERE CODIGO = ?";
+	final String BUSCAR = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, telefone, ativo FROM cliente WHERE codigo = ?";
 //	final String BUSCAR_TODOS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, ativo FROM cliente";
 	final String APAGAR = "UPDATE cliente SET ativo = 'N' WHERE codigo = ?";
 	
@@ -186,8 +186,10 @@ public class ClientesDBService implements ClientesService{
 			PreparedStatement buscar = con.prepareStatement(BUSCAR);
 			buscar.setInt(1, codigo);
 			ResultSet resultadoBusca = buscar.executeQuery();
-			resultadoBusca.next();
-			cliente = extraiCliente(resultadoBusca);
+//			resultadoBusca.next();
+			if (resultadoBusca.next()) {
+				cliente = extraiCliente(resultadoBusca);
+			}
 			buscar.close();
 			con.close();
 		} catch (Exception e) {
