@@ -32,6 +32,8 @@ public class ViagensDBService implements ViagensService{
 	
 	final String BUSCAR_PASSAGEIROS = "SELECT * FROM participanteviagem WHERE codigoviagem = ? ";
 	
+	final String APAGAR_PASSAGEIROS = "DELETE FROM participanteviagem WHERE codigo = ?";
+	
 	private Viagem viagem;
 	private static ViagensService instance;
 	
@@ -217,6 +219,21 @@ public class ViagensDBService implements ViagensService{
 			System.exit(0);
 		} 
 	}
+
+	private void apagarPassageiro(Passageiro passageiro) {
+		try {
+			Connection con = conexao();
+			PreparedStatement apagarPassageiro = con.prepareStatement(APAGAR_PASSAGEIROS);
+			apagarPassageiro.setInt(1, passageiro.getCodigo());
+			apagarPassageiro.executeUpdate();
+			apagarPassageiro.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO APAGAR PASSAGEIRO COM CODIGO" + passageiro.getCodigo());
+			System.exit(0);
+		} 
+	}
 	
 	@Override
 	public void atualizar(Viagem viagem) {
@@ -250,6 +267,7 @@ public class ViagensDBService implements ViagensService{
 			if (viagemRetorna.getPassageiros().contains(passageiro)){
 				System.out.println("Está na tela e no banco então não faz nada");
 			} else {
+				salvarPassageiro(passageiro, viagem);
 				System.out.println("Incluir pois não está no banco");
 			}
 		}
@@ -258,6 +276,7 @@ public class ViagensDBService implements ViagensService{
 			if (viagem.getPassageiros().contains(passageiro)){
 				System.out.println("Está na tela e no banco então não faz nada - Segunda validação");
 			} else {
+				apagarPassageiro(passageiro);
 				System.out.println("Exclui pois está no banco e não na tela");
 			}
 		}
