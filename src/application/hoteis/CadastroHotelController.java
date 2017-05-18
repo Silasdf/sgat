@@ -93,9 +93,12 @@ public class CadastroHotelController implements Initializable, ControlledScreen{
 	private void pegaValores(Hotel hotel) {
 		hotel.setNome(txtNomeHotel.getText());
 		hotel.setCnpj(txtCnpj.getText());
-		hotel.setValorDuploPorPessoa(txtValorDuploPorPessoa.getText());
-		hotel.setValorTriploPorPessoa(txtValorTriploPorPessoa.getText());
-		hotel.setValorQuadruploPorPessoa(txtValorQuadruploPorPessoa.getText());
+		Double valorDuplo = Double.parseDouble(txtValorDuploPorPessoa.getText());
+		hotel.setValorDuploPorPessoa(valorDuplo);
+		Double valorTriplo = Double.parseDouble(txtValorTriploPorPessoa.getText());
+		hotel.setValorTriploPorPessoa(valorTriplo);
+		Double valorQuadruplo = Double.parseDouble(txtValorQuadruploPorPessoa.getText());
+		hotel.setValorQuadruploPorPessoa(valorQuadruplo);
 		hotel.setEndereco(txtEnderecoHotel.getText());
 		hotel.setCidade(txtCidadeHotel.getText());
 		hotel.setTelefone(txtTelefoneHotel.getText());

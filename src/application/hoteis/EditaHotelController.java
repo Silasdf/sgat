@@ -71,9 +71,9 @@ public class EditaHotelController implements Initializable, ControlledScreen{
     	hotelSelecionado = hoteisService.getHotel();
     	txtNomeHotelEdita.setText(hotelSelecionado.getNome());
     	txtCnpjEdita.setText(hotelSelecionado.getCnpj());
-    	txtValorDuploPorPessoaEdita.setText(hotelSelecionado.getValorDuploPorPessoa());
-    	txtValorTriploPorPessoaEdita.setText(hotelSelecionado.getValorTriploPorPessoa());
-    	txtValorQuadruploPorPessoaEdita.setText(hotelSelecionado.getValorQuadruploPorPessoa());
+    	txtValorDuploPorPessoaEdita.setText(hotelSelecionado.getValorDuploPorPessoa().toString());
+    	txtValorTriploPorPessoaEdita.setText(hotelSelecionado.getValorTriploPorPessoa().toString());
+    	txtValorQuadruploPorPessoaEdita.setText(hotelSelecionado.getValorQuadruploPorPessoa().toString());
     	txtEnderecoHotelEdita.setText(hotelSelecionado.getEndereco());
     	txtCidadeHotelEdita.setText(hotelSelecionado.getCidade());
     	txtTelefoneHotelEdita.setText(hotelSelecionado.getTelefone());
@@ -122,9 +122,12 @@ public class EditaHotelController implements Initializable, ControlledScreen{
 	private void pegaValores(Hotel hotel) {
 		hotel.setNome(txtNomeHotelEdita.getText());
 		hotel.setCnpj(txtCnpjEdita.getText());
-		hotel.setValorDuploPorPessoa(txtValorDuploPorPessoaEdita.getText());
-		hotel.setValorTriploPorPessoa(txtValorTriploPorPessoaEdita.getText());
-		hotel.setValorQuadruploPorPessoa(txtValorQuadruploPorPessoaEdita.getText());
+		Double valorDuplo = Double.parseDouble(txtValorDuploPorPessoaEdita.getText());
+		hotel.setValorDuploPorPessoa(valorDuplo);
+		Double valorTriplo = Double.parseDouble(txtValorTriploPorPessoaEdita.getText());
+		hotel.setValorTriploPorPessoa(valorTriplo);
+		Double valorQuadruplo = Double.parseDouble(txtValorQuadruploPorPessoaEdita.getText());
+		hotel.setValorQuadruploPorPessoa(valorQuadruplo);
 		hotel.setEndereco(txtEnderecoHotelEdita.getText());
 		hotel.setCidade(txtCidadeHotelEdita.getText());
 		hotel.setTelefone(txtTelefoneHotelEdita.getText());

@@ -4,9 +4,9 @@ public class Hotel {
 	
 	private String nome;
 	private String cnpj;
-	private String valorDuploPorPessoa;
-	private String valorTriploPorPessoa;
-	private String valorQuadruploPorPessoa;
+	private Double valorDuploPorPessoa;
+	private Double valorTriploPorPessoa;
+	private Double valorQuadruploPorPessoa;
 	private String endereco;
 	private String cidade;
 	private String telefone;
@@ -25,22 +25,22 @@ public class Hotel {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getValorDuploPorPessoa() {
+	public Double getValorDuploPorPessoa() {
 		return valorDuploPorPessoa;
 	}
-	public void setValorDuploPorPessoa(String valorDuploPorPessoa) {
+	public void setValorDuploPorPessoa(Double valorDuploPorPessoa) {
 		this.valorDuploPorPessoa = valorDuploPorPessoa;
 	}
-	public String getValorTriploPorPessoa() {
+	public Double getValorTriploPorPessoa() {
 		return valorTriploPorPessoa;
 	}
-	public void setValorTriploPorPessoa(String valorTriploPorPessoa) {
+	public void setValorTriploPorPessoa(Double valorTriploPorPessoa) {
 		this.valorTriploPorPessoa = valorTriploPorPessoa;
 	}
-	public String getValorQuadruploPorPessoa() {
+	public Double getValorQuadruploPorPessoa() {
 		return valorQuadruploPorPessoa;
 	}
-	public void setValorQuadruploPorPessoa(String valorQuadruploPorPessoa) {
+	public void setValorQuadruploPorPessoa(Double valorQuadruploPorPessoa) {
 		this.valorQuadruploPorPessoa = valorQuadruploPorPessoa;
 	}
 	public String getEndereco() {
@@ -76,9 +76,10 @@ public class Hotel {
 	
 	@Override
 	public String toString() {
-		return "Hotel [nomeHotel=" + nome + ", cnpj=" + cnpj + ", valorDuploPorPessoa=" + valorDuploPorPessoa + ", valorTriploPorPessoa=" + valorTriploPorPessoa
-				+ ", valorQuadruploPorPessoa=" + valorQuadruploPorPessoa + ", enderecoHotel=" + endereco + ", cidadeHotel=" + cidade + ", telefeneHotel=" +
-				telefone + ", codigo=" + codigo + ", ativo=" + ativo + "]";
+		return "Hotel [nome=" + nome + ", cnpj=" + cnpj + ", valorDuploPorPessoa=" + valorDuploPorPessoa
+				+ ", valorTriploPorPessoa=" + valorTriploPorPessoa + ", valorQuadruploPorPessoa="
+				+ valorQuadruploPorPessoa + ", endereco=" + endereco + ", cidade=" + cidade + ", telefone=" + telefone
+				+ ", codigo=" + codigo + ", ativo=" + ativo + "]";
 	}
 
 }

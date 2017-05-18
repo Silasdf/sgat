@@ -40,9 +40,9 @@ public class HoteisDBService implements HoteisService{
 			PreparedStatement salvar = con.prepareStatement(INSERIR);
 			salvar.setString(1, hotel.getNome());
 			salvar.setString(2, hotel.getCnpj());
-			salvar.setString(3, hotel.getValorDuploPorPessoa());
-			salvar.setString(4, hotel.getValorTriploPorPessoa());
-			salvar.setString(5, hotel.getValorQuadruploPorPessoa());
+			salvar.setDouble(3, hotel.getValorDuploPorPessoa());
+			salvar.setDouble(4, hotel.getValorTriploPorPessoa());
+			salvar.setDouble(5, hotel.getValorQuadruploPorPessoa());
 			salvar.setString(6, hotel.getEndereco());
 			salvar.setString(7, hotel.getCidade());
 			salvar.setString(8, hotel.getTelefone());
@@ -68,13 +68,13 @@ public class HoteisDBService implements HoteisService{
 			if (!SgatUtills.isNullOrEmpty((hotel.getCnpj()))){
 				sql += " and cnpj = :cnpj";
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorDuploPorPessoa()))){
+			if (hotel.getValorDuploPorPessoa()!= null){
 				sql += " and valorduploporpessoa = :valorduploporpessoa";
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorTriploPorPessoa()))){
+			if (hotel.getValorTriploPorPessoa()!= null){
 				sql += " and valortriploporpessoa = :valortriploporpessoa";
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorQuadruploPorPessoa()))){
+			if (hotel.getValorQuadruploPorPessoa()!= null){
 				sql += " and valorquadruploporpessoa = :valorquadruploporpessoa";
 			}
 			if (!SgatUtills.isNullOrEmpty((hotel.getEndereco()))){
@@ -94,14 +94,14 @@ public class HoteisDBService implements HoteisService{
 			if (!SgatUtills.isNullOrEmpty((hotel.getCnpj()))){
 				buscarHoteis.setString("cnpj", hotel.getCnpj());
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorDuploPorPessoa()))){
-				buscarHoteis.setString("valorduploporpessoa", hotel.getValorDuploPorPessoa());
+			if (hotel.getValorDuploPorPessoa()!= null){
+				buscarHoteis.setDouble("valorduploporpessoa", hotel.getValorDuploPorPessoa());
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorTriploPorPessoa()))){
-				buscarHoteis.setString("valortriploporpessoa", hotel.getValorTriploPorPessoa());
+			if (hotel.getValorTriploPorPessoa()!= null){
+				buscarHoteis.setDouble("valortriploporpessoa", hotel.getValorTriploPorPessoa());
 			}
-			if (!SgatUtills.isNullOrEmpty((hotel.getValorQuadruploPorPessoa()))){
-				buscarHoteis.setString("valorquadruploporpessoa", hotel.getValorQuadruploPorPessoa());
+			if (hotel.getValorQuadruploPorPessoa()!= null){
+				buscarHoteis.setDouble("valorquadruploporpessoa", hotel.getValorQuadruploPorPessoa());
 			}
 			if (!SgatUtills.isNullOrEmpty((hotel.getEndereco()))){
 				buscarHoteis.setString("enderecohotel", "%" + hotel.getEndereco() + "%");
@@ -171,9 +171,9 @@ public class HoteisDBService implements HoteisService{
 			PreparedStatement atualizar = con.prepareStatement(ATUALIZAR);
 			atualizar.setString(1, hotel.getNome());
 			atualizar.setString(2, hotel.getCnpj());
-			atualizar.setString(3, hotel.getValorDuploPorPessoa());
-			atualizar.setString(4, hotel.getValorTriploPorPessoa());
-			atualizar.setString(5, hotel.getValorQuadruploPorPessoa());
+			atualizar.setDouble(3, hotel.getValorDuploPorPessoa());
+			atualizar.setDouble(4, hotel.getValorTriploPorPessoa());
+			atualizar.setDouble(5, hotel.getValorQuadruploPorPessoa());
 			atualizar.setString(6, hotel.getEndereco());
 			atualizar.setString(7, hotel.getCidade());
 			atualizar.setString(8, hotel.getTelefone());
@@ -214,9 +214,9 @@ public class HoteisDBService implements HoteisService{
 		hotel.setCodigo(resultadoBusca.getInt(1));
 		hotel.setNome(resultadoBusca.getString(2));
 		hotel.setCnpj(resultadoBusca.getString(3));
-		hotel.setValorDuploPorPessoa(resultadoBusca.getString(4));
-		hotel.setValorTriploPorPessoa(resultadoBusca.getString(5));
-		hotel.setValorQuadruploPorPessoa(resultadoBusca.getString(6));
+		hotel.setValorDuploPorPessoa(resultadoBusca.getDouble(4));
+		hotel.setValorTriploPorPessoa(resultadoBusca.getDouble(5));
+		hotel.setValorQuadruploPorPessoa(resultadoBusca.getDouble(6));
 		hotel.setEndereco(resultadoBusca.getString(7));
 		hotel.setCidade(resultadoBusca.getString(8));
 		hotel.setTelefone(resultadoBusca.getString(9));

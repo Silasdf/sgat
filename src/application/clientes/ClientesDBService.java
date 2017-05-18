@@ -186,7 +186,6 @@ public class ClientesDBService implements ClientesService{
 			PreparedStatement buscar = con.prepareStatement(BUSCAR);
 			buscar.setInt(1, codigo);
 			ResultSet resultadoBusca = buscar.executeQuery();
-//			resultadoBusca.next();
 			if (resultadoBusca.next()) {
 				cliente = extraiCliente(resultadoBusca);
 			}

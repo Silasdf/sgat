@@ -7,6 +7,7 @@ import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
+import framework.SgatUtills;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -124,9 +125,18 @@ public class PesquisaHotelController implements Initializable, ControlledScreen{
 	private void pegaValores(Hotel hotel) {
 		hotel.setNome(txtNomeHotel.getText());
 		hotel.setCnpj(txtCnpj.getText());
-		hotel.setValorDuploPorPessoa(txtValorDuploPorPessoa.getText());
-		hotel.setValorTriploPorPessoa(txtValorTriploPorPessoa.getText());
-		hotel.setValorQuadruploPorPessoa(txtValorQuadruploPorPessoa.getText());
+		if (!SgatUtills.isNullOrEmpty((txtValorDuploPorPessoa.getText()))){
+			Double valorDuplo = Double.parseDouble(txtValorDuploPorPessoa.getText());
+			hotel.setValorDuploPorPessoa(valorDuplo);
+		}
+		if (!SgatUtills.isNullOrEmpty((txtValorTriploPorPessoa.getText()))){
+			Double valorTriplo = Double.parseDouble(txtValorTriploPorPessoa.getText());
+			hotel.setValorTriploPorPessoa(valorTriplo);
+		}
+		if (!SgatUtills.isNullOrEmpty((txtValorQuadruploPorPessoa.getText()))){
+			Double valorQuadruplo = Double.parseDouble(txtValorQuadruploPorPessoa.getText());
+			hotel.setValorQuadruploPorPessoa(valorQuadruplo);
+		}
 		hotel.setEndereco(txtEnderecoHotel.getText());
 		hotel.setCidade(txtCidadeHotel.getText());
 		hotel.setTelefone(txtTelefoneHotel.getText());

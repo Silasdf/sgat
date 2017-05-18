@@ -67,7 +67,7 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	    	mudarEdicao(false);
 	    	onibusSelecionado = onibusService.getOnibus();
 	    	txtNomeEdita.setText(onibusSelecionado.getNome());
-	    	txtValorPorPoltronaEdita.setText(onibusSelecionado.getValorPorPoltrona());
+	    	txtValorPorPoltronaEdita.setText(onibusSelecionado.getValorPorPoltrona().toString());
 	    	txtPlacaOnibusEdita.setText(onibusSelecionado.getPlacaOnibus());
 	    	txtOnibusComMultasEdita.setText(onibusSelecionado.getOnibusComMultas());
 	    	txtAnoOnibusEdita.setText(onibusSelecionado.getAnoOnibus().toString());
@@ -115,7 +115,8 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 		// pega os valores entrados pelo usuário e adiciona no objeto onibus
 		private void pegaValores(Onibus onibus) {
 			onibus.setNome(txtNomeEdita.getText());
-			onibus.setValorPorPoltrona(txtValorPorPoltronaEdita.getText());
+			Double valorPoltrona = Double.parseDouble(txtValorPorPoltronaEdita.getText());
+			onibus.setValorPorPoltrona(valorPoltrona);
 			onibus.setPlacaOnibus(txtPlacaOnibusEdita.getText());
 			onibus.setOnibusComMultas(txtOnibusComMultasEdita.getText());
 			int anoOnibus = Integer.parseInt(txtAnoOnibusEdita.getText());

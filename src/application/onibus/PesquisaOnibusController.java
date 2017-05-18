@@ -122,7 +122,10 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 		// pega os valores entrados pelo usuário e adiciona no objeto onibus
 		private void pegaValores(Onibus onibus) {
 			onibus.setNome(txtNome.getText());
-			onibus.setValorPorPoltrona(txtValorPorPoltrona.getText());
+			if (!SgatUtills.isNullOrEmpty((txtValorPorPoltrona.getText()))){
+				Double valorPoltrona = Double.parseDouble(txtValorPorPoltrona.getText());
+				onibus.setValorPorPoltrona(valorPoltrona);
+			}
 			onibus.setPlacaOnibus(txtPlacaOnibus.getText());
 			onibus.setOnibusComMultas(txtOnibusComMultas.getText());
 			if (!SgatUtills.isNullOrEmpty((txtAnoOnibus.getText()))){

@@ -3,7 +3,7 @@ package sgat.entidades;
 public class Onibus {
 	
 	private String nome;
-	private String valorPorPoltrona;
+	private Double valorPorPoltrona;
 	private String placaOnibus;
 	private String onibusComMultas;
 	private Integer anoOnibus;
@@ -18,10 +18,10 @@ public class Onibus {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getValorPorPoltrona() {
+	public Double getValorPorPoltrona() {
 		return valorPorPoltrona;
 	}
-	public void setValorPorPoltrona(String valorPorPoltrona) {
+	public void setValorPorPoltrona(Double valorPorPoltrona) {
 		this.valorPorPoltrona = valorPorPoltrona;
 	}
 	public String getPlacaOnibus() {

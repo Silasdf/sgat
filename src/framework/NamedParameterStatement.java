@@ -284,4 +284,12 @@ statement;
         return statement.executeBatch();
     }
 
+	public void setDouble(String name, double value) throws SQLException {
+		
+		int[] indexes=getIndexes(name);
+        for(int i=0; i < indexes.length; i++) {
+            statement.setDouble(indexes[i], value);
+        }
+	}
+
 }

@@ -38,7 +38,7 @@ public class OnibusDBService implements OnibusService {
 			Connection con = conexao();
 			PreparedStatement salvar = con.prepareStatement(INSERIR);
 			salvar.setString(1, onibus.getNome());
-			salvar.setString(2, onibus.getValorPorPoltrona());
+			salvar.setDouble(2, onibus.getValorPorPoltrona());
 			salvar.setString(3, onibus.getPlacaOnibus());
 			salvar.setString(4, onibus.getOnibusComMultas());
 			salvar.setInt(5, onibus.getAnoOnibus());
@@ -63,7 +63,7 @@ public class OnibusDBService implements OnibusService {
 			if (!SgatUtills.isNullOrEmpty((onibus.getNome()))){
 				sql += " and nomemotorista LIKE :nomemotorista";
 			}
-			if (!SgatUtills.isNullOrEmpty((onibus.getValorPorPoltrona()))){
+			if (onibus.getValorPorPoltrona()!= null){
 				sql += " and valorporpoltrona = :valorporpoltrona";
 			}
 			if (!SgatUtills.isNullOrEmpty((onibus.getPlacaOnibus()))){
@@ -86,8 +86,8 @@ public class OnibusDBService implements OnibusService {
 			if (!SgatUtills.isNullOrEmpty((onibus.getNome()))){
 				buscarOnibus.setString("nomemotorista", "%" + onibus.getNome() + "%");
 			}
-			if (!SgatUtills.isNullOrEmpty((onibus.getValorPorPoltrona()))){
-				buscarOnibus.setString("valorporpoltrona", onibus.getValorPorPoltrona());
+			if (onibus.getValorPorPoltrona()!= null){
+				buscarOnibus.setDouble("valorporpoltrona", onibus.getValorPorPoltrona());
 			}
 			if (!SgatUtills.isNullOrEmpty((onibus.getPlacaOnibus()))){
 				buscarOnibus.setString("placaonibus", "%" + onibus.getPlacaOnibus() + "%");
@@ -162,7 +162,7 @@ public class OnibusDBService implements OnibusService {
 			Connection con = conexao();
 			PreparedStatement atualizar = con.prepareStatement(ATUALIZAR);
 			atualizar.setString(1, onibus.getNome());
-			atualizar.setString(2, onibus.getValorPorPoltrona());
+			atualizar.setDouble(2, onibus.getValorPorPoltrona());
 			atualizar.setString(3, onibus.getPlacaOnibus());
 			atualizar.setString(4, onibus.getOnibusComMultas());
 			atualizar.setInt(5, onibus.getAnoOnibus());
@@ -204,7 +204,7 @@ public class OnibusDBService implements OnibusService {
 		Onibus onibus = new Onibus();
 		onibus.setCodigo(resultadoBusca.getInt(1));
 		onibus.setNome(resultadoBusca.getString(2));
-		onibus.setValorPorPoltrona(resultadoBusca.getString(3));
+		onibus.setValorPorPoltrona(resultadoBusca.getDouble(3));
 		onibus.setPlacaOnibus(resultadoBusca.getString(4));
 		onibus.setOnibusComMultas(resultadoBusca.getString(5));
 		onibus.setAnoOnibus(resultadoBusca.getInt(6));
