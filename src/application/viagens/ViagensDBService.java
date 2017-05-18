@@ -28,11 +28,13 @@ public class ViagensDBService implements ViagensService{
 	
 	final String BUSCAR_VIAGENS = "SELECT * FROM viagem WHERE ativo = 'S' ";
 	
-	final String INSERIR_PASSAGEIRO = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo) VALUES(?, ?, ?, ?, ?, ?)";
+	final String INSERIR_PASSAGEIROS = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo) VALUES(?, ?, ?, ?, ?, ?)";
 	
 	final String BUSCAR_PASSAGEIROS = "SELECT * FROM participanteviagem WHERE codigoviagem = ? ";
 	
 	final String APAGAR_PASSAGEIROS = "DELETE FROM participanteviagem WHERE codigo = ?";
+	
+	final String ATUALIZAR_PASSAGEIROS = "UPDATE participanteviagem SET observacaoonibus=?, observacaohotel=?, valorvenda=?, grupo=? WHERE codigo = ?";
 	
 	private Viagem viagem;
 	private static ViagensService instance;
@@ -85,7 +87,7 @@ public class ViagensDBService implements ViagensService{
 	private void salvarPassageiro(Passageiro passageiro, Viagem viagem) {
 		try {
 			Connection con = conexao();
-			PreparedStatement salvar = con.prepareStatement(INSERIR_PASSAGEIRO);
+			PreparedStatement salvar = con.prepareStatement(INSERIR_PASSAGEIROS);
 			salvar.setInt(1, viagem.getCodigo());
 			salvar.setInt(2, passageiro.getCliente().getCodigo());
 			salvar.setString(3, passageiro.getObservacaoOnibus());
@@ -260,11 +262,64 @@ public class ViagensDBService implements ViagensService{
 		} 
 	}
 	
+	private void atualizarPassageiro(Passageiro passageiro) {
+		try {
+			Connection con = conexao();
+			PreparedStatement atualizarPassageiro = con.prepareStatement(ATUALIZAR_PASSAGEIROS);
+			atualizarPassageiro.setString(1, passageiro.getObservacaoOnibus());
+			atualizarPassageiro.setString(2, passageiro.getObservacaoHotel());
+			atualizarPassageiro.setDouble(3, passageiro.getValor());
+			atualizarPassageiro.setInt(4, passageiro.getGrupo());
+			atualizarPassageiro.setInt(5, passageiro.getCodigo());
+			atualizarPassageiro.executeUpdate();
+			atualizarPassageiro.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO ATUALIZAR PASSAGEIRO COM CODIGO " + passageiro.getCodigo());
+			System.exit(0);
+		} 
+	}
+	/*
+	 * Metodo compara os valores que estão na tela com os valores que estão no banco.
+	 * se houver diferença entre esses valores true.
+	 */
+	private boolean comparaPassageiros(Passageiro passageiroTela, Passageiro passageiroBanco){
+		if (passageiroTela == null || passageiroBanco == null ){
+			return false;
+		}
+		if (passageiroTela.getCliente() == null || passageiroBanco.getCliente() == null ){
+			return false;
+		} else {
+			if (!passageiroTela.getCliente().getCodigo().equals(passageiroBanco.getCliente().getCodigo())){
+				return true;
+			}
+		}
+		if (!passageiroTela.getObservacaoOnibus().equals(passageiroBanco.getObservacaoOnibus())){
+			return true;
+		}
+		if (!passageiroTela.getObservacaoHotel().equals(passageiroBanco.getObservacaoHotel())){
+			return true;
+		}
+		if (!passageiroTela.getValor().equals(passageiroBanco.getValor())){
+			return true;
+		}
+		if (!passageiroTela.getGrupo().equals(passageiroBanco.getGrupo())){
+			return true;
+		}
+		return false;
+	}
+	
 	private void persistirPassageiros(Viagem viagem){
 		Viagem viagemRetorna = buscaPorCodigo(viagem.getCodigo());
 		
 		for (Passageiro passageiro : viagem.getPassageiros()){
 			if (viagemRetorna.getPassageiros().contains(passageiro)){
+				Passageiro passageiroBanco = viagemRetorna.getPassageiros().get(viagemRetorna.getPassageiros().indexOf(passageiro));
+				boolean passageiroComAlteracao = comparaPassageiros(passageiro, passageiroBanco);
+				if (passageiroComAlteracao){
+					atualizarPassageiro(passageiro);
+				}
 				System.out.println("Está na tela e no banco então não faz nada");
 			} else {
 				salvarPassageiro(passageiro, viagem);
