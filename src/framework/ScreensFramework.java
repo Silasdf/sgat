@@ -53,6 +53,10 @@ public class ScreensFramework extends Application{
     public static String screen15ID = "screen15";
     public static String screen15File = "../application/clientes/SelecionaCliente.fxml";
     
+    public static String screen16ID = "screen16";
+    public static String screen16File = "../application/viagens/AcertoViagem.fxml";
+
+    
     @Override
     public void start(Stage primaryStage) {
     	
@@ -72,6 +76,7 @@ public class ScreensFramework extends Application{
         mainContainer.loadScreen(ScreensFramework.screen13ID, ScreensFramework.screen13File);
         mainContainer.loadScreen(ScreensFramework.screen14ID, ScreensFramework.screen14File);
         mainContainer.loadScreen(ScreensFramework.screen15ID, ScreensFramework.screen15File);
+        mainContainer.loadScreen(ScreensFramework.screen16ID, ScreensFramework.screen16File);
         
         mainContainer.setScreen(ScreensFramework.screen1ID);
         

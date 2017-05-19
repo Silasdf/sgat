@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viagens.AcertoViagemController">
+   <children>
+      <HBox alignment="BOTTOM_RIGHT" layoutX="14.0" layoutY="485.0" prefHeight="62.0" prefWidth="336.0" spacing="20.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#calcularAcerto" text="Calcular" />
+            <Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+            <Button mnemonicParsing="false" onAction="#imprimir" text="Imprimir" />
+            <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+         </children>
+      </HBox>
+      <GridPane fx:id="gridAcerto" layoutX="14.0" layoutY="14.0" prefHeight="440.0" prefWidth="837.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="240.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="186.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="253.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="154.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="quantidadePacotesVendidosHotel3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="demaisDespesas3" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="valorTotalLucro" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label text="Demais Despesas 1:" GridPane.rowIndex="5" />
+            <Label text="Demais Despesas 2:" GridPane.rowIndex="6" />
+            <Label text="Demais Despesas 3:" GridPane.rowIndex="7" />
+            <Label text="Valor Total do Lucro:" GridPane.rowIndex="8" />
+            <Label prefHeight="24.0" prefWidth="259.0" text="Quantidade de Pacotes Vendidos:" />
+            <TextField fx:id="quantidadePacotesVendidos" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" />
+            <Label prefHeight="24.0" prefWidth="259.0" text="Quantidade de Poltronas Vendidas:" GridPane.rowIndex="1" />
+            <TextField fx:id="quantidadePoltronasVendidos" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Pacotes Vendidos Hotel 1:" GridPane.rowIndex="2" />
+            <TextField fx:id="quantidadePacotesVendidosHotel1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Pacotes Vendidos Hotel 2:" GridPane.rowIndex="3" />
+            <Label text="Pacotes Vendidos Hotel 3:" GridPane.rowIndex="4" />
+            <TextField fx:id="quantidadePacotesVendidosHotel2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="demaisDespesas1" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="demaisDespesas2" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="259.0" text="Valor Total dos Pacostes:" GridPane.columnIndex="2" />
+            <TextField fx:id="valorTotalPacotes" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="3" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="259.0" text="Valor Total das Poltronas:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="valorTotalPoltronas" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="259.0" text="Valor Total dos Pacostes Hotel 1:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="259.0" text="Valor Total dos Pacostes Hotel 2:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="259.0" text="Valor Total dos Pacostes Hotel 3:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="valorTotalPacotesHotel1" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="valorTotalPacotesHotel2" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <TextField fx:id="valorTotalPacotesHotel3" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
