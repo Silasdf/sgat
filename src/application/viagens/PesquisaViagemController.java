@@ -92,6 +92,9 @@ public class PesquisaViagemController implements Initializable, ControlledScreen
 	
     @FXML
     private void acerto(ActionEvent event){
+    	Viagem viagem = tblViagens.getSelectionModel().getSelectedItem();
+    	System.out.println(viagem);
+    	viagensService.setViagem(viagem);
     	myController.setScreen(ScreensFramework.screen16ID);
 		limpar();
     	tblViagens.getItems().clear();
