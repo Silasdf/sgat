@@ -65,6 +65,9 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	private TextField txtHospedagemEdita;
 	
 	@FXML
+	private TextField txtValorPoltronaOnibusEdita;
+	
+	@FXML
 	private TextField txtNomePassageiro;
 	
 	@FXML
@@ -119,6 +122,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtDataVoltaEdita.setValue(viagemSelecionada.getDataVolta());
 	    	txtEmbarqueEdita.setText(viagemSelecionada.getEmbarque());
 	    	txtHospedagemEdita.setText(viagemSelecionada.getHospedagem());
+	    	txtValorPoltronaOnibusEdita.setText(viagemSelecionada.getValorPoltronaOnibus().toString());
 	    	tblPassageiros.getItems().setAll(viagemSelecionada.getPassageiros());
 	    	System.out.println(viagemSelecionada);
 	    }
@@ -144,6 +148,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtDataVoltaEdita.setEditable(novoEstado);
 	    	txtEmbarqueEdita.setEditable(novoEstado);
 	    	txtHospedagemEdita.setEditable(novoEstado);
+	    	txtValorPoltronaOnibusEdita.setEditable(novoEstado);
 	    }
 	    
 	    @FXML
@@ -153,6 +158,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtDataVoltaEdita.setValue(null);
 	    	txtEmbarqueEdita.setText("");
 	    	txtHospedagemEdita.setText("");
+	    	txtValorPoltronaOnibusEdita.setText("");
 	    }
 	    
 		// pega os valores entrados pelo usuário e adiciona no objeto viagem
@@ -164,6 +170,8 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 			viagem.setDataVolta(dataVolta);
 			viagem.setEmbarque(txtEmbarqueEdita.getText());
 			viagem.setHospedagem(txtHospedagemEdita.getText());
+			Double valorPoltronaOnibus = Double.parseDouble(txtValorPoltronaOnibusEdita.getText());
+			viagem.setValorPoltronaOnibus(valorPoltronaOnibus);
 			viagem.setCodigo(viagemSelecionada.getCodigo());
 			viagem.setAtivo(viagemSelecionada.getAtivo());
 			viagem.getPassageiros().addAll(tblPassageiros.getItems());

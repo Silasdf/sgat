@@ -1,6 +1,7 @@
 package application.viagens;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import framework.ControlledScreen;
@@ -88,14 +89,36 @@ public class AcertoViagemController implements Initializable, ControlledScreen{
     
     @FXML
     private void carrega(){
+    	mudarEdicao(false);
     	viagemSelecionada = viagensService.getViagem();
-//    	quantidadePacotesVendidos.setText(viagemSelecionada.getNome());
-//    	valorTotalPacotes.setText(viagemSelecionada.getDataIda());
-//    	txtDataVoltaEdita.setValue(viagemSelecionada.getDataVolta());
-//    	txtEmbarqueEdita.setText(viagemSelecionada.getEmbarque());
+    	List<AcertoGrupoDto> acertos =  viagensService.carregarAcerto(viagensService.getViagem().getCodigo());
+    	System.out.println(acertos);
+    	String qtdPacotesVendidos = Integer.toString(acertos.size());
+    	quantidadePacotesVendidos.setText(qtdPacotesVendidos);
+		double valorTotalPoltrona = 0;
+		double valorTotalVenda = 0;
+		int quantidadeTotalDasPoltronas = 0;
+    	for (AcertoGrupoDto umAcerto : acertos){
+    		valorTotalPoltrona += umAcerto.getValorPoltrona();
+    		valorTotalVenda += umAcerto.getValorVenda();
+    		quantidadeTotalDasPoltronas += umAcerto.getQuantidadePassageirosPagantes();
+		}
+    	String resultadoTotalPacotes = Double.toString(valorTotalVenda + valorTotalPoltrona);
+    	valorTotalPacotes.setText(resultadoTotalPacotes);
+    	String qtdTotalDasPoltronas = Integer.toString(quantidadeTotalDasPoltronas);
+    	quantidadePoltronasVendidos.setText(qtdTotalDasPoltronas);
+    	String valorTotalDasPoltronas = Double.toString(valorTotalPoltrona);
+    	valorTotalPoltronas.setText(valorTotalDasPoltronas);
 //    	txtHospedagemEdita.setText(viagemSelecionada.getHospedagem());
-//    	tblPassageiros.getItems().setAll(viagemSelecionada.getPassageiros());
+//    	tblAcertoHotel.getItems().setAll(viagemSelecionada.getPassageiros());
     	System.out.println(viagemSelecionada);
+    }
+    
+    private void mudarEdicao(Boolean novoEstado){
+    	quantidadePacotesVendidos.setEditable(novoEstado);
+    	valorTotalPacotes.setEditable(novoEstado);
+    	quantidadePoltronasVendidos.setEditable(novoEstado);
+    	valorTotalPoltronas.setEditable(novoEstado);
     }
     
     @FXML

@@ -14,7 +14,9 @@ public class Viagem {
 	private Integer codigo;
 	private String ativo;
 	private List<Passageiro> passageiros = new ArrayList<Passageiro>();
-	
+	private Double valorPoltronaOnibus;
+	private Onibus onibus;
+
 	public String getNome() {
 		return nome;
 	}
@@ -63,12 +65,24 @@ public class Viagem {
 	public void setPassageiros(List<Passageiro> passageiros) {
 		this.passageiros = passageiros;
 	}
+	public Double getValorPoltronaOnibus() {
+		return valorPoltronaOnibus;
+	}
+	public void setValorPoltronaOnibus(Double valorPoltronaOnibus) {
+		this.valorPoltronaOnibus = valorPoltronaOnibus;
+	}
+	public Onibus getOnibus() {
+		return onibus;
+	}
+	public void setOnibus(Onibus onibus) {
+		this.onibus = onibus;
+	}
 	
 	@Override
 	public String toString() {
 		return "Viagem [nome=" + nome + ", dataIda=" + dataIda + ", dataVolta=" + dataVolta + ", embarque=" + embarque
 				+ ", hospedagem=" + hospedagem + ", codigo=" + codigo + ", ativo=" + ativo + ", passageiros="
-				+ passageiros + "]";
+				+ passageiros + ", valorPoltronaOnibus=" + valorPoltronaOnibus + ", onibus=" + onibus + "]";
 	}
 
 }

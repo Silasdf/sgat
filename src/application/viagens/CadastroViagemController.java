@@ -38,6 +38,9 @@ public class CadastroViagemController implements Initializable, ControlledScreen
 	@FXML
 	private TextField txtHospedagem;
 	
+	@FXML
+	private TextField txtValorPoltronaOnibus;
+	
 	private ViagensService viagensService;
 	
     @Override
@@ -76,6 +79,7 @@ public class CadastroViagemController implements Initializable, ControlledScreen
     	txtDataVolta.setValue(null);
     	txtEmbarque.setText("");
     	txtHospedagem.setText("");
+    	txtValorPoltronaOnibus.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto viagem
@@ -87,6 +91,8 @@ public class CadastroViagemController implements Initializable, ControlledScreen
 		viagem.setDataVolta(dataVolta);
 		viagem.setEmbarque(txtEmbarque.getText());
 		viagem.setHospedagem(txtHospedagem.getText());
+		Double valorPoltronaOnibus = Double.parseDouble(txtValorPoltronaOnibus.getText());
+		viagem.setValorPoltronaOnibus(valorPoltronaOnibus);
 	}
 
 }

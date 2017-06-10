@@ -22,6 +22,8 @@ public interface ViagensService {
 	
 	// DELETE
 	public void apagar(Viagem viagem);
-
+	
+	// ACERTO
+	public List<AcertoGrupoDto> carregarAcerto(int codigoViagem);
 
 }

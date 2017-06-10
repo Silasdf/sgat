@@ -128,8 +128,9 @@ public class OnibusDBService implements OnibusService {
 			PreparedStatement buscar = con.prepareStatement(BUSCAR);
 			buscar.setInt(1, codigo);
 			ResultSet resultadoBusca = buscar.executeQuery();
-			resultadoBusca.next();
-			onibus = extraiOnibus(resultadoBusca);
+			if (resultadoBusca.next()) {
+				onibus = extraiOnibus(resultadoBusca);
+			}
 			buscar.close();
 			con.close();
 		} catch (Exception e) {

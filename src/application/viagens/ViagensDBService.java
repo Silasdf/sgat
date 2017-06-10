@@ -21,9 +21,9 @@ import sgat.entidades.Viagem;
 
 public class ViagensDBService implements ViagensService{
 	
-	final String INSERIR = "INSERT INTO viagem(nomeviagem, dataida, datavolta, embarque, hospedagem) VALUES(?, ?, ?, ?, ?)";
-	final String ATUALIZAR = "UPDATE viagem SET nomeviagem=?, dataida=?, datavolta=?, embarque=?, hospedagem=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nomeviagem, dataida, datavolta, embarque, hospedagem, ativo FROM viagem WHERE codigo = ?";
+	final String INSERIR = "INSERT INTO viagem(nomeviagem, dataida, datavolta, embarque, hospedagem, valorpoltronaonibus) VALUES(?, ?, ?, ?, ?, ?)";
+	final String ATUALIZAR = "UPDATE viagem SET nomeviagem=?, dataida=?, datavolta=?, embarque=?, hospedagem=?, valorpoltronaonibus=? WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, nomeviagem, dataida, datavolta, embarque, hospedagem, valorpoltronaonibus, ativo FROM viagem WHERE codigo = ?";
 	final String APAGAR = "UPDATE viagem SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_VIAGENS = "SELECT * FROM viagem WHERE ativo = 'S' ";
@@ -36,10 +36,18 @@ public class ViagensDBService implements ViagensService{
 	
 	final String ATUALIZAR_PASSAGEIROS = "UPDATE participanteviagem SET observacaoonibus=?, observacaohotel=?, valorvenda=?, grupo=? WHERE codigo = ?";
 	
+	final String BUSCAR_PASSAGEIRO_TOTAL_LISTA = "SELECT part.grupo AS Grupo, (select COUNT(partsub.codigocliente) from participanteviagem partsub "
+			+ "where partsub.grupo = part.grupo AND partsub.codigoviagem = part.codigoviagem AND partsub.observacaoonibus <> '') as qtd_passageiros_pagantes, "
+			+ "SUM(part.valorvenda) AS ValorVenda, (select COUNT(partsub.codigocliente) from participanteviagem partsub where partsub.grupo = part.grupo "
+			+ "AND partsub.codigoviagem = part.codigoviagem AND partsub.observacaoonibus <> '') * viag.valorpoltronaonibus AS ValorTotalPoltronas "
+			+ "FROM participanteviagem part INNER JOIN viagem viag ON (viag.codigo = part.codigoviagem) WHERE part.codigoviagem = ? GROUP BY part.grupo";
+	
 	private Viagem viagem;
 	private static ViagensService instance;
 	
 	private ClientesService clientesService;
+	
+//	private OnibusService onibusService;
 	
 	private ViagensDBService(){
 		clientesService = ClientesDBService.getInstance();
@@ -74,6 +82,7 @@ public class ViagensDBService implements ViagensService{
 			salvar.setDate(3, java.sql.Date.valueOf(viagem.getDataVolta()));
 			salvar.setString(4, viagem.getEmbarque());
 			salvar.setString(5, viagem.getHospedagem());
+			salvar.setDouble(6, viagem.getValorPoltronaOnibus());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -125,6 +134,9 @@ public class ViagensDBService implements ViagensService{
 			if (!SgatUtills.isNullOrEmpty((viagem.getHospedagem()))){
 				sql += " and hospedagem LIKE :hospedagem";
 			}
+			if (viagem.getValorPoltronaOnibus()!= null){
+				sql += " and valorpoltronaonibus = :valorpoltronaonibus";
+			}
 			System.out.println("SQL = " + sql);
 			NamedParameterStatement buscarViagens = new NamedParameterStatement(con, sql);
 			if (!SgatUtills.isNullOrEmpty((viagem.getNome()))){
@@ -143,6 +155,9 @@ public class ViagensDBService implements ViagensService{
 			}
 			if (!SgatUtills.isNullOrEmpty((viagem.getHospedagem()))){
 				buscarViagens.setString("hospedagem", "%" + viagem.getHospedagem() + "%");
+			}
+			if (viagem.getValorPoltronaOnibus()!= null){
+				buscarViagens.setDouble("valorpoltronaonibus", viagem.getValorPoltronaOnibus());
 			}
 			System.out.println("viagem = " + viagem);
 			ResultSet resultadoBusca = buscarViagens.executeQuery();
@@ -182,6 +197,29 @@ public class ViagensDBService implements ViagensService{
 			System.exit(0);
 		} 
 		return passageiros;
+	}
+	
+	@Override
+	public List<AcertoGrupoDto> carregarAcerto(int codigoViagem){
+		List<AcertoGrupoDto> acertos = new ArrayList<>();
+		try {
+			Connection con = conexao();
+			PreparedStatement carregarAcerto = con.prepareStatement(BUSCAR_PASSAGEIRO_TOTAL_LISTA);
+			System.out.println("Codigo da viagem = " + codigoViagem);
+			carregarAcerto.setInt(1, codigoViagem);
+			ResultSet resultadoBusca = carregarAcerto.executeQuery();
+			while (resultadoBusca.next()) {
+				AcertoGrupoDto acertoResultado = extraiAcerto(resultadoBusca);
+				acertos.add(acertoResultado);
+			}
+			carregarAcerto.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO BUSCAR ACERTOS ESPECIFICOS.");
+			System.exit(0);
+		} 
+		return acertos;
 	}
 	
 	@Override
@@ -247,7 +285,8 @@ public class ViagensDBService implements ViagensService{
 			atualizar.setDate(3, java.sql.Date.valueOf(viagem.getDataVolta()));
 			atualizar.setString(4, viagem.getEmbarque());
 			atualizar.setString(5, viagem.getHospedagem());
-			atualizar.setInt(6, viagem.getCodigo());
+			atualizar.setDouble(6, viagem.getValorPoltronaOnibus());
+			atualizar.setInt(7, viagem.getCodigo());
 			atualizar.executeUpdate();
 //			for (Passageiro passageiro : viagem.getPassageiros()){
 //				salvarPassageiro(passageiro, viagem);
@@ -361,14 +400,18 @@ public class ViagensDBService implements ViagensService{
 	private Viagem extraiViagem(ResultSet resultadoBusca) throws SQLException, ParseException {
 		Viagem viagem = new Viagem();
 		viagem.setCodigo(resultadoBusca.getInt(1));
-		viagem.setNome(resultadoBusca.getString(2));
-		LocalDate dataIda = resultadoBusca.getDate(3).toLocalDate();
+//		int codigoOnibus = resultadoBusca.getInt(2);
+//		Onibus onibus = onibusService.buscaPorCodigo(codigoOnibus);
+//		viagem.setOnibus(onibus);
+		viagem.setNome(resultadoBusca.getString(3));
+		LocalDate dataIda = resultadoBusca.getDate(4).toLocalDate();
 		viagem.setDataIda(dataIda);
-		LocalDate dataVolta = resultadoBusca.getDate(4).toLocalDate();
+		LocalDate dataVolta = resultadoBusca.getDate(5).toLocalDate();
 		viagem.setDataVolta(dataVolta);
-		viagem.setEmbarque(resultadoBusca.getString(5));
-		viagem.setHospedagem(resultadoBusca.getString(6));
-		viagem.setAtivo(resultadoBusca.getString(7));
+		viagem.setEmbarque(resultadoBusca.getString(6));
+		viagem.setHospedagem(resultadoBusca.getString(7));
+		viagem.setValorPoltronaOnibus(resultadoBusca.getDouble(8));
+		viagem.setAtivo(resultadoBusca.getString(9));
 		return viagem;
 	}
 	
@@ -385,6 +428,16 @@ public class ViagensDBService implements ViagensService{
 		passageiro.setValor(resultadoBusca.getDouble(6));
 		passageiro.setGrupo(resultadoBusca.getInt(7));
 		return passageiro;
+	}
+	
+	// extrai o objeto AcertoGrupoDto do result set
+	public AcertoGrupoDto extraiAcerto(ResultSet resultadoBusca) throws SQLException, ParseException {
+		AcertoGrupoDto acerto = new AcertoGrupoDto();
+		acerto.setGrupo(resultadoBusca.getInt(1));
+		acerto.setQuantidadePassageirosPagantes(resultadoBusca.getInt(2));
+		acerto.setValorVenda(resultadoBusca.getDouble(3));
+		acerto.setValorPoltrona(resultadoBusca.getDouble(4));
+		return acerto;
 	}
 
 }
