@@ -1,5 +1,7 @@
 package application.viagens;
 
+import sgat.entidades.Hotel;
+
 public class AcertoGrupoDto {
 	
 	private int grupo;
@@ -9,6 +11,8 @@ public class AcertoGrupoDto {
 	private double valorPoltrona;
 	
 	private int quantidadePassageirosPagantes;
+	
+	private Hotel hotel;
 
 	public int getGrupo() {
 		return grupo;
@@ -41,11 +45,18 @@ public class AcertoGrupoDto {
 	public void setQuantidadePassageirosPagantes(int quantidadePassageirosPagantes) {
 		this.quantidadePassageirosPagantes = quantidadePassageirosPagantes;
 	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
 
 	@Override
 	public String toString() {
 		return "AcertoGrupoDto [grupo=" + grupo + ", valorVenda=" + valorVenda + ", valorPoltrona=" + valorPoltrona
-				+ ", quantidadePassageirosPagantes=" + quantidadePassageirosPagantes + "]";
+				+ ", quantidadePassageirosPagantes=" + quantidadePassageirosPagantes + ", hotel=" + hotel + "]";
 	}
 
 }

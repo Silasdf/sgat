@@ -13,9 +13,15 @@ import java.util.List;
 
 import application.clientes.ClientesDBService;
 import application.clientes.ClientesService;
+import application.hoteis.HoteisDBService;
+import application.hoteis.HoteisService;
+import application.onibus.OnibusDBService;
+import application.onibus.OnibusService;
 import framework.NamedParameterStatement;
 import framework.SgatUtills;
 import sgat.entidades.Cliente;
+import sgat.entidades.Hotel;
+import sgat.entidades.Onibus;
 import sgat.entidades.Passageiro;
 import sgat.entidades.Viagem;
 
@@ -23,12 +29,12 @@ public class ViagensDBService implements ViagensService{
 	
 	final String INSERIR = "INSERT INTO viagem(nomeviagem, dataida, datavolta, embarque, hospedagem, valorpoltronaonibus) VALUES(?, ?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE viagem SET nomeviagem=?, dataida=?, datavolta=?, embarque=?, hospedagem=?, valorpoltronaonibus=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nomeviagem, dataida, datavolta, embarque, hospedagem, valorpoltronaonibus, ativo FROM viagem WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, codigoonibus, nomeviagem, dataida, datavolta, embarque, hospedagem, valorpoltronaonibus, ativo FROM viagem WHERE codigo = ?";
 	final String APAGAR = "UPDATE viagem SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_VIAGENS = "SELECT * FROM viagem WHERE ativo = 'S' ";
 	
-	final String INSERIR_PASSAGEIROS = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo) VALUES(?, ?, ?, ?, ?, ?)";
+	final String INSERIR_PASSAGEIROS = "INSERT INTO participanteviagem(codigoviagem, codigocliente, observacaoonibus, observacaohotel, valorvenda, grupo, codigohotel) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	
 	final String BUSCAR_PASSAGEIROS = "SELECT * FROM participanteviagem WHERE codigoviagem = ? ";
 	
@@ -36,7 +42,7 @@ public class ViagensDBService implements ViagensService{
 	
 	final String ATUALIZAR_PASSAGEIROS = "UPDATE participanteviagem SET observacaoonibus=?, observacaohotel=?, valorvenda=?, grupo=? WHERE codigo = ?";
 	
-	final String BUSCAR_PASSAGEIRO_TOTAL_LISTA = "SELECT part.grupo AS Grupo, (select COUNT(partsub.codigocliente) from participanteviagem partsub "
+	final String BUSCAR_PASSAGEIRO_TOTAL_LISTA = "SELECT part.grupo AS Grupo, part.codigohotel, (select COUNT(partsub.codigocliente) from participanteviagem partsub "
 			+ "where partsub.grupo = part.grupo AND partsub.codigoviagem = part.codigoviagem AND partsub.observacaoonibus <> '') as qtd_passageiros_pagantes, "
 			+ "SUM(part.valorvenda) AS ValorVenda, (select COUNT(partsub.codigocliente) from participanteviagem partsub where partsub.grupo = part.grupo "
 			+ "AND partsub.codigoviagem = part.codigoviagem AND partsub.observacaoonibus <> '') * viag.valorpoltronaonibus AS ValorTotalPoltronas "
@@ -47,10 +53,14 @@ public class ViagensDBService implements ViagensService{
 	
 	private ClientesService clientesService;
 	
-//	private OnibusService onibusService;
+	private OnibusService onibusService;
+	
+	private HoteisService hoteisService;
 	
 	private ViagensDBService(){
 		clientesService = ClientesDBService.getInstance();
+		hoteisService = HoteisDBService.getInstance();
+		onibusService = OnibusDBService.getInstance();
 	}
 	
 	public static ViagensService getInstance(){
@@ -103,6 +113,7 @@ public class ViagensDBService implements ViagensService{
 			salvar.setString(4, passageiro.getObservacaoHotel());
 			salvar.setDouble(5, passageiro.getValor());
 			salvar.setInt(6, passageiro.getGrupo());
+			salvar.setInt(7, passageiro.getHotel().getCodigo());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -400,9 +411,9 @@ public class ViagensDBService implements ViagensService{
 	private Viagem extraiViagem(ResultSet resultadoBusca) throws SQLException, ParseException {
 		Viagem viagem = new Viagem();
 		viagem.setCodigo(resultadoBusca.getInt(1));
-//		int codigoOnibus = resultadoBusca.getInt(2);
-//		Onibus onibus = onibusService.buscaPorCodigo(codigoOnibus);
-//		viagem.setOnibus(onibus);
+		int codigoOnibus = resultadoBusca.getInt(2);
+		Onibus onibus = onibusService.buscaPorCodigo(codigoOnibus);
+		viagem.setOnibus(onibus);
 		viagem.setNome(resultadoBusca.getString(3));
 		LocalDate dataIda = resultadoBusca.getDate(4).toLocalDate();
 		viagem.setDataIda(dataIda);
@@ -423,10 +434,13 @@ public class ViagensDBService implements ViagensService{
 		int codigoCliente = resultadoBusca.getInt(3);
 		Cliente cliente = clientesService.buscaPorCodigo(codigoCliente);
 		passageiro.setCliente(cliente);
-		passageiro.setObservacaoOnibus(resultadoBusca.getString(4));
-		passageiro.setObservacaoHotel(resultadoBusca.getString(5));
-		passageiro.setValor(resultadoBusca.getDouble(6));
-		passageiro.setGrupo(resultadoBusca.getInt(7));
+		int codigoHotel = resultadoBusca.getInt(4);
+		Hotel hotel = hoteisService.buscaPorCodigo(codigoHotel);
+		passageiro.setHotel(hotel);
+		passageiro.setObservacaoOnibus(resultadoBusca.getString(5));
+		passageiro.setObservacaoHotel(resultadoBusca.getString(6));
+		passageiro.setValor(resultadoBusca.getDouble(7));
+		passageiro.setGrupo(resultadoBusca.getInt(8));
 		return passageiro;
 	}
 	
@@ -434,9 +448,12 @@ public class ViagensDBService implements ViagensService{
 	public AcertoGrupoDto extraiAcerto(ResultSet resultadoBusca) throws SQLException, ParseException {
 		AcertoGrupoDto acerto = new AcertoGrupoDto();
 		acerto.setGrupo(resultadoBusca.getInt(1));
-		acerto.setQuantidadePassageirosPagantes(resultadoBusca.getInt(2));
-		acerto.setValorVenda(resultadoBusca.getDouble(3));
-		acerto.setValorPoltrona(resultadoBusca.getDouble(4));
+		int codigoHotel = resultadoBusca.getInt(2);
+		Hotel hotel = hoteisService.buscaPorCodigo(codigoHotel);
+		acerto.setHotel(hotel);
+		acerto.setQuantidadePassageirosPagantes(resultadoBusca.getInt(3));
+		acerto.setValorVenda(resultadoBusca.getDouble(4));
+		acerto.setValorPoltrona(resultadoBusca.getDouble(5));
 		return acerto;
 	}
 

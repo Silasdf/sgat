@@ -81,5 +81,16 @@ public class Hotel {
 				+ valorQuadruploPorPessoa + ", endereco=" + endereco + ", cidade=" + cidade + ", telefone=" + telefone
 				+ ", codigo=" + codigo + ", ativo=" + ativo + "]";
 	}
+	
+	@Override
+	public boolean equals(Object object){
+		
+		if (object != null && object instanceof Hotel){
+			if (this.codigo == ((Hotel) object).codigo){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

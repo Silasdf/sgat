@@ -34,6 +34,12 @@ public class AcertoHotelDto {
 		this.valorTotalDosPacotes = valorTotalDosPacotes;
 	}
 
+	@Override
+	public String toString() {
+		return "AcertoHotelDto [hotel=" + hotel + ", quantidadePacotesVendidos=" + quantidadePacotesVendidos
+				+ ", valorTotalDosPacotes=" + valorTotalDosPacotes + "]";
+	}
+
 	public AcertoHotelDto(Hotel hotel, int quantidadePacotesVendidos, double valorTotalDosPacotes) {
 		super();
 		this.hotel = hotel;

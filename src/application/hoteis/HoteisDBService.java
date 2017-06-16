@@ -23,6 +23,7 @@ public class HoteisDBService implements HoteisService{
 	final String BUSCAR_HOTEIS = "SELECT * FROM hotel WHERE ativo = 'S' ";
 	
 	private Hotel hotel;
+	private Hotel hotelSelecionado;
 	private static HoteisService instance;
 	
 //	@Override
@@ -31,6 +32,30 @@ public class HoteisDBService implements HoteisService{
 		instance = new HoteisDBService();
 		}
 		return instance;
+	}
+	
+	@Override
+	public Hotel getHotel() {
+
+		return this.hotel;
+	}
+
+	@Override
+	public void setHotel(Hotel hotel) {
+
+		this.hotel = hotel;
+	}
+	
+	@Override
+	public Hotel getHotelSelecionado() {
+
+		return this.hotelSelecionado;
+	}
+
+	@Override
+	public void setHotelSelecionado(Hotel hotelSelecionado) {
+
+		this.hotelSelecionado = hotelSelecionado;
 	}
 	
 	@Override
@@ -136,8 +161,9 @@ public class HoteisDBService implements HoteisService{
 			PreparedStatement buscar = con.prepareStatement(BUSCAR);
 			buscar.setInt(1, codigo);
 			ResultSet resultadoBusca = buscar.executeQuery();
-			resultadoBusca.next();
-			hotel = extraiHotel(resultadoBusca);
+			if (resultadoBusca.next()){
+				hotel = extraiHotel(resultadoBusca);
+			}
 			buscar.close();
 			con.close();
 		} catch (Exception e) {
@@ -222,18 +248,6 @@ public class HoteisDBService implements HoteisService{
 		hotel.setTelefone(resultadoBusca.getString(9));
 		hotel.setAtivo(resultadoBusca.getString(10));
 		return hotel;
-	}
-	
-	@Override
-	public Hotel getHotel() {
-
-		return this.hotel;
-	}
-
-	@Override
-	public void setHotel(Hotel hotel) {
-
-		this.hotel = hotel;
 	}
 
 }

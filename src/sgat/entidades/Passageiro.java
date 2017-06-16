@@ -8,7 +8,8 @@ public class Passageiro {
 	private Integer grupo;
 	private Integer codigo;
 	private Cliente cliente;
-	
+	private Hotel hotel;
+
 	public String getObservacaoOnibus() {
 		return observacaoOnibus;
 	}
@@ -45,11 +46,17 @@ public class Passageiro {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
 	
 	@Override
 	public String toString() {
 		return "Passageiro [observacaoOnibus=" + observacaoOnibus + ", observacaoHotel=" + observacaoHotel + ", valor="
-				+ valor + ", grupo=" + grupo + ", codigo=" + codigo + ", cliente=" + cliente + "]";
+				+ valor + ", grupo=" + grupo + ", codigo=" + codigo + ", cliente=" + cliente + ", hotel=" + hotel + "]";
 	}
 	
 	@Override

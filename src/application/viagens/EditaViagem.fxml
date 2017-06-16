@@ -64,26 +64,30 @@
             <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
             <RowConstraints />
          </rowConstraints>
          <children>
             <TextField fx:id="txtNomePassageiro" GridPane.columnIndex="1" />
-            <TextField fx:id="txtValor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Passageiros:" />
+            <TextField fx:id="txtValor" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Passageiro:" />
             <Label text="Observação Onibus:" GridPane.rowIndex="1" />
-            <Label text="Observação Hotel:" GridPane.rowIndex="2" />
-            <Label text="Valor Venda:" GridPane.rowIndex="3" />
-            <Label text="Grupo:" GridPane.rowIndex="4" />
+            <Label text="Observação Hotel:" GridPane.rowIndex="3" />
+            <Label text="Valor Venda:" GridPane.rowIndex="4" />
+            <Label text="Grupo:" GridPane.rowIndex="5" />
             <TextField fx:id="txtObservacaoOnibus" layoutX="145.0" layoutY="29.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtObservacaoHotel" layoutX="145.0" layoutY="91.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtObservacaoHotel" layoutX="145.0" layoutY="91.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#selecionaCliente" text="Selecionar Cliente" GridPane.columnIndex="2" />
-            <Spinner fx:id="txtGrupo" editable="false" prefHeight="26.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Spinner fx:id="txtGrupo" editable="false" prefHeight="26.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <valueFactory>
             <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" max="99" min="0" />
             </valueFactory>
             </Spinner>
+            <Label text="Hotel:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtNomeHotel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#selecionaHotel" text="Selecionar Hotel" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <TableView fx:id="tblPassageiros" layoutX="465.0" layoutY="406.0" prefHeight="125.0" prefWidth="417.0">

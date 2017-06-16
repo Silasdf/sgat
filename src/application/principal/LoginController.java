@@ -34,10 +34,10 @@ public class LoginController implements Initializable, ControlledScreen {
 	 @Override
 	 public void initialize(URL url, ResourceBundle rb) {
 	  if (loginModel.isDbConnected()) {
-	   isConnected.setText("Connected");
+	   isConnected.setText("Login");
 	  } else {
 
-	   isConnected.setText("Not Connected");
+	   isConnected.setText("Sem conexão com o banco");
 	  }
   	txtNomeUsuario.setText("vfturismo");
   	txtSenhaUsuario.setText("vfturismo");

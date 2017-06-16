@@ -1,6 +1,7 @@
 package application.viagens;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+import sgat.entidades.Hotel;
+import sgat.entidades.Passageiro;
 import sgat.entidades.Viagem;
 
 public class AcertoViagemController implements Initializable, ControlledScreen{
@@ -71,6 +74,9 @@ public class AcertoViagemController implements Initializable, ControlledScreen{
     public void initialize(URL url, ResourceBundle rb) {
     	viagensService = ViagensDBService.getInstance();
     	configuraColunas();
+    	demaisDespesas1.setText("0");
+    	demaisDespesas2.setText("0");
+    	demaisDespesas3.setText("0");
     }
 	
     public void setScreenParent(ScreensController screenParent){
@@ -79,7 +85,7 @@ public class AcertoViagemController implements Initializable, ControlledScreen{
     
     @FXML
     private void calcularAcerto(ActionEvent event){
-    	
+    	carrega();
     }
     
     @FXML
@@ -109,9 +115,47 @@ public class AcertoViagemController implements Initializable, ControlledScreen{
     	quantidadePoltronasVendidos.setText(qtdTotalDasPoltronas);
     	String valorTotalDasPoltronas = Double.toString(valorTotalPoltrona);
     	valorTotalPoltronas.setText(valorTotalDasPoltronas);
-//    	txtHospedagemEdita.setText(viagemSelecionada.getHospedagem());
-//    	tblAcertoHotel.getItems().setAll(viagemSelecionada.getPassageiros());
+    	double valorDespesas = calcularValorDespesas();
+    	double valorLucro = (quantidadeTotalDasPoltronas*100) - valorDespesas;
+    	String valorLucroStr = Double.toString(valorLucro);
+    	valorTotalLucro.setText(valorLucroStr);
     	System.out.println(viagemSelecionada);
+    	totalizarHotel(acertos);
+    }
+    
+    private double calcularValorDespesas() {
+		double despesa1 = Double.parseDouble(demaisDespesas1.getText());
+		double despesa2 = Double.parseDouble(demaisDespesas2.getText());
+		double despesa3 = Double.parseDouble(demaisDespesas3.getText());
+		return despesa1 + despesa2 + despesa3;
+	}
+
+	private void totalizarHotel(List<AcertoGrupoDto> acertos){
+    	//Selecionar os hotéis
+    	ArrayList<Hotel> hoteis = new ArrayList<Hotel>();
+    	for (Passageiro p : viagemSelecionada.getPassageiros()){
+    		if (!hoteis.contains(p.getHotel())){
+    			hoteis.add(p.getHotel());
+    		}
+    	};
+    	System.out.println("Hotéis Selecionados: " + hoteis);
+    	ArrayList<AcertoHotelDto> acertoHoteis = new ArrayList<AcertoHotelDto>();
+    	
+    	//Totalizar cada hotel
+    	for (Hotel h : hoteis){
+    		int quantidadePacotesVendidos = 0;
+    		double valorTotalDosPacotes = 0;
+    		for (AcertoGrupoDto ag : acertos){
+    			if (h.equals(ag.getHotel())){
+    				quantidadePacotesVendidos += 1;
+    				valorTotalDosPacotes += ag.getValorVenda();
+    			}
+    		}
+    		AcertoHotelDto acerto = new AcertoHotelDto(h, quantidadePacotesVendidos, valorTotalDosPacotes);
+    		acertoHoteis.add(acerto);
+    	};
+    	tblAcertoHotel.getItems().setAll(acertoHoteis);
+    	System.out.println("Hotéis Totalizados: " + acertoHoteis);
     }
     
     private void mudarEdicao(Boolean novoEstado){
@@ -119,16 +163,26 @@ public class AcertoViagemController implements Initializable, ControlledScreen{
     	valorTotalPacotes.setEditable(novoEstado);
     	quantidadePoltronasVendidos.setEditable(novoEstado);
     	valorTotalPoltronas.setEditable(novoEstado);
+    	valorTotalLucro.setEditable(novoEstado);
     }
     
     @FXML
-    private void limpar(ActionEvent event){
-    	
+    private void limpar(){
+    	quantidadePacotesVendidos.setText("");
+    	valorTotalPacotes.setText("");
+    	quantidadePoltronasVendidos.setText("");
+    	valorTotalPoltronas.setText("");
+    	tblAcertoHotel.getItems().clear();
+    	demaisDespesas1.setText("0");
+    	demaisDespesas2.setText("0");
+    	demaisDespesas3.setText("0");
+    	valorTotalLucro.setText("");
     }
     
     @FXML
     private void voltar(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen13ID);
+    	limpar();
     }
     
 	private void configuraColunas() {

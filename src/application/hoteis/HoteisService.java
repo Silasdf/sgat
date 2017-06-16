@@ -9,6 +9,9 @@ public interface HoteisService {
 	public Hotel getHotel();
 	public void setHotel (Hotel hotel);
 	
+	public Hotel getHotelSelecionado();
+	public void setHotelSelecionado (Hotel hotelSelecionado);
+	
 	// INSERT
 	public void salvar(Hotel hotel);
 		

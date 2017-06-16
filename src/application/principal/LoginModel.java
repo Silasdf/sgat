@@ -14,7 +14,7 @@ public class LoginModel {
 	   conection = MariaDBConection.Connector();
 	   if (conection == null) {
 
-	   System.out.println("connection not successful");
+	   System.out.println("Conexão sem sucesso");
 	    System.exit(1);}
 	  }
 	  

@@ -55,6 +55,9 @@ public class ScreensFramework extends Application{
     
     public static String screen16ID = "screen16";
     public static String screen16File = "../application/viagens/AcertoViagem.fxml";
+    
+    public static String screen17ID = "screen17";
+    public static String screen17File = "../application/hoteis/SelecionaHotel.fxml";
 
     
     @Override
@@ -77,6 +80,7 @@ public class ScreensFramework extends Application{
         mainContainer.loadScreen(ScreensFramework.screen14ID, ScreensFramework.screen14File);
         mainContainer.loadScreen(ScreensFramework.screen15ID, ScreensFramework.screen15File);
         mainContainer.loadScreen(ScreensFramework.screen16ID, ScreensFramework.screen16File);
+        mainContainer.loadScreen(ScreensFramework.screen17ID, ScreensFramework.screen17File);
         
         mainContainer.setScreen(ScreensFramework.screen1ID);
         

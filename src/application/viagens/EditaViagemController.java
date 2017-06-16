@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import application.clientes.ClientesDBService;
 import application.clientes.ClientesService;
+import application.hoteis.HoteisDBService;
+import application.hoteis.HoteisService;
 import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
@@ -24,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import sgat.entidades.Cliente;
+import sgat.entidades.Hotel;
 import sgat.entidades.Passageiro;
 import sgat.entidades.Viagem;
 
@@ -74,6 +77,9 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	private TextField txtObservacaoOnibus;
 	
 	@FXML
+	private TextField txtNomeHotel;
+	
+	@FXML
 	private TextField txtObservacaoHotel;
 	
 	@FXML
@@ -90,14 +96,23 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	
 	private Viagem viagemSelecionada;
 	
+	private HoteisService hoteisService;
+	
+	private Hotel hotelSelecionado;
+	
 	 @Override
 	    public void initialize(URL url, ResourceBundle rb) {
 	    	viagensService = ViagensDBService.getInstance();
 	    	clientesService = ClientesDBService.getInstance();
+	    	hoteisService = HoteisDBService.getInstance();
 	    	configuraColunas();
 	    	txtNomePassageiro.textProperty().addListener(
 	    			(observable, oldValue, newValue) -> {
 	    				preencherCampoCliente(newValue);
+	    			});
+	    	txtNomeHotel.textProperty().addListener(
+	    			(observable, oldValue, newValue) -> {
+	    				preencherCampoHotel(newValue);
 	    			});
 	    }
 	    
@@ -183,6 +198,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 //			clientesService.setClienteSelecionado(passageiro.getCliente());
 			passageiro.setCliente(clienteSelecionado);
 			passageiro.setObservacaoOnibus(txtObservacaoOnibus.getText());
+			passageiro.setHotel(hotelSelecionado);
 			passageiro.setObservacaoHotel(txtObservacaoHotel.getText());
 			Double valor = Double.parseDouble(txtValor.getText());
 			passageiro.setValor(valor);
@@ -196,6 +212,11 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 //			cliente.setNome(txtNomePassageiro.getText());
 //			tblClientes.getItems().setAll(clientesService.buscarClientes(cliente));
 	        myController.setScreen(ScreensFramework.screen15ID);
+		}
+		
+		@FXML
+		private void selecionaHotel(ActionEvent event){
+	        myController.setScreen(ScreensFramework.screen17ID);
 		}
 		
 		@FXML
@@ -215,6 +236,8 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	txtNomePassageiro.setText("");
 	    	clientesService.setClienteSelecionado(null);
 	    	txtObservacaoOnibus.setText("");
+	    	txtNomeHotel.setText("");
+	    	hoteisService.setHotelSelecionado(null);
 	    	txtObservacaoHotel.setText("");
 	    	txtValor.setText("");
 	    	txtGrupo.getValueFactory().setValue(0);
@@ -227,6 +250,16 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 		    	txtNomePassageiro.setText(clienteSelecionado.getNome());
 	    	} else {
 		    	txtNomePassageiro.setText("");
+	    	}
+	    }
+	    
+	    private void preencherCampoHotel(String h){
+	    	System.out.println("Hotel selecionado passou aqui!!!");
+	    	hotelSelecionado = hoteisService.getHotelSelecionado();
+	    	if (hotelSelecionado != null){
+		    	txtNomeHotel.setText(hotelSelecionado.getNome());
+	    	} else {
+	    		txtNomeHotel.setText("");
 	    	}
 	    }
 	    
@@ -264,6 +297,7 @@ public class EditaViagemController implements Initializable, ControlledScreen{
 	    	clientesService.setClienteSelecionado(passageiro.getCliente());
 			tblClientes.getItems().setAll(passageiro.getCliente());
 	    	txtObservacaoOnibus.setText(passageiro.getObservacaoOnibus());
+	    	hoteisService.setHotelSelecionado(passageiro.getHotel());
 	    	txtObservacaoHotel.setText(passageiro.getObservacaoHotel());
 			txtValor.setText(passageiro.getValor().toString());
 	    	txtGrupo.getValueFactory().setValue(passageiro.getGrupo());
