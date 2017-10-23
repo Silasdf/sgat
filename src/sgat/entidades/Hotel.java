@@ -1,5 +1,8 @@
 package sgat.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hotel {
 	
 	private String nome;
@@ -12,6 +15,7 @@ public class Hotel {
 	private String telefone;
 	private Integer codigo;
 	private String ativo;
+	private List<Arquivo> fotos = new ArrayList<Arquivo>();
 	
 	public String getNome() {
 		return nome;
@@ -73,13 +77,19 @@ public class Hotel {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
+	public List<Arquivo> getFotos() {
+		return fotos;
+	}
+	public void setFotos(List<Arquivo> fotos) {
+		this.fotos = fotos;
+	}
 	
 	@Override
 	public String toString() {
 		return "Hotel [nome=" + nome + ", cnpj=" + cnpj + ", valorDuploPorPessoa=" + valorDuploPorPessoa
 				+ ", valorTriploPorPessoa=" + valorTriploPorPessoa + ", valorQuadruploPorPessoa="
 				+ valorQuadruploPorPessoa + ", endereco=" + endereco + ", cidade=" + cidade + ", telefone=" + telefone
-				+ ", codigo=" + codigo + ", ativo=" + ativo + "]";
+				+ ", codigo=" + codigo + ", ativo=" + ativo + ", fotos=" + fotos + "]";
 	}
 	
 	@Override

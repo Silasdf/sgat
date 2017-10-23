@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import framework.NamedParameterStatement;
 import framework.SgatUtills;
+//import sgat.entidades.Arquivo;
 import sgat.entidades.Onibus;
+//import sgat.entidades.Passageiro;
 
 public class OnibusDBService implements OnibusService {
 	
@@ -108,6 +110,8 @@ public class OnibusDBService implements OnibusService {
 			ResultSet resultadoBusca = buscarOnibus.executeQuery();
 			while (resultadoBusca.next()) {
 				Onibus onibusResultado = extraiOnibus(resultadoBusca);
+//				List<Arquivo> fotosOnibus = buscarArquivos(onibusResultado.getCodigo());
+//				onibusResultado.getFotos().addAll(fotosOnibus);
 				variosOnibus.add(onibusResultado);
 			}
 			buscarOnibus.close();

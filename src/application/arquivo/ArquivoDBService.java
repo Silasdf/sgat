@@ -12,24 +12,40 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.hoteis.HoteisDBService;
+import application.hoteis.HoteisService;
+import application.onibus.OnibusDBService;
+import application.onibus.OnibusService;
 import framework.NamedParameterStatement;
 import sgat.entidades.Arquivo;
+import sgat.entidades.Hotel;
+import sgat.entidades.Onibus;
 
 public class ArquivoDBService implements ArquivoService{
 	
-	final String INSERIR = "INSERT INTO arquivo(conteudoarquivo, nomearquivo, tipoarquivo) VALUES(?, ?, ?)";
+	final String INSERIR = "INSERT INTO arquivo(conteudoarquivo, nomearquivo, tipoarquivo, codigohotel, codigoonibus) VALUES(?, ?, ?, ?, ?)";
 	final String ATUALIZAR = "UPDATE arquivo SET conteudoarquivo=?, nomearquivo=?, tipoarquivo=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, conteudoarquivo, nomearquivo, tipoarquivo, ativo FROM arquivo WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, conteudoarquivo, nomearquivo, tipoarquivo, ativo, codigohotel, codigoonibus FROM arquivo WHERE codigo = ?";
 	final String APAGAR = "UPDATE arquivo SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_ARQUIVO = "SELECT * FROM arquivo WHERE ativo = 'S' ";
 	
 	private Arquivo arquivo;
 	private static ArquivoService instance;
+	
+	private OnibusService onibusService;
+	
+	private HoteisService hoteisService;
+	
+	private ArquivoDBService(){
+		hoteisService = HoteisDBService.getInstance();
+		onibusService = OnibusDBService.getInstance();
+	}
 	
 //	@Override
 	public static ArquivoService getInstance(){
@@ -48,6 +64,16 @@ public class ArquivoDBService implements ArquivoService{
 			salvar.setBlob(1, inputStream);
 			salvar.setString(2, arquivo.getNome());
 			salvar.setString(3, arquivo.getTipo());
+			if (arquivo.getHotel() != null && arquivo.getHotel().getCodigo() != null){
+				salvar.setInt(4, arquivo.getHotel().getCodigo());
+			} else {
+				salvar.setNull(4, Types.INTEGER);
+			}
+			if (arquivo.getOnibus() != null && arquivo.getOnibus().getCodigo() != null){
+				salvar.setInt(5, arquivo.getOnibus().getCodigo());
+			} else {
+				salvar.setNull(5, Types.INTEGER);
+			}
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -112,8 +138,9 @@ public class ArquivoDBService implements ArquivoService{
 			PreparedStatement buscar = con.prepareStatement(BUSCAR);
 			buscar.setInt(1, codigo);
 			ResultSet resultadoBusca = buscar.executeQuery();
-			resultadoBusca.next();
-			arquivo = extraiArquivo(resultadoBusca);
+			if (resultadoBusca.next()){
+				arquivo = extraiArquivo(resultadoBusca);
+			}
 			buscar.close();
 			con.close();
 		} catch (Exception e) {
@@ -186,7 +213,17 @@ public class ArquivoDBService implements ArquivoService{
 		File file = new File("abc.doc");
 		arquivo.setConteudo(file);
 		arquivo.setCodigo(resultadoBusca.getInt(1));
-		Blob blob = resultadoBusca.getBlob(2);
+		Integer codigoHotel = resultadoBusca.getInt(2);
+		if (codigoHotel != null){
+			Hotel hotel = hoteisService.buscaPorCodigo(codigoHotel);
+			arquivo.setHotel(hotel);
+		}
+		Integer codigoOnibus = resultadoBusca.getInt(3);
+		if (codigoOnibus != null){
+			Onibus onibus = onibusService.buscaPorCodigo(codigoOnibus);
+			arquivo.setOnibus(onibus);
+		}
+		Blob blob = resultadoBusca.getBlob(4);
 		InputStream in = blob.getBinaryStream();
 		OutputStream out;
 		try {
@@ -197,14 +234,13 @@ public class ArquivoDBService implements ArquivoService{
 				out.write(buff, 0, len);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 //		arquivo.setConteudo(resultadoBusca.getBlob(2));
-		arquivo.setNome(resultadoBusca.getString(3));
-		arquivo.setTipo(resultadoBusca.getString(4));
-		arquivo.setAtivo(resultadoBusca.getString(5));
+		arquivo.setNome(resultadoBusca.getString(5));
+		arquivo.setTipo(resultadoBusca.getString(6));
+		arquivo.setAtivo(resultadoBusca.getString(7));
 		return arquivo;
 	}
 	

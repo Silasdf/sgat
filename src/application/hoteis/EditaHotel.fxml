@@ -3,13 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="395.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.hoteis.EditaHotelController">
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.hoteis.EditaHotelController">
    <children>
       <HBox alignment="BOTTOM_RIGHT" layoutX="412.0" layoutY="312.0" prefHeight="62.0" prefWidth="417.0" spacing="20.0">
          <children>
@@ -20,10 +21,11 @@
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
          </children>
       </HBox>
-      <GridPane fx:id="gridHotel" layoutX="14.0" layoutY="13.0" prefHeight="312.0" prefWidth="398.0">
+      <GridPane fx:id="gridHotel" layoutX="14.0" layoutY="13.0" prefHeight="312.0" prefWidth="672.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="189.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="187.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="10.0" prefWidth="218.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="190.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -53,6 +55,7 @@
             <Label text="Endereço Hotel:" GridPane.rowIndex="5" />
             <Label text="Cidade Hotel:" GridPane.rowIndex="6" />
             <Label text="Telefone Hotel:" GridPane.rowIndex="7" />
+            <ImageView fx:id="primeiraImagem" fitHeight="274.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

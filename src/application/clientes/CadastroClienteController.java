@@ -65,7 +65,7 @@ public class CadastroClienteController implements Initializable, ControlledScree
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	clientesService = ClientesDBService.getInstance();
-    	atualizaDadosTabela();
+//    	atualizaDadosTabela();
     }
     
     public void setScreenParent(ScreensController screenParent){
@@ -89,21 +89,21 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		pegaValores(cliente);
 		clientesService.salvar(cliente);
 		Mensagens.mensagemInformativa("Cliente cadastrado com sucesso!");
-		atualizaDadosTabela();
+//		limpar();
     }
     
-    @FXML
-    private void limpar(){
-    	txtNome.setText("");
-    	txtCpf.setText("");
-    	txtDataNascimento.setValue(null);
-    	txtRg.setText("");
-    	txtEndereco.setText("");
-    	txtCidade.setText("");
-//    	txtViagemEmpresa.setText("");
-    	txtViagemEmpresa.getValueFactory().setValue(0);
-    	txtTelefone.setText("");
-    }
+//    @FXML
+//    private void limpar(){
+//    	txtNome.setText("");
+//    	txtCpf.setText("");
+//    	txtDataNascimento.setValue(null);
+//    	txtRg.setText("");
+//    	txtEndereco.setText("");
+//    	txtCidade.setText("");
+////    	txtViagemEmpresa.setText("");
+//    	txtViagemEmpresa.getValueFactory().setValue(0);
+//    	txtTelefone.setText("");
+//    }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {
@@ -121,9 +121,9 @@ public class CadastroClienteController implements Initializable, ControlledScree
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados
-	private void atualizaDadosTabela() {
-		limpar();
-	}
+//	private void atualizaDadosTabela() {
+//		limpar();
+//	}
 }
 
 

@@ -1,5 +1,7 @@
 package application.hoteis;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import sgat.entidades.Hotel;
 
@@ -44,7 +48,9 @@ public class EditaHotelController implements Initializable, ControlledScreen{
 	
 	@FXML
 	private TextField txtTelefoneHotelEdita;
-
+	
+	@FXML
+	private ImageView primeiraImagem;
 	
 	private HoteisService hoteisService;
 	
@@ -78,6 +84,15 @@ public class EditaHotelController implements Initializable, ControlledScreen{
     	txtCidadeHotelEdita.setText(hotelSelecionado.getCidade());
     	txtTelefoneHotelEdita.setText(hotelSelecionado.getTelefone());
     	System.out.println(hotelSelecionado);
+    	FileInputStream inputStream;
+		try {
+			inputStream = new FileInputStream("/home/silas/Imagens/Deadpool.jpg");
+			Image image = new Image(inputStream);
+			primeiraImagem.setImage(image);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
     }
     
     @FXML
@@ -116,6 +131,7 @@ public class EditaHotelController implements Initializable, ControlledScreen{
     	txtEnderecoHotelEdita.setText("");
     	txtCidadeHotelEdita.setText("");
     	txtTelefoneHotelEdita.setText("");
+    	primeiraImagem.setImage(null);
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto hotel

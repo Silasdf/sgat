@@ -12,19 +12,19 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="5.0" layoutY="50.0" prefHeight="385.0" prefWidth="133.0" spacing="65.0">
          <children>
-            <MenuButton mnemonicParsing="false" text="Cliente">
+            <MenuButton mnemonicParsing="false" text="Clientes">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#goToCadastroCliente" text="Cadastrar" />
                 <MenuItem mnemonicParsing="false" onAction="#goToPesquisaCliente" text="Pesquisar" />
               </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Hoteis">
+            <MenuButton mnemonicParsing="false" text="Hotéis">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#cadastroHotel" text="Cadastrar" />
                   <MenuItem mnemonicParsing="false" onAction="#pesquisaHotel" text="Pesquisar" />
                </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Onibus">
+            <MenuButton mnemonicParsing="false" text="Ônibus">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#cadastroOnibus" text="Cadastrar" />
                   <MenuItem mnemonicParsing="false" onAction="#pesquisaOnibus" text="Pesquisar" />
@@ -36,7 +36,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#pesquisaViagem" text="Pesquisar" />
                </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Documento">
+            <MenuButton mnemonicParsing="false" text="Contrato">
                <items>
                   <MenuItem fx:id="incluirDocumento" mnemonicParsing="false" onAction="#botaoIncluir" text="Incluir" />
                   <MenuItem mnemonicParsing="false" onAction="#apagar" text="Excluir" />

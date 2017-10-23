@@ -9,7 +9,9 @@ public class Arquivo {
 	private String tipo;
 	private Integer codigo;
 	private String ativo;
-	
+	private Hotel hotel;
+	private Onibus onibus;
+		
 	public File getConteudo() {
 		return conteudo;
 	}
@@ -40,11 +42,23 @@ public class Arquivo {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+	public Onibus getOnibus() {
+		return onibus;
+	}
+	public void setOnibus(Onibus onibus) {
+		this.onibus = onibus;
+	}
 	
 	@Override
 	public String toString() {
-		return "Arquivo [nome=" + nome + ", conteudo=" + conteudo + ", tipo=" + tipo + 
-				", codigo=" + codigo + " ativo=" + ativo + "]";
+		return "Arquivo [conteudo=" + conteudo + ", nome=" + nome + ", tipo=" + tipo + ", codigo=" + codigo + ", ativo="
+				+ ativo + ", hotel=" + hotel + ", onibus=" + onibus + "]";
 	}
 	
 }
