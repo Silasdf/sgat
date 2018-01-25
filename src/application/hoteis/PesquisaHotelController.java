@@ -93,6 +93,7 @@ public class PesquisaHotelController implements Initializable, ControlledScreen{
     	System.out.println(hotel);
     	hoteisService.setHotel(hotel);
         myController.setScreen(ScreensFramework.screen8ID);
+    	tblHoteis.getItems().clear();
     }
     
     private void buscarHoteis(Hotel hotel){

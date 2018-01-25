@@ -107,6 +107,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	System.out.println(cliente);
     	clientesService.setCliente(cliente);
         myController.setScreen(ScreensFramework.screen5ID);
+    	tblClientes.getItems().clear();
     }
     
 	@FXML

@@ -72,7 +72,7 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     @FXML
     private void voltar(ActionEvent event){
        myController.setScreen(ScreensFramework.screen4ID);
-//       limpar();
+       limpar();
     }
     
     @FXML
@@ -116,18 +116,17 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtViagemEmpresaEdita.setEditable(novoEstado);
     	txtTelefoneEdita.setEditable(novoEstado);
     }
-    
-//    @FXML
-//    private void limpar(){
-//    	txtNomeEdita.setText("");
-//    	txtCpfEdita.setText("");
-//    	txtDataNascimentoEdita.setValue(null);
-//    	txtRgEdita.setText("");
-//    	txtEnderecoEdita.setText("");
-//    	txtCidadeEdita.setText("");
-//    	txtViagemEmpresaEdita.getValueFactory().setValue(0);
-//    	txtTelefoneEdita.setText("");
-//    }
+
+    private void limpar(){
+    	txtNomeEdita.setText("");
+    	txtCpfEdita.setText("");
+    	txtDataNascimentoEdita.setValue(null);
+    	txtRgEdita.setText("");
+    	txtEnderecoEdita.setText("");
+    	txtCidadeEdita.setText("");
+    	txtViagemEmpresaEdita.getValueFactory().setValue(0);
+    	txtTelefoneEdita.setText("");
+    }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {

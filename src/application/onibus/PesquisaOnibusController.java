@@ -96,6 +96,7 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 	    	System.out.println(onibus);
 	    	onibusService.setOnibus(onibus);
 	        myController.setScreen(ScreensFramework.screen11ID);
+	    	tblOnibus.getItems().clear();
 	    }
 	    
 	    @FXML

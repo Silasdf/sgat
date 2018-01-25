@@ -80,6 +80,7 @@ public class PesquisaViagemController implements Initializable, ControlledScreen
     	System.out.println(viagem);
     	viagensService.setViagem(viagem);
         myController.setScreen(ScreensFramework.screen14ID);
+    	tblViagens.getItems().clear();
     }
     
 	@FXML

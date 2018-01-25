@@ -55,11 +55,13 @@ public class CadastroViagemController implements Initializable, ControlledScreen
     @FXML
     private void pesquisaViagem(ActionEvent event){
        myController.setScreen(ScreensFramework.screen13ID);
+       limpar();
     }
     
     @FXML
     private void voltar(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen2ID);
+    	limpar();
     }
     
     @FXML

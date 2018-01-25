@@ -75,11 +75,13 @@ public class CadastroClienteController implements Initializable, ControlledScree
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen4ID);
+       limpar();
     }
     
     @FXML
     private void voltar(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen2ID);
+    	limpar();
     }
     
     @FXML
@@ -89,21 +91,21 @@ public class CadastroClienteController implements Initializable, ControlledScree
 		pegaValores(cliente);
 		clientesService.salvar(cliente);
 		Mensagens.mensagemInformativa("Cliente cadastrado com sucesso!");
-//		limpar();
+		limpar();
     }
     
-//    @FXML
-//    private void limpar(){
-//    	txtNome.setText("");
-//    	txtCpf.setText("");
-//    	txtDataNascimento.setValue(null);
-//    	txtRg.setText("");
-//    	txtEndereco.setText("");
-//    	txtCidade.setText("");
-////    	txtViagemEmpresa.setText("");
-//    	txtViagemEmpresa.getValueFactory().setValue(0);
-//    	txtTelefone.setText("");
-//    }
+    @FXML
+    private void limpar(){
+    	txtNome.setText("");
+    	txtCpf.setText("");
+    	txtDataNascimento.setValue(null);
+    	txtRg.setText("");
+    	txtEndereco.setText("");
+    	txtCidade.setText("");
+//    	txtViagemEmpresa.setText("");
+    	txtViagemEmpresa.getValueFactory().setValue(0);
+    	txtTelefone.setText("");
+    }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
 	private void pegaValores(Cliente cliente) {

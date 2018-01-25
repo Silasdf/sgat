@@ -60,11 +60,13 @@ public class CadastroHotelController implements Initializable, ControlledScreen{
     @FXML
     private void pesquisaHotel(ActionEvent event){
        myController.setScreen(ScreensFramework.screen7ID);
+       limpar();
     }
     
     @FXML
     private void voltar(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen2ID);
+    	limpar();
     }
     
     @FXML

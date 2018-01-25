@@ -59,11 +59,13 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
     @FXML
     private void pesquisaOnibus(ActionEvent event){
        myController.setScreen(ScreensFramework.screen10ID);
+       limpar();
     }
     
     @FXML
     private void voltar(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen2ID);
+    	limpar();
     }
     
     @FXML
