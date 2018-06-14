@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="583.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.onibus.PesquisaOnibusController">
+<AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.onibus.PesquisaOnibusController">
   <children>
-      <HBox alignment="BOTTOM_RIGHT" layoutX="445.0" layoutY="294.0" prefHeight="62.0" prefWidth="436.0" spacing="20.0">
+      <HBox alignment="BOTTOM_RIGHT" layoutX="448.0" layoutY="364.0" prefHeight="46.0" prefWidth="436.0" spacing="20.0">
          <children>
 			<Button mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
 			<Button mnemonicParsing="false" onAction="#limpar" text="Limpar" />
@@ -24,7 +24,7 @@
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
          </children>
       </HBox>
-      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="311.0" prefWidth="367.0">
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="364.0" prefWidth="367.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="152.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="195.0" />
@@ -35,6 +35,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -57,14 +59,20 @@
             <TextField fx:id="txtPlacaOnibus" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Telefone Motorista:" GridPane.rowIndex="6" />
             <TextField fx:id="txtTelefone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Valor Frete Onibus:" GridPane.rowIndex="7" />
+            <Label text="Nome Empresa:" GridPane.rowIndex="8" />
+            <TextField fx:id="txtValorFreteOnibus" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtNomeEmpresa" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          </children>
       </GridPane>
-      <TableView fx:id="tblOnibus" layoutX="14.0" layoutY="369.0" prefHeight="200.0" prefWidth="616.0">
+      <TableView fx:id="tblOnibus" layoutX="14.0" layoutY="424.0" prefHeight="200.0" prefWidth="871.0">
         <columns>
-          <TableColumn fx:id="clNome" prefWidth="230.0" text="Nome Motorista" />
-          <TableColumn fx:id="clValorPorPoltrona" prefWidth="150.0" text="Valor Por Poltrona" />
-            <TableColumn fx:id="clTelefone" prefWidth="151.0" text="Telefone Motorista" />
-            <TableColumn fx:id="clViagensRealizadas" prefWidth="84.0" text="Viagens" />
+          <TableColumn fx:id="clNome" prefWidth="191.0" text="Nome Motorista" />
+          <TableColumn fx:id="clValorPorPoltrona" prefWidth="148.0" text="Valor Por Poltrona" />
+            <TableColumn fx:id="clTelefone" prefWidth="150.0" text="Telefone Motorista" />
+            <TableColumn fx:id="clViagensRealizadas" prefWidth="70.0" text="Viagens" />
+            <TableColumn fx:id="clValorFreteOnibus" prefWidth="149.0" text="Valor Frete Onibus" />
+            <TableColumn fx:id="clNomeEmpresa" prefWidth="162.0" text="Nome Empresa" />
         </columns>
       </TableView>
    </children>

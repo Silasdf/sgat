@@ -71,10 +71,10 @@ public class CadastroHotelController implements Initializable, ControlledScreen{
     
     @FXML
     private void salvar(ActionEvent event){
-    	System.out.println("Hotel cadastro com sucesso!");
 		Hotel hotel = new Hotel();
 		pegaValores(hotel);
 		hoteisService.salvar(hotel);
+    	System.out.println("Hotel cadastro com sucesso!");
 		Mensagens.mensagemInformativa("Hotel cadastrado com sucesso!");
 		atualizaDadosTabela();
     }

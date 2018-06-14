@@ -43,6 +43,12 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	@FXML
 	private TextField txtTelefoneEdita;
 	
+	@FXML
+	private TextField txtValorFreteOnibusEdita;
+	
+	@FXML
+	private TextField txtNomeEmpresaEdita;
+	
 	private OnibusService onibusService;
 	
 	private Onibus onibusSelecionado;
@@ -73,6 +79,8 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	    	txtAnoOnibusEdita.setText(onibusSelecionado.getAnoOnibus().toString());
 	    	txtViagensRealizadasEdita.getValueFactory().setValue(onibusSelecionado.getViagensRealizadas());
 	    	txtTelefoneEdita.setText(onibusSelecionado.getTelefone());
+	    	txtValorFreteOnibusEdita.setText(onibusSelecionado.getValorFreteOnibus().toString());
+	    	txtNomeEmpresaEdita.setText(onibusSelecionado.getNomeEmpresa());
 	    	System.out.println(onibusSelecionado);
 	    }
 	    
@@ -83,7 +91,7 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 			onibusService.atualizar(onibus);
 			Mensagens.mensagemInformativa("Onibus alterado com sucesso!");
 	    	mudarEdicao(false);
-	    	System.out.println("cliente Editado: " + onibus);
+	    	System.out.println("Onibus Editado: " + onibus);
 	    }
 	    
 	    @FXML
@@ -99,6 +107,8 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	    	txtAnoOnibusEdita.setEditable(novoEstado);
 	    	txtViagensRealizadasEdita.setEditable(novoEstado);
 	    	txtTelefoneEdita.setEditable(novoEstado);
+	    	txtValorFreteOnibusEdita.setEditable(novoEstado);
+	    	txtNomeEmpresaEdita.setEditable(novoEstado);
 	    }
 	    
 	    @FXML
@@ -110,6 +120,8 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	    	txtAnoOnibusEdita.setText("");
 	    	txtViagensRealizadasEdita.getValueFactory().setValue(0);
 	    	txtTelefoneEdita.setText("");
+	    	txtValorFreteOnibusEdita.setText("");
+	    	txtNomeEmpresaEdita.setText("");
 	    }
 	    
 		// pega os valores entrados pelo usuário e adiciona no objeto onibus
@@ -123,6 +135,9 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 			onibus.setAnoOnibus(anoOnibus);
 			onibus.setViagensRealizadas(txtViagensRealizadasEdita.getValue());
 			onibus.setTelefone(txtTelefoneEdita.getText());
+			Double valorFreteOnibus = Double.parseDouble(txtValorFreteOnibusEdita.getText());
+			onibus.setValorFreteOnibus(valorFreteOnibus);
+			onibus.setNomeEmpresa(txtNomeEmpresaEdita.getText());
 			onibus.setCodigo(onibusSelecionado.getCodigo());
 			onibus.setAtivo(onibusSelecionado.getAtivo());
 		}

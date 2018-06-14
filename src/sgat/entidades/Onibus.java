@@ -1,8 +1,5 @@
 package sgat.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Onibus {
 	
 	private String nome;
@@ -14,7 +11,9 @@ public class Onibus {
 	private String telefone;
 	private Integer codigo;
 	private String ativo;
-	private List<Arquivo> fotos = new ArrayList<Arquivo>();
+	private Double valorFreteOnibus;
+	private String nomeEmpresa;
+//	private List<Arquivo> fotos = new ArrayList<Arquivo>();
 	
 	public String getNome() {
 		return nome;
@@ -70,19 +69,32 @@ public class Onibus {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
-	public List<Arquivo> getFotos() {
-		return fotos;
+
+	public Double getValorFreteOnibus() {
+		return valorFreteOnibus;
 	}
-	public void setFotos(List<Arquivo> fotos) {
-		this.fotos = fotos;
+	public void setValorFreteOnibus(Double valorFreteOnibus) {
+		this.valorFreteOnibus = valorFreteOnibus;
 	}
+	public String getNomeEmpresa() {
+		return nomeEmpresa;
+	}
+	public void setNomeEmpresa(String nomeEmpresa) {
+		this.nomeEmpresa = nomeEmpresa;
+	}
+//	public List<Arquivo> getFotos() {
+//		return fotos;
+//	}
+//	public void setFotos(List<Arquivo> fotos) {
+//		this.fotos = fotos;
+//	}
 	
 	@Override
 	public String toString() {
 		return "Onibus [nome=" + nome + ", valorPorPoltrona=" + valorPorPoltrona + ", placaOnibus=" + placaOnibus
 				+ ", onibusComMultas=" + onibusComMultas + ", anoOnibus=" + anoOnibus + ", viagensRealizadas="
-				+ viagensRealizadas + ", telefone=" + telefone + ", codigo=" + codigo + ", ativo=" + ativo + ", fotos="
-				+ fotos + "]";
+				+ viagensRealizadas + ", telefone=" + telefone + ", codigo=" + codigo + ", ativo=" + ativo
+				+ ", valorFreteOnibus=" + valorFreteOnibus + ", nomeEmpresa=" + nomeEmpresa + "]";
 	}
 	
 }

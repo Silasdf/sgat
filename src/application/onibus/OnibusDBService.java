@@ -16,9 +16,9 @@ import sgat.entidades.Onibus;
 
 public class OnibusDBService implements OnibusService {
 	
-	final String INSERIR = "INSERT INTO onibus(nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	final String ATUALIZAR = "UPDATE onibus SET nomemotorista=?, valorporpoltrona=?, placaonibus=?, onibuscommultas=?, anoonibus=?, viagensrealizadas=?, telefone=? WHERE codigo = ?";
-	final String BUSCAR = "SELECT codigo, nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone, ativo FROM onibus WHERE codigo = ?";
+	final String INSERIR = "INSERT INTO onibus(nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone, valorfreteonibus, nomeempresa) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	final String ATUALIZAR = "UPDATE onibus SET nomemotorista=?, valorporpoltrona=?, placaonibus=?, onibuscommultas=?, anoonibus=?, viagensrealizadas=?, telefone=?, valorfreteonibus=?, nomeempresa=? WHERE codigo = ?";
+	final String BUSCAR = "SELECT codigo, nomemotorista, valorporpoltrona, placaonibus, onibuscommultas, anoonibus, viagensrealizadas, telefone, valorfreteonibus, nomeempresa, ativo FROM onibus WHERE codigo = ?";
 	final String APAGAR = "UPDATE onibus SET ativo = 'N' WHERE codigo = ?";
 	
 	final String BUSCAR_ONIBUS = "SELECT * FROM onibus WHERE ativo = 'S' ";
@@ -38,7 +38,7 @@ public class OnibusDBService implements OnibusService {
 	public void salvar(Onibus onibus){
 		try {
 			Connection con = conexao();
-			PreparedStatement salvar = con.prepareStatement(INSERIR);
+			PreparedStatement salvar = con.prepareStatement(INSERIR);  
 			salvar.setString(1, onibus.getNome());
 			salvar.setDouble(2, onibus.getValorPorPoltrona());
 			salvar.setString(3, onibus.getPlacaOnibus());
@@ -46,6 +46,8 @@ public class OnibusDBService implements OnibusService {
 			salvar.setInt(5, onibus.getAnoOnibus());
 			salvar.setInt(6, onibus.getViagensRealizadas());
 			salvar.setString(7, onibus.getTelefone());
+			salvar.setDouble(8, onibus.getValorFreteOnibus());
+			salvar.setString(9, onibus.getNomeEmpresa());
 			salvar.executeUpdate();
 			salvar.close();
 			con.close();
@@ -83,6 +85,12 @@ public class OnibusDBService implements OnibusService {
 			if (!SgatUtills.isNullOrEmpty((onibus.getTelefone()))){
 				sql += " and telefone = :telefone";
 			}
+			if (onibus.getValorFreteOnibus()!= null){
+				sql += " and valorfreteonibus = :valorfreteonibus";
+			}
+			if (!SgatUtills.isNullOrEmpty((onibus.getNomeEmpresa()))){
+				sql += " and nomeempresa LIKE :nomeempresa";
+			}
 			System.out.println("SQL = " + sql);
 			NamedParameterStatement buscarOnibus = new NamedParameterStatement(con, sql);
 			if (!SgatUtills.isNullOrEmpty((onibus.getNome()))){
@@ -105,6 +113,12 @@ public class OnibusDBService implements OnibusService {
 			}
 			if (!SgatUtills.isNullOrEmpty((onibus.getTelefone()))){
 				buscarOnibus.setString("telefone", onibus.getTelefone());
+			}
+			if (onibus.getValorFreteOnibus()!= null){
+				buscarOnibus.setDouble("valorfreteonibus", onibus.getValorFreteOnibus());
+			}
+			if (!SgatUtills.isNullOrEmpty((onibus.getNomeEmpresa()))){
+				buscarOnibus.setString("nomeempresa", "%" + onibus.getNomeEmpresa() + "%");
 			}
 			System.out.println("onibus = " + onibus);
 			ResultSet resultadoBusca = buscarOnibus.executeQuery();
@@ -173,7 +187,9 @@ public class OnibusDBService implements OnibusService {
 			atualizar.setInt(5, onibus.getAnoOnibus());
 			atualizar.setInt(6, onibus.getViagensRealizadas());
 			atualizar.setString(7, onibus.getTelefone());
-			atualizar.setInt(8, onibus.getCodigo());
+			atualizar.setDouble(8, onibus.getValorFreteOnibus());
+			atualizar.setString(9, onibus.getNomeEmpresa());
+			atualizar.setInt(10, onibus.getCodigo());
 			atualizar.executeUpdate();
 			atualizar.close();
 			con.close();
@@ -215,7 +231,9 @@ public class OnibusDBService implements OnibusService {
 		onibus.setAnoOnibus(resultadoBusca.getInt(6));
 		onibus.setViagensRealizadas(resultadoBusca.getInt(7));
 		onibus.setTelefone(resultadoBusca.getString(8));
-		onibus.setAtivo(resultadoBusca.getString(9));
+		onibus.setValorFreteOnibus(resultadoBusca.getDouble(9));
+		onibus.setNomeEmpresa(resultadoBusca.getString(10));
+		onibus.setAtivo(resultadoBusca.getString(11));
 		return onibus;
 	}
 	

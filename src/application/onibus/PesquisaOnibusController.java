@@ -38,6 +38,12 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 	private TableColumn<Onibus, String> clViagensRealizadas = new TableColumn<>("ViagensRealizadas");
 	
 	@FXML
+	private TableColumn<Onibus, String> clNomeEmpresa = new TableColumn<>("NomeEmpresa");
+	
+	@FXML
+	private TableColumn<Onibus, String> clValorFreteOnibus = new TableColumn<>("ValorFreteOnibus");
+	
+	@FXML
 	private TextField txtNome;
 	
 	@FXML
@@ -57,6 +63,12 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 	
 	@FXML
 	private TextField txtTelefone;
+	
+	@FXML
+	private TextField txtValorFreteOnibus;
+	
+	@FXML
+	private TextField txtNomeEmpresa;
 	
 	private OnibusService onibusService;
 	
@@ -108,6 +120,8 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 	    	txtAnoOnibus.setText("");
 	    	txtViagensRealizadas.getValueFactory().setValue(0);
 	    	txtTelefone.setText("");
+	    	txtValorFreteOnibus.setText("");
+	    	txtNomeEmpresa.setText("");
 	    }
 	    
 	    @FXML
@@ -137,6 +151,11 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 			onibus.setViagensRealizadas(txtViagensRealizadas.getValue());
 			}
 			onibus.setTelefone(txtTelefone.getText());
+			if (!SgatUtills.isNullOrEmpty((txtValorFreteOnibus.getText()))){
+				Double valorFreteOnibus = Double.parseDouble(txtValorFreteOnibus.getText());
+				onibus.setValorFreteOnibus(valorFreteOnibus);
+			}
+			onibus.setNomeEmpresa(txtNomeEmpresa.getText());
 		}
 		
 		private void configuraColunas() {
@@ -144,6 +163,8 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 			clValorPorPoltrona.setCellValueFactory(new PropertyValueFactory<Onibus, String>("valorPorPoltrona"));
 			clTelefone.setCellValueFactory(new PropertyValueFactory<Onibus, String>("telefone"));
 			clViagensRealizadas.setCellValueFactory(new PropertyValueFactory<Onibus, String>("viagensRealizadas"));
+			clValorFreteOnibus.setCellValueFactory(new PropertyValueFactory<Onibus, String>("valorFreteOnibus"));
+			clNomeEmpresa.setCellValueFactory(new PropertyValueFactory<Onibus, String>("nomeEmpresa"));
 		}
 		
 }

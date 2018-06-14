@@ -43,6 +43,13 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
 	@FXML
 	private TextField txtTelefone;
 	
+	@FXML
+	private TextField txtValorFreteOnibus;
+	
+	@FXML
+	private TextField txtNomeEmpresa;
+	
+	
 	private OnibusService onibusService;
 	
 	//Initializes the controller class.
@@ -70,10 +77,10 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
     
     @FXML
     private void salvar(ActionEvent event){
-    	System.out.println("Onibus cadastro com sucesso!");
 		Onibus onibus = new Onibus();
 		pegaValores(onibus);
 		onibusService.salvar(onibus);
+		System.out.println("Onibus cadastrado com sucesso!");
 		Mensagens.mensagemInformativa("Onibus cadastrado com sucesso!");
 		atualizaDadosTabela();
     }
@@ -87,6 +94,8 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
     	txtAnoOnibus.setText("");
     	txtViagensRealizadas.getValueFactory().setValue(0);
     	txtTelefone.setText("");
+    	txtValorFreteOnibus.setText("");
+    	txtNomeEmpresa.setText("");
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto onibus
@@ -100,6 +109,9 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
 		onibus.setAnoOnibus(anoOnibus);
 		onibus.setViagensRealizadas(txtViagensRealizadas.getValue());
 		onibus.setTelefone(txtTelefone.getText());
+		Double valorFreteOnibus = Double.parseDouble(txtValorFreteOnibus.getText());
+		onibus.setValorFreteOnibus(valorFreteOnibus);
+		onibus.setNomeEmpresa(txtNomeEmpresa.getText());
 	}
     
 	// chamado quando acontece alguma operação de atualização dos dados

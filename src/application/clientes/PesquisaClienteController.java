@@ -106,6 +106,7 @@ public class PesquisaClienteController implements Initializable, ControlledScree
     	Cliente cliente = tblClientes.getSelectionModel().getSelectedItem();
     	System.out.println(cliente);
     	clientesService.setCliente(cliente);
+    	limpar();
         myController.setScreen(ScreensFramework.screen5ID);
     	tblClientes.getItems().clear();
     }
