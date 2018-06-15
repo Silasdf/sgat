@@ -66,10 +66,10 @@ public class CadastroViagemController implements Initializable, ControlledScreen
     
     @FXML
     private void salvar(ActionEvent event){
-    	System.out.println("Viagem cadastra com sucesso!");
 		Viagem viagem = new Viagem();
 		pegaValores(viagem);
 		viagensService.salvar(viagem);
+		System.out.println("Viagem cadastra com sucesso!");
 		Mensagens.mensagemInformativa("Viagem cadastrada com sucesso!");
 		limpar();
     }
