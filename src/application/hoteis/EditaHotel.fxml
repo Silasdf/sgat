@@ -40,13 +40,13 @@
         </rowConstraints>
          <children>
             <TextField fx:id="txtNomeHotelEdita" editable="false" GridPane.columnIndex="1" />
-            <TextField fx:id="txtCnpjEdita" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCnpjEdita" editable="false" onKeyReleased="#txtCnpjKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtValorDuploPorPessoaEdita" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtValorTriploPorPessoaEdita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtValorQuadruploPorPessoaEdita" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="txtEnderecoHotelEdita" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="txtCidadeHotelEdita" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="txtTelefoneHotelEdita" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtTelefoneHotelEdita" editable="false" onKeyReleased="#txtTelefoneHotelKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Nome Hotel:" />
             <Label text="CNPJ:" GridPane.rowIndex="1" />
             <Label text="Valor Duplo Por Pessoa:" GridPane.rowIndex="2" />

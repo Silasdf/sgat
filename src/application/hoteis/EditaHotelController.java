@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -134,6 +135,24 @@ public class EditaHotelController implements Initializable, ControlledScreen{
     	txtCidadeHotelEdita.setText("");
     	txtTelefoneHotelEdita.setText("");
     	primeiraImagem.setImage(null);
+    }
+    
+    @FXML
+    private void txtCnpjKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("##.###.###/####-##");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtCnpjEdita);
+    	tff.formatter();
+    }
+    
+    @FXML
+    private void txtTelefoneHotelKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("(##)####-####");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtTelefoneHotelEdita);
+    	tff.formatter();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto hotel

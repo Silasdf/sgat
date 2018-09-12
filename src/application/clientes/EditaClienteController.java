@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -126,6 +127,33 @@ public class EditaClienteController implements Initializable, ControlledScreen{
     	txtCidadeEdita.setText("");
     	txtViagemEmpresaEdita.getValueFactory().setValue(0);
     	txtTelefoneEdita.setText("");
+    }
+    
+    @FXML
+    private void txtCpfKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("###.###.###-##");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtCpfEdita);
+    	tff.formatter();
+    }
+    
+    @FXML
+    private void txtTelefoneKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("(##)#####-####");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtTelefoneEdita);
+    	tff.formatter();
+    }
+    
+    @FXML
+    private void txtRgKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("#.###.###");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtRgEdita);
+    	tff.formatter();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente

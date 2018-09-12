@@ -1,8 +1,10 @@
 package application.textfieldformatter;
 
 import java.text.ParseException;
-import javafx.scene.control.TextField;
+
 import javax.swing.text.MaskFormatter;
+
+import javafx.scene.control.TextField;
 
 public class TextFieldFormatter {
 	
@@ -54,6 +56,7 @@ public class TextFieldFormatter {
                 tf.forward();
             }
         }
+
     }
 
     public void formatter(){

@@ -55,7 +55,7 @@
             </Spinner>
             <TextField fx:id="txtPlacaOnibus" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Telefone Motorista:" GridPane.rowIndex="6" />
-            <TextField fx:id="txtTelefone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtTelefone" onKeyReleased="#txtTelefoneKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Valor Frete do Onibus:" GridPane.rowIndex="7" />
             <Label text="Nome Empresa:" GridPane.rowIndex="8" />
             <TextField fx:id="txtValorFreteOnibus" GridPane.columnIndex="1" GridPane.rowIndex="7" />

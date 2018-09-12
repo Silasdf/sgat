@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -96,6 +97,24 @@ public class CadastroOnibusController implements Initializable, ControlledScreen
     	txtTelefone.setText("");
     	txtValorFreteOnibus.setText("");
     	txtNomeEmpresa.setText("");
+    }
+    
+//    @FXML
+//    private void txtPlacaOnibusKeyReleased(){
+//    	TextFieldFormatter tff = new TextFieldFormatter();
+//    	tff.setMask("###-####");
+//    	tff.setCaracteresValidos("[0-9]");
+//    	tff.setTf(txtPlacaOnibus);
+//    	tff.formatter();
+//    }
+    
+    @FXML
+    private void txtTelefoneKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("(##)#####-####");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtTelefone);
+    	tff.formatter();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto onibus

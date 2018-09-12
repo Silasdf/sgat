@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -109,6 +110,7 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 	    	onibusService.setOnibus(onibus);
 	        myController.setScreen(ScreensFramework.screen11ID);
 	    	tblOnibus.getItems().clear();
+	    	limpar();
 	    }
 	    
 	    @FXML
@@ -132,6 +134,15 @@ public class PesquisaOnibusController implements Initializable, ControlledScreen
 				onibusService.apagar(onibus);
 		    	tblOnibus.getItems().clear();
 			}
+	    }
+	    
+	    @FXML
+	    private void txtTelefoneKeyReleased(){
+	    	TextFieldFormatter tff = new TextFieldFormatter();
+	    	tff.setMask("(##)#####-####");
+	    	tff.setCaracteresValidos("0123456789");
+	    	tff.setTf(txtTelefone);
+	    	tff.formatter();
 	    }
 	    
 		// pega os valores entrados pelo usuário e adiciona no objeto onibus

@@ -45,7 +45,7 @@
             <TextField fx:id="txtPlacaOnibusEdita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtOnibusComMultasEdita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtAnoOnibusEdita" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="txtTelefoneEdita" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtTelefoneEdita" onKeyReleased="#txtTelefoneKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Nome Motorista:" />
             <Label text="Valor Por Poltrona:" GridPane.rowIndex="1" />
             <Label text="Placa Onibus:" GridPane.rowIndex="2" />

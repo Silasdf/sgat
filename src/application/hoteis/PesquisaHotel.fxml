@@ -39,7 +39,7 @@
         </rowConstraints>
          <children>
             <TextField fx:id="txtNomeHotel" GridPane.columnIndex="1" />
-            <TextField fx:id="txtCnpj" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCnpj" onKeyReleased="#txtCnpjKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtValorTriploPorPessoa" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtValorQuadruploPorPessoa" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="txtEnderecoHotel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -53,7 +53,7 @@
             <Label text="Cidade Hotel:" GridPane.rowIndex="6" />
             <TextField fx:id="txtValorDuploPorPessoa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Telefone Hotel:" GridPane.rowIndex="7" />
-            <TextField fx:id="txtTelefoneHotel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtTelefoneHotel" onKeyReleased="#txtTelefoneHotelKeyReleased" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <TableView fx:id="tblHoteis" layoutX="23.0" layoutY="375.0" prefHeight="200.0" prefWidth="636.0">

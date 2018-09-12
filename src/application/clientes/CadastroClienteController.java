@@ -142,7 +142,8 @@ public class CadastroClienteController implements Initializable, ControlledScree
 //    	tff.setCaracteresValidos("0123456789");
 ////    	tff.setTf(txtDataNascimento);
 //    	LocalDate data = txtDataNascimento.getValue();
-//    	tff.setDataNascimento(data);
+//    	TextField tfData = data;
+//    	tff.setTf(tfData);
 //    	tff.formatter();
 //    }
     

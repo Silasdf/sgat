@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -122,6 +123,15 @@ public class EditaOnibusController implements Initializable, ControlledScreen{
 	    	txtTelefoneEdita.setText("");
 	    	txtValorFreteOnibusEdita.setText("");
 	    	txtNomeEmpresaEdita.setText("");
+	    }
+	    
+	    @FXML
+	    private void txtTelefoneKeyReleased(){
+	    	TextFieldFormatter tff = new TextFieldFormatter();
+	    	tff.setMask("(##)#####-####");
+	    	tff.setCaracteresValidos("0123456789");
+	    	tff.setTf(txtTelefoneEdita);
+	    	tff.formatter();
 	    }
 	    
 		// pega os valores entrados pelo usuário e adiciona no objeto onibus

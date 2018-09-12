@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import application.mensagens.Mensagens;
+import application.textfieldformatter.TextFieldFormatter;
 import framework.ControlledScreen;
 import framework.ScreensController;
 import framework.ScreensFramework;
@@ -132,6 +133,33 @@ public class PesquisaClienteController implements Initializable, ControlledScree
 			clientesService.apagar(cliente);
 	    	tblClientes.getItems().clear();
 		}
+    }
+    
+    @FXML
+    private void txtCpfKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("###.###.###-##");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtCpf);
+    	tff.formatter();
+    }
+    
+    @FXML
+    private void txtTelefoneKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("(##)#####-####");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtTelefone);
+    	tff.formatter();
+    }
+    
+    @FXML
+    private void txtRgKeyReleased(){
+    	TextFieldFormatter tff = new TextFieldFormatter();
+    	tff.setMask("#.###.###");
+    	tff.setCaracteresValidos("0123456789");
+    	tff.setTf(txtRg);
+    	tff.formatter();
     }
     
 	// pega os valores entrados pelo usuário e adiciona no objeto cliente
