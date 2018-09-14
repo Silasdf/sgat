@@ -25,6 +25,8 @@ public class ClientesDBService implements ClientesService{
 	
 	final String BUSCAR_CLIENTES = "SELECT * FROM cliente WHERE ativo = 'S' ";
 	
+	final String BUSCAR_ANIVERSARIANTES_MÊS = "SELECT codigo, nome, cpf, dataNascimento, rg, endereco, cidade, viagensPelaEmpresa, telefone, ativo FROM cliente WHERE MONTH(datanascimento) = MOD(MONTH(CURDATE()), 12)";
+	
 	private Cliente cliente;
 	private Cliente clienteSelecionado;
 	private static ClientesService instance;
@@ -237,6 +239,29 @@ public class ClientesDBService implements ClientesService{
 			System.err.println("ERROR AO ATUALIZAR CLIENTE COM CODIGO " + cliente.getCodigo());
 			System.exit(0);
 		} 
+	}
+	
+	@Override
+	public List<Cliente> buscarAniversariantes() {
+		List<Cliente> clientes = new ArrayList<>();
+		try {
+			Connection con = conexao();
+			String sql = BUSCAR_ANIVERSARIANTES_MÊS;
+			System.out.println("SQL = " + sql);
+			NamedParameterStatement buscarAniversariantes = new NamedParameterStatement(con, sql);
+			ResultSet resultadoBusca = buscarAniversariantes.executeQuery();
+			while (resultadoBusca.next()) {
+				Cliente clienteResultado = extraiCliente(resultadoBusca);
+				clientes.add(clienteResultado);
+			}
+			buscarAniversariantes.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("ERROR AO BUSCAR ANIVERSARIANTES DO MÊS.");
+			System.exit(0);
+		} 
+		return clientes;
 	}
 
 	// abre uma nova conexão com o banco de dados. Se algum erro for lançado

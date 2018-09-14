@@ -25,6 +25,8 @@ public interface ClientesService {
 	
 	// DELETE
 	public void apagar(Cliente cliente);
+	
+	public List<Cliente> buscarAniversariantes();
 
 //	public static ClientesService getNewInstance() {
 //

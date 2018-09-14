@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import application.arquivo.ArquivoDBService;
 import application.arquivo.ArquivoService;
+import application.clientes.ClientesDBService;
+import application.clientes.ClientesService;
 import application.mensagens.Mensagens;
 import framework.ControlledScreen;
 import framework.ScreensController;
@@ -21,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import sgat.entidades.Arquivo;
+import sgat.entidades.Cliente;
 
 public class InicioController implements Initializable, ControlledScreen {
 	
@@ -37,9 +40,21 @@ public class InicioController implements Initializable, ControlledScreen {
 	
 	private ArquivoService arquivoService;
 	
+	@FXML
+	private TableView<Cliente> tblClientes = new TableView<Cliente>();
+	
+	@FXML
+	private TableColumn<Cliente, String> clNomeAniversariante = new TableColumn<>("Cliente Aniversariante");
+	
+	@FXML
+	private TableColumn<Cliente, String> clDataNascimento = new TableColumn<>("Data de Nascimento");
+	
+	private ClientesService clientesService;
+	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	arquivoService = ArquivoDBService.getInstance();
+    	clientesService = ClientesDBService.getInstance();
     	configuraColunas();
     	buscarDocumentoVigente();
     }
@@ -139,6 +154,8 @@ public class InicioController implements Initializable, ControlledScreen {
     
 	private void configuraColunas() {
 		clNome.setCellValueFactory(new PropertyValueFactory<Arquivo, String>("nome"));
+		clNomeAniversariante.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
+		clDataNascimento.setCellValueFactory(new PropertyValueFactory<Cliente, String>("dataNascimento"));
 	}
 	
     @FXML
@@ -156,5 +173,23 @@ public class InicioController implements Initializable, ControlledScreen {
     	System.out.println("Sistema foi fechado!");
     	System.exit(0);
     }
+    
+    private void buscarAniversariantes(){
+    	tblClientes.getItems().setAll(clientesService.buscarAniversariantes());
+    }
+    
+    @FXML
+    public void pesquisarAniversariantes(){
+//		Cliente cliente = new Cliente();
+//		pegaValores(cliente);
+		buscarAniversariantes();
+		Mensagens.mensagemInformativa("Aniversariantes pesquisados com sucesso!");
+    }
+    
+ // pega os valores entrados pelo usuário e adiciona no objeto cliente
+// 	private void pegaValores(Cliente cliente) {
+// 		LocalDate data = txtDataNascimento.getValue();
+// 		cliente.setDataNascimento(data);
+// 	}
 
 }
