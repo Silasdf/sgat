@@ -2,6 +2,8 @@ package application.principal;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -22,6 +24,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sgat.entidades.Arquivo;
 import sgat.entidades.Cliente;
 
@@ -66,41 +74,49 @@ public class InicioController implements Initializable, ControlledScreen {
     @FXML
     private void goToCadastroCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen3ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void goToPesquisaCliente(ActionEvent event){
        myController.setScreen(ScreensFramework.screen4ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void cadastroHotel(ActionEvent event){
        myController.setScreen(ScreensFramework.screen6ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void pesquisaHotel(ActionEvent event){
        myController.setScreen(ScreensFramework.screen7ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void cadastroOnibus(ActionEvent event){
        myController.setScreen(ScreensFramework.screen9ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void pesquisaOnibus(ActionEvent event){
        myController.setScreen(ScreensFramework.screen10ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void cadastroViagem(ActionEvent event){
        myController.setScreen(ScreensFramework.screen12ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
     private void pesquisaViagem(ActionEvent event){
        myController.setScreen(ScreensFramework.screen13ID);
+       tblClientes.getItems().clear();
     }
     
     @FXML
@@ -186,10 +202,49 @@ public class InicioController implements Initializable, ControlledScreen {
 		Mensagens.mensagemInformativa("Aniversariantes pesquisados com sucesso!");
     }
     
- // pega os valores entrados pelo usuário e adiciona no objeto cliente
-// 	private void pegaValores(Cliente cliente) {
-// 		LocalDate data = txtDataNascimento.getValue();
-// 		cliente.setDataNascimento(data);
-// 	}
+	// abre uma nova conexão com o banco de dados. Se algum erro for lançado
+	// aqui, verifique o erro com atenção e se o banco está rodando
+	private Connection conexao() {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sgatdb?user=vfturismo&password=vfturismo");
+			return conn;
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(e instanceof ClassNotFoundException) {
+				System.err.println("VERIFIQUE SE O DRIVER DO BANCO DE DADOS ESTÁ NO CLASSPATH");
+			} else {
+				System.err.println("VERIFIQUE SE O BANCO ESTÁ RODANDO E SE OS DADOS DE CONEXÃO ESTÃO CORRETOS");
+			}
+			System.exit(0);
+			// o sistema deverá sair antes de chegar aqui...
+			return null;
+		}
+	}
+    
+    //Para Imprimir Documentos prontos
+	@FXML
+    public void handleImprimirAniversariantes() throws JRException{
+    	Connection con = conexao();
+    	
+//    	File arquivo = new File("application.relatorios/Aniversariantes_Mes.jasper");
+//    	if(arquivo.exists()){
+//    		//O ARQUIVO EXISTE
+//    	}else{
+//    		//O ARQUIVO NÃO EXISTE
+//    	}
+    	
+    	URL url = getClass().getResource("/Aniversariantes_Mes.jasper");
+    	url.getFile();
+    	System.out.println(url.getFile());
+    	JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+    	
+    	//null: caso não existam filtros
+    	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, con);
+    	
+    	//false: não deixa fechar a aplicação principal
+    	JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+    	jasperViewer.setVisible(true);
+    }
 
 }
